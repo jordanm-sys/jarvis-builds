@@ -13,3 +13,14 @@
 - First boot: 2026-02-13
 - Emoji: ⚡
 - Adaptive tone
+
+## Infrastructure
+- **Kanban board**: http://localhost:3333 — task management system, check on heartbeats
+  - Tasks stored at: /Users/jordanmaragliano/.openclaw/workspace/kanban/tasks.json
+  - API: GET/POST/PUT/DELETE /api/tasks, PUT /api/tasks/:id/move
+  - Jordan adds tasks → I pick them up and work on them
+  - Move tasks: backlog → inprogress → review → done
+- **GitHub repo**: https://github.com/jordanm-sys/jarvis-builds — push all builds here
+- **Brave Search**: configured and working
+- **Telegram**: connected (bot paired with Jordan)
+- **Discord**: configured
