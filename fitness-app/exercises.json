@@ -1,0 +1,74 @@
+{
+  "categories": {
+    "cardio": [
+      { "name": "Running (6 mph)", "caloriesPerMinute": 10, "unit": "minutes" },
+      { "name": "Jogging (5 mph)", "caloriesPerMinute": 8, "unit": "minutes" },
+      { "name": "Walking (3.5 mph)", "caloriesPerMinute": 4, "unit": "minutes" },
+      { "name": "Cycling (moderate)", "caloriesPerMinute": 8, "unit": "minutes" },
+      { "name": "Swimming (moderate)", "caloriesPerMinute": 11, "unit": "minutes" },
+      { "name": "Elliptical", "caloriesPerMinute": 9, "unit": "minutes" },
+      { "name": "Treadmill", "caloriesPerMinute": 8, "unit": "minutes" },
+      { "name": "Stair climbing", "caloriesPerMinute": 12, "unit": "minutes" },
+      { "name": "Rowing machine", "caloriesPerMinute": 10, "unit": "minutes" },
+      { "name": "Jump rope", "caloriesPerMinute": 13, "unit": "minutes" },
+      { "name": "Dancing", "caloriesPerMinute": 6, "unit": "minutes" },
+      { "name": "Basketball", "caloriesPerMinute": 9, "unit": "minutes" },
+      { "name": "Tennis", "caloriesPerMinute": 8, "unit": "minutes" },
+      { "name": "Soccer", "caloriesPerMinute": 10, "unit": "minutes" },
+      { "name": "Hiking", "caloriesPerMinute": 6, "unit": "minutes" }
+    ],
+    "strength": [
+      { "name": "Bench Press", "caloriesPerRep": 0.5, "unit": "reps" },
+      { "name": "Squats", "caloriesPerRep": 0.4, "unit": "reps" },
+      { "name": "Deadlifts", "caloriesPerRep": 0.6, "unit": "reps" },
+      { "name": "Overhead Press", "caloriesPerRep": 0.4, "unit": "reps" },
+      { "name": "Rows", "caloriesPerRep": 0.4, "unit": "reps" },
+      { "name": "Pull-ups", "caloriesPerRep": 1.0, "unit": "reps" },
+      { "name": "Dips", "caloriesPerRep": 0.8, "unit": "reps" },
+      { "name": "Bicep Curls", "caloriesPerRep": 0.2, "unit": "reps" },
+      { "name": "Tricep Extensions", "caloriesPerRep": 0.2, "unit": "reps" },
+      { "name": "Lat Pulldowns", "caloriesPerRep": 0.3, "unit": "reps" },
+      { "name": "Leg Press", "caloriesPerRep": 0.5, "unit": "reps" },
+      { "name": "Leg Curls", "caloriesPerRep": 0.3, "unit": "reps" },
+      { "name": "Leg Extensions", "caloriesPerRep": 0.3, "unit": "reps" },
+      { "name": "Calf Raises", "caloriesPerRep": 0.1, "unit": "reps" },
+      { "name": "Shoulder Shrugs", "caloriesPerRep": 0.2, "unit": "reps" }
+    ],
+    "bodyweight": [
+      { "name": "Push-ups", "caloriesPerRep": 0.5, "unit": "reps" },
+      { "name": "Sit-ups", "caloriesPerRep": 0.3, "unit": "reps" },
+      { "name": "Crunches", "caloriesPerRep": 0.2, "unit": "reps" },
+      { "name": "Mountain Climbers", "caloriesPerRep": 0.4, "unit": "reps" },
+      { "name": "Burpees", "caloriesPerRep": 1.5, "unit": "reps" },
+      { "name": "Jumping Jacks", "caloriesPerRep": 0.2, "unit": "reps" },
+      { "name": "Lunges", "caloriesPerRep": 0.4, "unit": "reps" },
+      { "name": "Planks", "caloriesPerMinute": 3, "unit": "seconds" },
+      { "name": "High Knees", "caloriesPerRep": 0.3, "unit": "reps" },
+      { "name": "Wall Sits", "caloriesPerMinute": 4, "unit": "seconds" },
+      { "name": "Bear Crawl", "caloriesPerMinute": 8, "unit": "seconds" },
+      { "name": "Pike Push-ups", "caloriesPerRep": 0.6, "unit": "reps" },
+      { "name": "Diamond Push-ups", "caloriesPerRep": 0.6, "unit": "reps" },
+      { "name": "Bicycle Crunches", "caloriesPerRep": 0.3, "unit": "reps" },
+      { "name": "Glute Bridges", "caloriesPerRep": 0.2, "unit": "reps" }
+    ],
+    "flexibility": [
+      { "name": "Yoga", "caloriesPerMinute": 3, "unit": "minutes" },
+      { "name": "Pilates", "caloriesPerMinute": 4, "unit": "minutes" },
+      { "name": "Stretching", "caloriesPerMinute": 2, "unit": "minutes" },
+      { "name": "Tai Chi", "caloriesPerMinute": 3, "unit": "minutes" },
+      { "name": "Meditation (active)", "caloriesPerMinute": 1, "unit": "minutes" }
+    ],
+    "sports": [
+      { "name": "Baseball", "caloriesPerMinute": 5, "unit": "minutes" },
+      { "name": "Football", "caloriesPerMinute": 9, "unit": "minutes" },
+      { "name": "Volleyball", "caloriesPerMinute": 6, "unit": "minutes" },
+      { "name": "Badminton", "caloriesPerMinute": 7, "unit": "minutes" },
+      { "name": "Golf (walking)", "caloriesPerMinute": 5, "unit": "minutes" },
+      { "name": "Bowling", "caloriesPerMinute": 3, "unit": "minutes" },
+      { "name": "Rock Climbing", "caloriesPerMinute": 12, "unit": "minutes" },
+      { "name": "Skiing (downhill)", "caloriesPerMinute": 8, "unit": "minutes" },
+      { "name": "Snowboarding", "caloriesPerMinute": 7, "unit": "minutes" },
+      { "name": "Surfing", "caloriesPerMinute": 6, "unit": "minutes" }
+    ]
+  }
+}

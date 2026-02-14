@@ -1,0 +1,86 @@
+{
+  "categories": {
+    "fruits": [
+      { "name": "Apple (medium)", "calories": 95, "serving": "1 apple (182g)" },
+      { "name": "Banana (medium)", "calories": 105, "serving": "1 banana (118g)" },
+      { "name": "Orange (medium)", "calories": 62, "serving": "1 orange (154g)" },
+      { "name": "Grapes", "calories": 62, "serving": "1 cup (151g)" },
+      { "name": "Strawberries", "calories": 49, "serving": "1 cup (144g)" },
+      { "name": "Blueberries", "calories": 84, "serving": "1 cup (148g)" },
+      { "name": "Pineapple chunks", "calories": 82, "serving": "1 cup (165g)" },
+      { "name": "Mango (sliced)", "calories": 107, "serving": "1 cup (165g)" },
+      { "name": "Watermelon", "calories": 46, "serving": "1 cup (152g)" },
+      { "name": "Avocado (medium)", "calories": 322, "serving": "1 avocado (201g)" }
+    ],
+    "vegetables": [
+      { "name": "Broccoli (cooked)", "calories": 55, "serving": "1 cup (156g)" },
+      { "name": "Carrots (raw)", "calories": 50, "serving": "1 cup (122g)" },
+      { "name": "Spinach (raw)", "calories": 7, "serving": "1 cup (30g)" },
+      { "name": "Bell pepper (red)", "calories": 37, "serving": "1 cup (149g)" },
+      { "name": "Tomato (medium)", "calories": 22, "serving": "1 tomato (123g)" },
+      { "name": "Cucumber (sliced)", "calories": 16, "serving": "1 cup (119g)" },
+      { "name": "Lettuce (romaine)", "calories": 8, "serving": "1 cup (47g)" },
+      { "name": "Sweet potato (baked)", "calories": 112, "serving": "1 medium (128g)" },
+      { "name": "Asparagus (cooked)", "calories": 27, "serving": "1 cup (180g)" },
+      { "name": "Green beans (cooked)", "calories": 35, "serving": "1 cup (125g)" }
+    ],
+    "proteins": [
+      { "name": "Chicken breast (grilled)", "calories": 165, "serving": "100g" },
+      { "name": "Salmon (cooked)", "calories": 206, "serving": "100g" },
+      { "name": "Ground beef (lean)", "calories": 250, "serving": "100g" },
+      { "name": "Eggs (large)", "calories": 70, "serving": "1 egg (50g)" },
+      { "name": "Tuna (canned in water)", "calories": 116, "serving": "100g" },
+      { "name": "Turkey breast (roasted)", "calories": 135, "serving": "100g" },
+      { "name": "Tofu (firm)", "calories": 144, "serving": "100g" },
+      { "name": "Black beans (cooked)", "calories": 132, "serving": "1/2 cup (86g)" },
+      { "name": "Lentils (cooked)", "calories": 116, "serving": "1/2 cup (99g)" },
+      { "name": "Greek yogurt (plain)", "calories": 100, "serving": "170g container" }
+    ],
+    "grains": [
+      { "name": "Brown rice (cooked)", "calories": 112, "serving": "1/2 cup (98g)" },
+      { "name": "White rice (cooked)", "calories": 103, "serving": "1/2 cup (79g)" },
+      { "name": "Quinoa (cooked)", "calories": 111, "serving": "1/2 cup (93g)" },
+      { "name": "Oatmeal (cooked)", "calories": 83, "serving": "1/2 cup (117g)" },
+      { "name": "Whole wheat bread", "calories": 81, "serving": "1 slice (28g)" },
+      { "name": "White bread", "calories": 75, "serving": "1 slice (25g)" },
+      { "name": "Pasta (cooked)", "calories": 111, "serving": "1/2 cup (70g)" },
+      { "name": "Bagel (plain)", "calories": 277, "serving": "1 bagel (95g)" },
+      { "name": "Tortilla (flour, 8\")", "calories": 144, "serving": "1 tortilla (32g)" },
+      { "name": "Cereal (granola)", "calories": 209, "serving": "1/4 cup (30g)" }
+    ],
+    "dairy": [
+      { "name": "Milk (2%)", "calories": 122, "serving": "1 cup (244g)" },
+      { "name": "Milk (skim)", "calories": 83, "serving": "1 cup (245g)" },
+      { "name": "Cheddar cheese", "calories": 113, "serving": "1 oz (28g)" },
+      { "name": "Mozzarella cheese", "calories": 85, "serving": "1 oz (28g)" },
+      { "name": "Cottage cheese (low-fat)", "calories": 81, "serving": "1/2 cup (113g)" },
+      { "name": "Butter", "calories": 102, "serving": "1 tbsp (14g)" },
+      { "name": "Cream cheese", "calories": 99, "serving": "1 oz (28g)" },
+      { "name": "Yogurt (vanilla)", "calories": 150, "serving": "170g container" }
+    ],
+    "snacks": [
+      { "name": "Almonds", "calories": 164, "serving": "1 oz (28g)" },
+      { "name": "Peanut butter", "calories": 188, "serving": "2 tbsp (32g)" },
+      { "name": "Potato chips", "calories": 152, "serving": "1 oz (28g)" },
+      { "name": "Dark chocolate (70%)", "calories": 168, "serving": "1 oz (28g)" },
+      { "name": "Granola bar", "calories": 118, "serving": "1 bar (24g)" },
+      { "name": "Apple with peanut butter", "calories": 283, "serving": "1 apple + 2 tbsp PB" },
+      { "name": "Trail mix", "calories": 131, "serving": "1 oz (28g)" },
+      { "name": "Crackers (saltines)", "calories": 65, "serving": "5 crackers (15g)" },
+      { "name": "Pretzels", "calories": 108, "serving": "1 oz (28g)" },
+      { "name": "Popcorn (air-popped)", "calories": 31, "serving": "1 cup (8g)" }
+    ],
+    "beverages": [
+      { "name": "Water", "calories": 0, "serving": "1 cup (240ml)" },
+      { "name": "Coffee (black)", "calories": 2, "serving": "1 cup (240ml)" },
+      { "name": "Tea (unsweetened)", "calories": 2, "serving": "1 cup (240ml)" },
+      { "name": "Orange juice", "calories": 112, "serving": "1 cup (248ml)" },
+      { "name": "Soda (cola)", "calories": 139, "serving": "12 fl oz (355ml)" },
+      { "name": "Beer (regular)", "calories": 153, "serving": "12 fl oz (355ml)" },
+      { "name": "Wine (red)", "calories": 125, "serving": "5 fl oz (148ml)" },
+      { "name": "Sports drink", "calories": 80, "serving": "12 fl oz (355ml)" },
+      { "name": "Energy drink", "calories": 110, "serving": "8.4 fl oz (248ml)" },
+      { "name": "Smoothie (fruit)", "calories": 145, "serving": "1 cup (240ml)" }
+    ]
+  }
+}

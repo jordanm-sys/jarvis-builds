@@ -1,0 +1,793 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e1e2e 0%, #2d3748 100%);
+    color: #e2e8f0;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.app {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(45, 55, 72, 0.8);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header h1 {
+    font-size: 2rem;
+    color: #4fd1c7;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.date-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-btn, .date-btn, .calendar-btn {
+    background: #4a5568;
+    color: #e2e8f0;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.nav-btn:hover, .date-btn:hover, .calendar-btn:hover {
+    background: #2d3748;
+    transform: translateY(-2px);
+}
+
+.date-btn {
+    font-weight: bold;
+    min-width: 150px;
+}
+
+/* Summary Section */
+.summary-section {
+    margin-bottom: 30px;
+}
+
+.summary-card {
+    background: rgba(45, 55, 72, 0.8);
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.summary-card h3 {
+    color: #4fd1c7;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+}
+
+.summary-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.stat {
+    text-align: center;
+    padding: 15px;
+    background: rgba(26, 32, 44, 0.5);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.85rem;
+    color: #a0aec0;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #4fd1c7;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: rgba(26, 32, 44, 0.8);
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4fd1c7 0%, #38b2ac 100%);
+    border-radius: 6px;
+    transition: width 0.3s ease;
+    width: 0%;
+}
+
+/* Main Content */
+.main-content {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+}
+
+.section {
+    background: rgba(45, 55, 72, 0.8);
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.section-header h2 {
+    color: #4fd1c7;
+    font-size: 1.4rem;
+}
+
+.add-btn {
+    background: linear-gradient(135deg, #4fd1c7 0%, #38b2ac 100%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.add-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 209, 199, 0.3);
+}
+
+/* Meal Sections */
+.meal-sections {
+    display: grid;
+    gap: 20px;
+}
+
+.meal-section {
+    background: rgba(26, 32, 44, 0.5);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.meal-section h3 {
+    color: #e2e8f0;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.meal-items {
+    min-height: 40px;
+    margin-bottom: 10px;
+}
+
+.food-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    background: rgba(45, 55, 72, 0.8);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.food-item-info {
+    flex: 1;
+}
+
+.food-item-name {
+    font-weight: bold;
+    color: #e2e8f0;
+}
+
+.food-item-serving {
+    font-size: 0.85rem;
+    color: #a0aec0;
+}
+
+.food-item-calories {
+    font-weight: bold;
+    color: #4fd1c7;
+    margin-right: 10px;
+}
+
+.delete-btn {
+    background: #e53e3e;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+    background: #c53030;
+}
+
+.meal-total {
+    text-align: right;
+    font-weight: bold;
+    color: #4fd1c7;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 10px;
+}
+
+.calorie-goal-section {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(26, 32, 44, 0.5);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.calorie-goal-section label {
+    color: #a0aec0;
+    font-size: 0.9rem;
+}
+
+.calorie-goal-section input {
+    background: #2d3748;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e2e8f0;
+    padding: 6px 10px;
+    border-radius: 6px;
+    width: 100px;
+}
+
+.calorie-goal-section button {
+    background: #4a5568;
+    color: #e2e8f0;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.calorie-goal-section button:hover {
+    background: #2d3748;
+}
+
+/* Workout Section */
+.workout-list {
+    min-height: 100px;
+}
+
+.workout-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: rgba(26, 32, 44, 0.5);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.workout-item-info {
+    flex: 1;
+}
+
+.workout-item-name {
+    font-weight: bold;
+    color: #e2e8f0;
+    margin-bottom: 5px;
+}
+
+.workout-item-details {
+    font-size: 0.9rem;
+    color: #a0aec0;
+}
+
+.workout-item-calories {
+    font-weight: bold;
+    color: #4fd1c7;
+    margin-right: 15px;
+    font-size: 1.1rem;
+}
+
+.workout-summary {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(26, 32, 44, 0.5);
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.workout-stat {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.workout-stat span:first-child {
+    font-size: 0.85rem;
+    color: #a0aec0;
+    margin-bottom: 5px;
+}
+
+.workout-stat span:last-child {
+    font-weight: bold;
+    color: #4fd1c7;
+    font-size: 1.2rem;
+}
+
+/* Notes */
+#dailyNotes {
+    width: 100%;
+    min-height: 100px;
+    background: rgba(26, 32, 44, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+    padding: 15px;
+    border-radius: 8px;
+    resize: vertical;
+    font-family: inherit;
+    font-size: 0.95rem;
+}
+
+#dailyNotes:focus {
+    outline: none;
+    border-color: #4fd1c7;
+}
+
+/* Modals */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    animation: fadeIn 0.2s ease;
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: #2d3748;
+    border-radius: 15px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: slideUp 0.3s ease;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-header h3 {
+    color: #4fd1c7;
+    font-size: 1.3rem;
+}
+
+.close-btn {
+    background: #e53e3e;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.close-btn:hover {
+    background: #c53030;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+/* Search and Categories */
+.search-section {
+    margin-bottom: 20px;
+}
+
+#foodSearch, #exerciseSearch {
+    width: 100%;
+    background: #4a5568;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e2e8f0;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+#foodSearch:focus, #exerciseSearch:focus {
+    outline: none;
+    border-color: #4fd1c7;
+}
+
+.food-categories, .exercise-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.category-btn {
+    background: #4a5568;
+    color: #e2e8f0;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.category-btn:hover, .category-btn.active {
+    background: #4fd1c7;
+    color: #1a202c;
+}
+
+/* Results */
+.food-results, .exercise-results {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.food-result, .exercise-result {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    margin-bottom: 8px;
+    background: rgba(26, 32, 44, 0.5);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.food-result:hover, .exercise-result:hover {
+    background: rgba(79, 209, 199, 0.1);
+    border-color: rgba(79, 209, 199, 0.3);
+}
+
+.food-result-info, .exercise-result-info {
+    flex: 1;
+}
+
+.food-result-name, .exercise-result-name {
+    font-weight: bold;
+    color: #e2e8f0;
+    margin-bottom: 3px;
+}
+
+.food-result-serving, .exercise-result-unit {
+    font-size: 0.85rem;
+    color: #a0aec0;
+}
+
+.food-result-calories, .exercise-result-calories {
+    font-weight: bold;
+    color: #4fd1c7;
+}
+
+.meal-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    background: rgba(26, 32, 44, 0.5);
+    border-radius: 8px;
+}
+
+.meal-selector label {
+    color: #a0aec0;
+    font-size: 0.9rem;
+}
+
+.meal-selector select {
+    background: #2d3748;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e2e8f0;
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+
+/* Exercise Details */
+.exercise-input-section {
+    background: rgba(26, 32, 44, 0.5);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.input-group label {
+    color: #a0aec0;
+    font-size: 0.9rem;
+    min-width: 80px;
+}
+
+.input-group input {
+    background: #2d3748;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e2e8f0;
+    padding: 6px 10px;
+    border-radius: 6px;
+    width: 80px;
+}
+
+.estimated-calories {
+    margin: 15px 0;
+    padding: 10px;
+    background: rgba(79, 209, 199, 0.1);
+    border-radius: 6px;
+    border: 1px solid rgba(79, 209, 199, 0.3);
+    color: #4fd1c7;
+    font-weight: bold;
+}
+
+/* Calendar */
+.calendar-nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    padding: 20px;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(26, 32, 44, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    min-height: 60px;
+}
+
+.calendar-day:hover {
+    background: rgba(79, 209, 199, 0.1);
+    border-color: rgba(79, 209, 199, 0.3);
+}
+
+.calendar-day.today {
+    background: rgba(79, 209, 199, 0.2);
+    border-color: #4fd1c7;
+    color: #4fd1c7;
+    font-weight: bold;
+}
+
+.calendar-day.has-data {
+    background: rgba(56, 178, 172, 0.2);
+    border-color: rgba(56, 178, 172, 0.5);
+}
+
+.calendar-day.other-month {
+    opacity: 0.3;
+}
+
+.calendar-day-number {
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.calendar-day-indicator {
+    width: 6px;
+    height: 6px;
+    background: #4fd1c7;
+    border-radius: 50%;
+}
+
+.calendar-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    padding: 0 20px;
+    margin-bottom: 10px;
+}
+
+.calendar-header-day {
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    color: #4fd1c7;
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .app {
+        padding: 10px;
+    }
+    
+    .header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .main-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .summary-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .section {
+        padding: 15px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        max-height: 90vh;
+    }
+    
+    .food-categories, .exercise-categories {
+        justify-content: center;
+    }
+    
+    .input-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .input-group label {
+        min-width: auto;
+    }
+    
+    .workout-summary {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .calorie-goal-section {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    
+    .calorie-goal-section input {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .food-result, .exercise-result {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    
+    .food-item, .workout-item {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    
+    .summary-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .date-selector {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(26, 32, 44, 0.5);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4a5568;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #2d3748;
+}

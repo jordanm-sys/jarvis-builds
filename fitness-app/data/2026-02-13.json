@@ -1,0 +1,18 @@
+{
+  "date": "2026-02-13",
+  "nutrition": {
+    "meals": {
+      "breakfast": [],
+      "lunch": [],
+      "dinner": [],
+      "snacks": []
+    },
+    "totalCalories": 0,
+    "calorieGoal": 2000
+  },
+  "workouts": {
+    "exercises": [],
+    "totalCaloriesBurned": 0
+  },
+  "notes": ""
+}

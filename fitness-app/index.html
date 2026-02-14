@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <h1>🏃‍♀️ Fitness Tracker</h1>
+            <div class="date-selector">
+                <button id="prevDay" class="nav-btn">‹</button>
+                <button id="currentDate" class="date-btn"></button>
+                <button id="nextDay" class="nav-btn">›</button>
+                <button id="showCalendar" class="calendar-btn">📅</button>
+            </div>
+        </header>
+
+        <!-- Calendar Modal -->
+        <div id="calendarModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="calendarMonth"></h3>
+                    <div class="calendar-nav">
+                        <button id="prevMonth" class="nav-btn">‹</button>
+                        <button id="nextMonth" class="nav-btn">›</button>
+                        <button id="closeCalendar" class="close-btn">×</button>
+                    </div>
+                </div>
+                <div id="calendarGrid" class="calendar-grid"></div>
+            </div>
+        </div>
+
+        <!-- Daily Summary -->
+        <div class="summary-section">
+            <div class="summary-card">
+                <h3>📊 Daily Summary</h3>
+                <div class="summary-stats">
+                    <div class="stat">
+                        <span class="stat-label">Calories Consumed</span>
+                        <span id="caloriesConsumed" class="stat-value">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Goal</span>
+                        <span id="calorieGoal" class="stat-value">2000</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Calories Burned</span>
+                        <span id="caloriesBurned" class="stat-value">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Net Calories</span>
+                        <span id="netCalories" class="stat-value">0</span>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div id="progressFill" class="progress-fill"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Nutrition Section -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>🍎 Nutrition</h2>
+                    <button id="addFood" class="add-btn">+ Add Food</button>
+                </div>
+                
+                <div class="meal-sections">
+                    <div class="meal-section" data-meal="breakfast">
+                        <h3>🌅 Breakfast</h3>
+                        <div class="meal-items"></div>
+                        <div class="meal-total">0 calories</div>
+                    </div>
+                    <div class="meal-section" data-meal="lunch">
+                        <h3>☀️ Lunch</h3>
+                        <div class="meal-items"></div>
+                        <div class="meal-total">0 calories</div>
+                    </div>
+                    <div class="meal-section" data-meal="dinner">
+                        <h3>🌙 Dinner</h3>
+                        <div class="meal-items"></div>
+                        <div class="meal-total">0 calories</div>
+                    </div>
+                    <div class="meal-section" data-meal="snacks">
+                        <h3>🍿 Snacks</h3>
+                        <div class="meal-items"></div>
+                        <div class="meal-total">0 calories</div>
+                    </div>
+                </div>
+
+                <div class="calorie-goal-section">
+                    <label for="calorieGoalInput">Daily Calorie Goal:</label>
+                    <input type="number" id="calorieGoalInput" min="1000" max="5000" step="50">
+                    <button id="updateGoal">Update</button>
+                </div>
+            </div>
+
+            <!-- Workout Section -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>💪 Workouts</h2>
+                    <button id="addExercise" class="add-btn">+ Add Exercise</button>
+                </div>
+                
+                <div id="workoutList" class="workout-list"></div>
+                
+                <div class="workout-summary">
+                    <div class="workout-stat">
+                        <span>Total Exercises:</span>
+                        <span id="totalExercises">0</span>
+                    </div>
+                    <div class="workout-stat">
+                        <span>Calories Burned:</span>
+                        <span id="totalCaloriesBurned">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Food Modal -->
+        <div id="foodModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Add Food</h3>
+                    <button id="closeFoodModal" class="close-btn">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="search-section">
+                        <input type="text" id="foodSearch" placeholder="Search foods...">
+                        <div class="food-categories">
+                            <button class="category-btn active" data-category="all">All</button>
+                            <button class="category-btn" data-category="fruits">Fruits</button>
+                            <button class="category-btn" data-category="vegetables">Vegetables</button>
+                            <button class="category-btn" data-category="proteins">Proteins</button>
+                            <button class="category-btn" data-category="grains">Grains</button>
+                            <button class="category-btn" data-category="dairy">Dairy</button>
+                            <button class="category-btn" data-category="snacks">Snacks</button>
+                            <button class="category-btn" data-category="beverages">Beverages</button>
+                        </div>
+                    </div>
+                    <div id="foodResults" class="food-results"></div>
+                    <div class="meal-selector">
+                        <label for="mealSelect">Add to:</label>
+                        <select id="mealSelect">
+                            <option value="breakfast">Breakfast</option>
+                            <option value="lunch">Lunch</option>
+                            <option value="dinner">Dinner</option>
+                            <option value="snacks">Snacks</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exercise Modal -->
+        <div id="exerciseModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Add Exercise</h3>
+                    <button id="closeExerciseModal" class="close-btn">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="search-section">
+                        <input type="text" id="exerciseSearch" placeholder="Search exercises...">
+                        <div class="exercise-categories">
+                            <button class="category-btn active" data-category="all">All</button>
+                            <button class="category-btn" data-category="cardio">Cardio</button>
+                            <button class="category-btn" data-category="strength">Strength</button>
+                            <button class="category-btn" data-category="bodyweight">Bodyweight</button>
+                            <button class="category-btn" data-category="flexibility">Flexibility</button>
+                            <button class="category-btn" data-category="sports">Sports</button>
+                        </div>
+                    </div>
+                    <div id="exerciseResults" class="exercise-results"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exercise Details Modal -->
+        <div id="exerciseDetailsModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="exerciseDetailsTitle">Exercise Details</h3>
+                    <button id="closeExerciseDetailsModal" class="close-btn">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="exercise-input-section">
+                        <div class="input-group">
+                            <label id="exerciseInputLabel">Duration (minutes):</label>
+                            <input type="number" id="exerciseInput" min="1" step="1">
+                        </div>
+                        <div class="input-group" id="setsRepsGroup" style="display: none;">
+                            <label>Sets:</label>
+                            <input type="number" id="setsInput" min="1" max="20" value="1">
+                            <label>Reps:</label>
+                            <input type="number" id="repsInput" min="1" max="100" value="1">
+                        </div>
+                        <div class="estimated-calories">
+                            <span>Estimated calories burned: </span>
+                            <span id="estimatedCalories">0</span>
+                        </div>
+                        <button id="addExerciseToLog" class="add-btn">Add to Workout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notes Section -->
+        <div class="section">
+            <div class="section-header">
+                <h2>📝 Daily Notes</h2>
+            </div>
+            <textarea id="dailyNotes" placeholder="Add any notes about your day..."></textarea>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
