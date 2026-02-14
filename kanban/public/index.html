@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kanban Board</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0d1117;--surface:#161b22;--surface2:#21262d;--border:#30363d;--text:#e6edf3;--text2:#8b949e;--accent:#58a6ff;--green:#3fb950;--yellow:#d29922;--red:#f85149;--radius:8px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);height:100vh;display:flex;flex-direction:column;overflow:hidden}
+header{padding:16px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:var(--surface)}
+header h1{font-size:20px;font-weight:600;letter-spacing:-.5px}
+header h1 span{color:var(--accent)}
+.btn{background:var(--accent);color:#fff;border:none;padding:8px 16px;border-radius:var(--radius);cursor:pointer;font-size:14px;font-weight:500;transition:opacity .2s}
+.btn:hover{opacity:.85}
+.board{display:flex;gap:16px;padding:20px 24px;flex:1;overflow-x:auto}
+.column{background:var(--surface);border-radius:var(--radius);min-width:280px;width:280px;display:flex;flex-direction:column;border:1px solid var(--border)}
+.column-header{padding:14px 16px;font-weight:600;font-size:14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border)}
+.column-header .count{background:var(--surface2);color:var(--text2);font-size:12px;padding:2px 8px;border-radius:10px;font-weight:500}
+.column-body{padding:8px;flex:1;overflow-y:auto;min-height:60px;transition:background .2s}
+.column-body.drag-over{background:rgba(88,166,255,.06)}
+.card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:12px;margin-bottom:8px;cursor:grab;transition:transform .15s,box-shadow .15s,opacity .15s;position:relative}
+.card:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.card.dragging{opacity:.4;transform:rotate(2deg)}
+.card-title{font-weight:600;font-size:14px;margin-bottom:4px}
+.card-desc{color:var(--text2);font-size:12px;line-height:1.4;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card-meta{display:flex;align-items:center;justify-content:space-between;font-size:11px;color:var(--text2)}
+.priority{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+.priority.low{background:var(--green)}.priority.medium{background:var(--yellow)}.priority.high{background:var(--red)}
+.card-actions{position:absolute;top:8px;right:8px;opacity:0;transition:opacity .15s;display:flex;gap:4px}
+.card:hover .card-actions{opacity:1}
+.card-actions button{background:none;border:none;color:var(--text2);cursor:pointer;font-size:14px;padding:2px 4px;border-radius:4px}
+.card-actions button:hover{background:var(--border);color:var(--red)}
+/* Modal */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:100;align-items:center;justify-content:center}
+.modal-overlay.active{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;width:420px;max-width:90vw}
+.modal h2{margin-bottom:16px;font-size:18px}
+.modal label{display:block;font-size:13px;color:var(--text2);margin-bottom:4px;margin-top:12px}
+.modal input,.modal textarea,.modal select{width:100%;padding:8px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:14px;font-family:inherit}
+.modal textarea{resize:vertical;height:80px}
+.modal-btns{display:flex;gap:8px;margin-top:20px;justify-content:flex-end}
+.btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--border);padding:8px 16px;border-radius:var(--radius);cursor:pointer;font-size:14px}
+</style>
+</head>
+<body>
+<header>
+  <h1><span>▦</span> Kanban Board</h1>
+  <button class="btn" onclick="openModal()">+ New Task</button>
+</header>
+<div class="board" id="board"></div>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h2 id="modalTitle">New Task</h2>
+    <label>Title</label><input id="fTitle" placeholder="Task title">
+    <label>Description</label><textarea id="fDesc" placeholder="Optional description"></textarea>
+    <label>Priority</label>
+    <select id="fPriority"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select>
+    <label>Column</label>
+    <select id="fColumn"><option value="backlog">Backlog</option><option value="inprogress">In Progress</option><option value="review">Review</option><option value="done">Done</option><option value="recurring">Recurring</option></select>
+    <div class="modal-btns">
+      <button class="btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn" id="modalSave" onclick="saveTask()">Create</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const COLS=[{id:'backlog',name:'Backlog'},{id:'inprogress',name:'In Progress'},{id:'review',name:'Review'},{id:'done',name:'Done'},{id:'recurring',name:'Recurring'}];
+let tasks=[], editId=null;
+
+async function load(){
+  tasks=await(await fetch('/api/tasks')).json();
+  render();
+}
+
+function render(){
+  const board=document.getElementById('board');
+  board.innerHTML='';
+  COLS.forEach(col=>{
+    const colTasks=tasks.filter(t=>t.column===col.id);
+    const div=document.createElement('div');
+    div.className='column';
+    div.innerHTML=`<div class="column-header">${col.name}<span class="count">${colTasks.length}</span></div>`;
+    const body=document.createElement('div');
+    body.className='column-body';
+    body.dataset.col=col.id;
+    body.addEventListener('dragover',e=>{e.preventDefault();body.classList.add('drag-over')});
+    body.addEventListener('dragleave',()=>body.classList.remove('drag-over'));
+    body.addEventListener('drop',async e=>{
+      e.preventDefault();body.classList.remove('drag-over');
+      const id=e.dataTransfer.getData('text/plain');
+      if(id){await fetch(`/api/tasks/${id}/move`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({column:col.id})});await load()}
+    });
+    colTasks.forEach(t=>{
+      const c=document.createElement('div');
+      c.className='card';c.draggable=true;
+      c.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',t.id);c.classList.add('dragging')});
+      c.addEventListener('dragend',()=>c.classList.remove('dragging'));
+      const date=new Date(t.createdAt).toLocaleDateString('en-US',{month:'short',day:'numeric'});
+      c.innerHTML=`<div class="card-actions"><button onclick="editTask('${t.id}')">✏️</button><button onclick="deleteTask('${t.id}')">🗑</button></div>
+        <div class="card-title"><span class="priority ${t.priority}"></span>${esc(t.title)}</div>
+        ${t.description?`<div class="card-desc">${esc(t.description)}</div>`:''}
+        <div class="card-meta"><span>${t.assignedTo||'Jarvis'}</span><span>${date}</span></div>`;
+      body.appendChild(c);
+    });
+    div.appendChild(body);
+    board.appendChild(div);
+  });
+}
+
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+
+function openModal(){editId=null;document.getElementById('modalTitle').textContent='New Task';document.getElementById('modalSave').textContent='Create';['fTitle','fDesc'].forEach(id=>document.getElementById(id).value='');document.getElementById('fPriority').value='medium';document.getElementById('fColumn').value='backlog';document.getElementById('modal').classList.add('active')}
+
+function editTask(id){
+  const t=tasks.find(x=>x.id===id);if(!t)return;
+  editId=id;
+  document.getElementById('modalTitle').textContent='Edit Task';
+  document.getElementById('modalSave').textContent='Save';
+  document.getElementById('fTitle').value=t.title;
+  document.getElementById('fDesc').value=t.description||'';
+  document.getElementById('fPriority').value=t.priority;
+  document.getElementById('fColumn').value=t.column;
+  document.getElementById('modal').classList.add('active');
+}
+
+function closeModal(){document.getElementById('modal').classList.remove('active')}
+
+async function saveTask(){
+  const data={title:document.getElementById('fTitle').value,description:document.getElementById('fDesc').value,priority:document.getElementById('fPriority').value,column:document.getElementById('fColumn').value};
+  if(!data.title)return;
+  if(editId){await fetch(`/api/tasks/${editId}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})}
+  else{await fetch('/api/tasks',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})}
+  closeModal();await load();
+}
+
+async function deleteTask(id){if(confirm('Delete this task?')){await fetch(`/api/tasks/${id}`,{method:'DELETE'});await load()}}
+
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});
+load();
+</script>
+</body>
+</html>

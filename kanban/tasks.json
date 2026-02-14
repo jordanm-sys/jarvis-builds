@@ -1,0 +1,6 @@
+[
+  {"id":"1","title":"Set up email integration","description":"Configure email service for notifications and alerts","priority":"medium","column":"backlog","assignedTo":"Jarvis","createdAt":"2026-02-13T21:33:00Z"},
+  {"id":"2","title":"Research AI dropshipping tools","description":"Evaluate top AI-powered dropshipping platforms and automation tools","priority":"high","column":"backlog","assignedTo":"Jarvis","createdAt":"2026-02-13T21:33:00Z"},
+  {"id":"3","title":"Daily memory maintenance","description":"Review and consolidate daily memory files, update MEMORY.md","priority":"low","column":"recurring","assignedTo":"Jarvis","createdAt":"2026-02-13T21:33:00Z"},
+  {"id":"4","title":"Organize workspace files","description":"Clean up workspace directory structure and archive old files","priority":"medium","column":"inprogress","assignedTo":"Jarvis","createdAt":"2026-02-13T21:33:00Z"}
+]
