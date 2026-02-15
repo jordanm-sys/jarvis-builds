@@ -1,1 +1,70 @@
-[{"id":"1","name":"Kanban Board","description":"Project management dashboard for tracking Jarvis tasks and builds","status":"active","githubUrl":"https://github.com/jordanm-sys/jarvis-builds","createdAt":"2026-02-13"}]
+[
+  {
+    "id": "1",
+    "name": "Kanban Board",
+    "description": "Project management dashboard for tracking Jarvis tasks and builds",
+    "status": "active",
+    "githubUrl": "https://github.com/jordanm-sys/jarvis-builds",
+    "createdAt": "2026-02-13",
+    "category": "websites",
+    "localUrl": "http://localhost:3333"
+  },
+  {
+    "id": "2",
+    "name": "Fitness Tracker",
+    "description": "Comprehensive fitness tracking web app with calorie intake tracking, workout logging, daily refresh with historical data storage, and calendar navigation",
+    "status": "active",
+    "githubUrl": "https://github.com/jordanm-sys/jarvis-builds",
+    "createdAt": "2026-02-13",
+    "category": "websites",
+    "localUrl": "http://localhost:3334"
+  },
+  {
+    "id": "3",
+    "name": "AI Dropshipping Tools Research",
+    "description": "Deep dive into 30+ AI-powered dropshipping platforms covering product research, store builders, suppliers, ad automation, content tools, and full-stack platforms. Includes 3 budget-tiered starter stacks ($39-$251/mo).",
+    "status": "completed",
+    "createdAt": "2026-02-14",
+    "category": "research",
+    "filePath": "research/ai-dropshipping-tools.pdf",
+    "localUrl": "http://localhost:3333/files/ai-dropshipping-tools.pdf"
+  },
+  {
+    "id": "4",
+    "name": "Oahu Hawaii Trip Plan",
+    "description": "7-day Oahu itinerary based at the Ilikai Hotel \u2014 beaches, hikes, food, nightlife, budget breakdowns, and a condensed 3-day version. Includes reservation tips for Diamond Head, Hanauma Bay & Pearl Harbor.",
+    "status": "completed",
+    "createdAt": "2026-02-14",
+    "category": "research",
+    "filePath": "research/hawaii-oahu-trip-plan.pdf",
+    "localUrl": "http://localhost:3333/files/hawaii-oahu-trip-plan.pdf"
+  },
+  {
+    "id": "1771136609676",
+    "name": "Winning Products Research (Feb 2026)",
+    "description": "Top 10 ranked dropshipping product opportunities with margins, competition analysis, ad strategies, and detailed breakdowns of the top 3 picks.",
+    "status": "completed",
+    "createdAt": "2026-02-14",
+    "category": "research",
+    "localUrl": "http://localhost:3333/files/winning-products-feb2026.pdf"
+  },
+  {
+    "id": "1771137670768",
+    "createdAt": "2026-02-14",
+    "name": "Product Saturation Analysis",
+    "description": "Deep competition & saturation analysis of 9 dropshipping products \u2014 Amazon competitors, TikTok presence, supplier costs, and GO/MAYBE/SKIP verdicts with re-ranking.",
+    "status": "completed",
+    "category": "research",
+    "localUrl": "http://localhost:3333/files/product-saturation-analysis.pdf"
+  },
+  {
+    "id": "1771138009006",
+    "name": "Deep Dive Dropshipping Product Research",
+    "description": "8 winning products analyzed with full breakdowns: margins (70-85%), target audiences, supplier links (AliExpress, CJ Dropshipping, Alibaba, Spocket), and marketing angles. Top picks: Magnetic Gym Bottle Bag & Projection Necklace. Includes niche analysis and strategic recommendations.",
+    "status": "completed",
+    "createdAt": "2026-02-15",
+    "category": "research",
+    "githubUrl": "https://github.com/jordanm-sys/jarvis-builds",
+    "filePath": "dropship-product-research-2026.md"
+  }
+]
