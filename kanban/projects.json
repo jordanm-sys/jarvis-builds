@@ -65,6 +65,7 @@
     "createdAt": "2026-02-15",
     "category": "research",
     "githubUrl": "https://github.com/jordanm-sys/jarvis-builds",
-    "filePath": "dropship-product-research-2026.md"
+    "filePath": "research/dropship-product-research-2026.pdf",
+    "localUrl": "http://localhost:3333/files/dropship-product-research-2026.pdf"
   }
 ]
