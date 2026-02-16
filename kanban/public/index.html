@@ -53,6 +53,11 @@ header h1 span{color:var(--accent)}
 .project-status.completed{background:rgba(88,166,255,.15);color:var(--accent)}
 .project-link{color:var(--accent);text-decoration:none;font-size:12px;display:inline-flex;align-items:center;gap:4px}
 .project-link:hover{text-decoration:underline}
+.project-links{display:flex;gap:12px}
+.category-section{margin-bottom:28px}
+.category-header{font-size:16px;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.category-header .cat-icon{font-size:18px}
+.category-header .cat-count{background:var(--surface2);color:var(--text2);font-size:12px;padding:2px 8px;border-radius:10px;font-weight:500}
 /* Modal */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:100;align-items:center;justify-content:center}
 .modal-overlay.active{display:flex}
@@ -91,6 +96,9 @@ header h1 span{color:var(--accent)}
     <select id="fPriority"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select>
     <label>Column</label>
     <select id="fColumn"><option value="backlog">Backlog</option><option value="inprogress">In Progress</option><option value="review">Review</option><option value="done">Done</option><option value="recurring">Recurring</option></select>
+    <label>Schedule</label>
+    <select id="fScheduleType" onchange="toggleScheduleDate()"><option value="instant">Instant</option><option value="scheduled">Scheduled</option></select>
+    <div id="scheduleDateWrap" style="display:none"><label>Deadline</label><input type="datetime-local" id="fScheduleDate"></div>
     <div class="modal-btns">
       <button class="btn-ghost" onclick="closeModal()">Cancel</button>
       <button class="btn" id="modalSave" onclick="saveTask()">Create</button>
@@ -104,9 +112,12 @@ header h1 span{color:var(--accent)}
     <h2 id="projectModalTitle">New Project</h2>
     <label>Name</label><input id="pName" placeholder="Project name">
     <label>Description</label><textarea id="pDesc" placeholder="What does this project do?"></textarea>
+    <label>Category</label>
+    <select id="pCategory"><option value="websites">🌐 Websites</option><option value="research">🔍 Research</option><option value="tools">🛠️ Tools</option><option value="other">📦 Other</option></select>
     <label>Status</label>
     <select id="pStatus"><option value="active">Active</option><option value="completed">Completed</option></select>
     <label>GitHub URL</label><input id="pGithub" placeholder="https://github.com/...">
+    <label>Website / File</label><input id="pLocal" placeholder="http://localhost:3334 or file path">
     <div class="modal-btns">
       <button class="btn-ghost" onclick="closeProjectModal()">Cancel</button>
       <button class="btn" id="projectModalSave" onclick="saveProject()">Create</button>
@@ -161,6 +172,7 @@ function render(){
       c.innerHTML=`<div class="card-actions"><button onclick="editTask('${t.id}')">✏️</button><button onclick="deleteTask('${t.id}')">🗑</button></div>
         <div class="card-title"><span class="priority ${t.priority}"></span>${esc(t.title)}</div>
         ${t.description?`<div class="card-desc">${esc(t.description)}</div>`:''}
+        ${t.schedule?`<div class="card-meta" style="margin-bottom:4px"><span>${t.schedule==='instant'?'⚡ Instant':'📅 Due: '+new Date(t.schedule).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})+', '+new Date(t.schedule).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}</span></div>`:''}
         <div class="card-meta"><span>${t.assignedTo||'Jarvis'}</span><span>${date}</span></div>`;
       body.appendChild(c);
     });
@@ -171,7 +183,9 @@ function render(){
 
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
 
-function openModal(){editId=null;document.getElementById('modalTitle').textContent='New Task';document.getElementById('modalSave').textContent='Create';['fTitle','fDesc'].forEach(id=>document.getElementById(id).value='');document.getElementById('fPriority').value='medium';document.getElementById('fColumn').value='backlog';document.getElementById('modal').classList.add('active')}
+function toggleScheduleDate(){document.getElementById('scheduleDateWrap').style.display=document.getElementById('fScheduleType').value==='scheduled'?'block':'none'}
+
+function openModal(){editId=null;document.getElementById('modalTitle').textContent='New Task';document.getElementById('modalSave').textContent='Create';['fTitle','fDesc'].forEach(id=>document.getElementById(id).value='');document.getElementById('fPriority').value='medium';document.getElementById('fColumn').value='backlog';document.getElementById('fScheduleType').value='instant';document.getElementById('fScheduleDate').value='';toggleScheduleDate();document.getElementById('modal').classList.add('active')}
 
 function editTask(id){
   const t=tasks.find(x=>x.id===id);if(!t)return;
@@ -182,13 +196,17 @@ function editTask(id){
   document.getElementById('fDesc').value=t.description||'';
   document.getElementById('fPriority').value=t.priority;
   document.getElementById('fColumn').value=t.column;
+  if(t.schedule&&t.schedule!=='instant'){document.getElementById('fScheduleType').value='scheduled';document.getElementById('fScheduleDate').value=t.schedule.slice(0,16)}else{document.getElementById('fScheduleType').value='instant';document.getElementById('fScheduleDate').value=''}
+  toggleScheduleDate();
   document.getElementById('modal').classList.add('active');
 }
 
 function closeModal(){document.getElementById('modal').classList.remove('active')}
 
 async function saveTask(){
-  const data={title:document.getElementById('fTitle').value,description:document.getElementById('fDesc').value,priority:document.getElementById('fPriority').value,column:document.getElementById('fColumn').value};
+  const schedType=document.getElementById('fScheduleType').value;
+  const schedule=schedType==='instant'?'instant':document.getElementById('fScheduleDate').value||'instant';
+  const data={title:document.getElementById('fTitle').value,description:document.getElementById('fDesc').value,priority:document.getElementById('fPriority').value,column:document.getElementById('fColumn').value,schedule};
   if(!data.title)return;
   if(editId){await fetch(`/api/tasks/${editId}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})}
   else{await fetch('/api/tasks',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})}
@@ -208,20 +226,46 @@ async function loadProjects(){
 function renderProjects(){
   const grid=document.getElementById('projectsGrid');
   grid.innerHTML='';
+  const catIcons={websites:'🌐',research:'🔍',tools:'🛠️',other:'📦'};
+  const catNames={websites:'Websites',research:'Research',tools:'Tools',other:'Other'};
+  const grouped={};
   projects.forEach(p=>{
-    const card=document.createElement('div');
-    card.className='project-card';
-    const date=p.createdAt||'';
-    card.innerHTML=`
-      <div class="card-actions"><button onclick="editProject('${p.id}')">✏️</button><button onclick="deleteProject('${p.id}')">🗑</button></div>
-      <div class="project-name">${esc(p.name)}</div>
-      ${p.description?`<div class="project-desc">${esc(p.description)}</div>`:''}
-      <div class="project-footer">
-        <span class="project-status ${p.status||'active'}">${p.status||'active'}</span>
-        ${p.githubUrl?`<a class="project-link" href="${esc(p.githubUrl)}" target="_blank">🔗 GitHub</a>`:''}
-        <span>${date}</span>
-      </div>`;
-    grid.appendChild(card);
+    const cat=p.category||'other';
+    if(!grouped[cat])grouped[cat]=[];
+    grouped[cat].push(p);
+  });
+  const order=['websites','research','tools','other'];
+  order.forEach(cat=>{
+    if(!grouped[cat]||grouped[cat].length===0)return;
+    const section=document.createElement('div');
+    section.className='category-section';
+    section.innerHTML=`<div class="category-header"><span class="cat-icon">${catIcons[cat]||'📦'}</span>${catNames[cat]||cat}<span class="cat-count">${grouped[cat].length}</span></div>`;
+    const catGrid=document.createElement('div');
+    catGrid.className='projects-grid';
+    grouped[cat].forEach(p=>{
+      const card=document.createElement('div');
+      card.className='project-card';
+      const date=p.createdAt||'';
+      const rawLink=p.localUrl||'';
+      const linkUrl=rawLink.replace(/localhost/g, window.location.hostname);
+      const linkIcon=cat==='research'?'📄':'🌐';
+      const linkLabel=cat==='research'?'Open PDF':'Open';
+      card.innerHTML=`
+        <div class="card-actions"><button onclick="editProject('${p.id}')">✏️</button><button onclick="deleteProject('${p.id}')">🗑</button></div>
+        <div class="project-name">${esc(p.name)}</div>
+        ${p.description?`<div class="project-desc">${esc(p.description)}</div>`:''}
+        <div class="project-footer">
+          <span class="project-status ${p.status||'active'}">${p.status||'active'}</span>
+          <span class="project-links">
+            ${p.githubUrl?`<a class="project-link" href="${esc(p.githubUrl)}" target="_blank">🔗 GitHub</a>`:''}
+            ${linkUrl?`<a class="project-link" href="${esc(linkUrl)}" target="_blank">${linkIcon} ${linkLabel}</a>`:''}
+          </span>
+          <span>${date}</span>
+        </div>`;
+      catGrid.appendChild(card);
+    });
+    section.appendChild(catGrid);
+    grid.appendChild(section);
   });
 }
 
@@ -229,7 +273,8 @@ function openProjectModal(){
   editProjectId=null;
   document.getElementById('projectModalTitle').textContent='New Project';
   document.getElementById('projectModalSave').textContent='Create';
-  ['pName','pDesc','pGithub'].forEach(id=>document.getElementById(id).value='');
+  ['pName','pDesc','pGithub','pLocal'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('pCategory').value='websites';
   document.getElementById('pStatus').value='active';
   document.getElementById('projectModal').classList.add('active');
 }
@@ -241,15 +286,17 @@ function editProject(id){
   document.getElementById('projectModalSave').textContent='Save';
   document.getElementById('pName').value=p.name||'';
   document.getElementById('pDesc').value=p.description||'';
+  document.getElementById('pCategory').value=p.category||'other';
   document.getElementById('pStatus').value=p.status||'active';
   document.getElementById('pGithub').value=p.githubUrl||'';
+  document.getElementById('pLocal').value=p.localUrl||p.filePath||'';
   document.getElementById('projectModal').classList.add('active');
 }
 
 function closeProjectModal(){document.getElementById('projectModal').classList.remove('active')}
 
 async function saveProject(){
-  const data={name:document.getElementById('pName').value,description:document.getElementById('pDesc').value,status:document.getElementById('pStatus').value,githubUrl:document.getElementById('pGithub').value};
+  const data={name:document.getElementById('pName').value,description:document.getElementById('pDesc').value,category:document.getElementById('pCategory').value,status:document.getElementById('pStatus').value,githubUrl:document.getElementById('pGithub').value,localUrl:document.getElementById('pLocal').value};
   if(!data.name)return;
   if(editProjectId){await fetch(`/api/projects/${editProjectId}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})}
   else{await fetch('/api/projects',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})}
