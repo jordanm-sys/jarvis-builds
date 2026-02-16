@@ -32,7 +32,7 @@ async function getDailyData(date) {
     const data = await fs.readFile(filePath, 'utf-8');
     return JSON.parse(data);
   } catch (error) {
-    // File doesn't exist, create default structure
+    // File doesn't exist, return default structure without creating file
     const defaultData = {
       date,
       nutrition: {
@@ -51,7 +51,6 @@ async function getDailyData(date) {
       },
       notes: ""
     };
-    await fs.writeFile(filePath, JSON.stringify(defaultData, null, 2));
     return defaultData;
   }
 }
@@ -107,6 +106,28 @@ app.get('/api/exercises', async (req, res) => {
   }
 });
 
+// Add custom food to database
+app.post('/api/foods/custom', async (req, res) => {
+  try {
+    const foodsPath = path.join(__dirname, 'foods.json');
+    const data = JSON.parse(await fs.readFile(foodsPath, 'utf-8'));
+    
+    // Create custom category if it doesn't exist
+    if (!data.categories.custom) {
+      data.categories.custom = [];
+    }
+    
+    // Add the food
+    data.categories.custom.push(req.body);
+    await fs.writeFile(foodsPath, JSON.stringify(data, null, 2));
+    
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Error saving custom food:', error);
+    res.status(500).json({ error: 'Failed to save custom food' });
+  }
+});
+
 // Get calendar data (all dates with data)
 app.get('/api/calendar', async (req, res) => {
   try {
@@ -136,6 +157,6 @@ app.get('/api/calendar', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`🏃‍♀️ Fitness Tracker running on http://localhost:${PORT}`);
 });
