@@ -7,7 +7,7 @@
     "githubUrl": "https://github.com/jordanm-sys/jarvis-builds",
     "createdAt": "2026-02-13",
     "category": "websites",
-    "localUrl": "http://localhost:3333"
+    "localUrl": "/"
   },
   {
     "id": "2",
@@ -17,7 +17,8 @@
     "githubUrl": "https://github.com/jordanm-sys/jarvis-builds",
     "createdAt": "2026-02-13",
     "category": "websites",
-    "localUrl": "http://localhost:3334"
+    "localUrl": "http://localhost:3334",
+    "note": "Access via Tailscale: http://100.109.88.104:3334"
   },
   {
     "id": "3",
@@ -27,7 +28,7 @@
     "createdAt": "2026-02-14",
     "category": "research",
     "filePath": "research/ai-dropshipping-tools.pdf",
-    "localUrl": "http://localhost:3333/files/ai-dropshipping-tools.pdf"
+    "localUrl": "/files/ai-dropshipping-tools.pdf"
   },
   {
     "id": "4",
@@ -37,7 +38,7 @@
     "createdAt": "2026-02-14",
     "category": "research",
     "filePath": "research/hawaii-oahu-trip-plan.pdf",
-    "localUrl": "http://localhost:3333/files/hawaii-oahu-trip-plan.pdf"
+    "localUrl": "/files/hawaii-oahu-trip-plan.pdf"
   },
   {
     "id": "1771136609676",
@@ -46,7 +47,7 @@
     "status": "completed",
     "createdAt": "2026-02-14",
     "category": "research",
-    "localUrl": "http://localhost:3333/files/winning-products-feb2026.pdf"
+    "localUrl": "/files/winning-products-feb2026.pdf"
   },
   {
     "id": "1771137670768",
@@ -55,7 +56,7 @@
     "description": "Deep competition & saturation analysis of 9 dropshipping products \u2014 Amazon competitors, TikTok presence, supplier costs, and GO/MAYBE/SKIP verdicts with re-ranking.",
     "status": "completed",
     "category": "research",
-    "localUrl": "http://localhost:3333/files/product-saturation-analysis.pdf"
+    "localUrl": "/files/product-saturation-analysis.pdf"
   },
   {
     "id": "1771138009006",
@@ -66,6 +67,6 @@
     "category": "research",
     "githubUrl": "https://github.com/jordanm-sys/jarvis-builds",
     "filePath": "research/dropship-product-research-2026.pdf",
-    "localUrl": "http://localhost:3333/files/dropship-product-research-2026.pdf"
+    "localUrl": "/files/dropship-product-research-2026.pdf"
   }
 ]
