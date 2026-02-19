@@ -56,7 +56,13 @@
       "addedAt": "2026-02-18"
     }
   ],
-  "watchlist": [],
+  "watchlist": [
+    {
+      "symbol": "NVDA",
+      "currency": "USD",
+      "addedAt": "2026-02-19"
+    }
+  ],
   "earnings": [
     {
       "id": "1771492314002",
