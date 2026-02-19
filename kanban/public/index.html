@@ -202,9 +202,10 @@ header h1 span{color:var(--accent)}
 
   /* Earnings table — sticky first column */
   .earnings-table{font-size:11px}
-  #earningsView>div{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .earnings-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -12px;padding:0 12px}
   .earnings-table th,.earnings-table td{padding:8px 8px;white-space:nowrap}
-  .earnings-table th:first-child,.earnings-table td:first-child{position:sticky;left:0;z-index:1;background:var(--surface)}
+  .earnings-table th:first-child,.earnings-table td:first-child{position:sticky;left:0;z-index:2;background:var(--surface)}
+  .earnings-table tr:hover td:first-child{background:var(--surface2)}
   .earnings-table th:nth-child(4),.earnings-table th:nth-child(5){min-width:140px!important}
 
   /* Market cards */
@@ -288,7 +289,7 @@ header h1 span{color:var(--accent)}
       <h3 style="font-size:16px">📅 Earnings Calendar</h3>
       <span style="font-size:12px;color:var(--text2)" id="earningsLastUpdated"></span>
     </div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden">
+    <div class="earnings-scroll" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)">
       <table class="earnings-table" id="earningsTable">
         <thead>
           <tr>
