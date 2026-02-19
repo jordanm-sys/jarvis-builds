@@ -12,5 +12,7 @@
     {"symbol": "CIFR", "currency": "USD", "addedAt": "2026-02-18"},
     {"symbol": "IREN", "currency": "USD", "addedAt": "2026-02-18"}
   ],
+  "watchlist": [],
+  "earnings": [],
   "briefings": []
 }

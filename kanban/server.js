@@ -160,4 +160,62 @@ app.delete('/api/stocks/briefings/:id', (req, res) => {
   res.json({ ok: true });
 });
 
+// Watchlist API
+app.post('/api/stocks/watchlist', (req, res) => {
+  const data = readStocks();
+  if (!data.watchlist) data.watchlist = [];
+  const { symbol, currency } = req.body;
+  if (!symbol) return res.status(400).json({ error: 'Symbol required' });
+  const upper = symbol.toUpperCase();
+  if (data.watchlist.find(t => t.symbol === upper)) return res.status(409).json({ error: 'Already exists' });
+  data.watchlist.push({ symbol: upper, currency: currency || 'USD', addedAt: new Date().toISOString().slice(0, 10) });
+  saveStocks(data);
+  res.json(data.watchlist);
+});
+
+app.delete('/api/stocks/watchlist/:symbol', (req, res) => {
+  const data = readStocks();
+  if (!data.watchlist) data.watchlist = [];
+  const upper = req.params.symbol.toUpperCase();
+  data.watchlist = data.watchlist.filter(t => t.symbol !== upper);
+  saveStocks(data);
+  res.json(data.watchlist);
+});
+
+// Earnings API
+app.get('/api/stocks/earnings', (_, res) => {
+  const data = readStocks();
+  res.json(data.earnings || []);
+});
+
+app.post('/api/stocks/earnings', (req, res) => {
+  const data = readStocks();
+  if (!data.earnings) data.earnings = [];
+  const entry = { id: Date.now().toString(), updatedAt: new Date().toISOString(), ...req.body };
+  // Upsert by symbol
+  const idx = data.earnings.findIndex(e => e.symbol === entry.symbol);
+  if (idx !== -1) data.earnings[idx] = { ...data.earnings[idx], ...entry };
+  else data.earnings.push(entry);
+  saveStocks(data);
+  res.json(entry);
+});
+
+app.put('/api/stocks/earnings/:id', (req, res) => {
+  const data = readStocks();
+  if (!data.earnings) data.earnings = [];
+  const i = data.earnings.findIndex(e => e.id === req.params.id);
+  if (i === -1) return res.status(404).json({ error: 'Not found' });
+  data.earnings[i] = { ...data.earnings[i], ...req.body, updatedAt: new Date().toISOString() };
+  saveStocks(data);
+  res.json(data.earnings[i]);
+});
+
+app.delete('/api/stocks/earnings/:id', (req, res) => {
+  const data = readStocks();
+  if (!data.earnings) data.earnings = [];
+  data.earnings = data.earnings.filter(e => e.id !== req.params.id);
+  saveStocks(data);
+  res.json({ ok: true });
+});
+
 app.listen(3333, '0.0.0.0', () => console.log('Kanban server running on http://localhost:3333'));

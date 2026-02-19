@@ -8,7 +8,7 @@ const PORT = 3334;
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static('.'));
+app.use(express.static(__dirname));
 
 // Helper function to ensure data directory exists
 async function ensureDataDir() {

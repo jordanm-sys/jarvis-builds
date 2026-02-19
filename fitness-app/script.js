@@ -51,6 +51,20 @@ const elements = {
     exerciseSearch: document.getElementById('exerciseSearch'),
     exerciseResults: document.getElementById('exerciseResults'),
     
+    // Custom food modal
+    customFoodModal: document.getElementById('customFoodModal'),
+    closeCustomFoodModal: document.getElementById('closeCustomFoodModal'),
+    showCustomFood: document.getElementById('showCustomFood'),
+    customFoodName: document.getElementById('customFoodName'),
+    customFoodServing: document.getElementById('customFoodServing'),
+    customFoodCalories: document.getElementById('customFoodCalories'),
+    customFoodProtein: document.getElementById('customFoodProtein'),
+    customFoodCarbs: document.getElementById('customFoodCarbs'),
+    customFoodFat: document.getElementById('customFoodFat'),
+    customFoodMeal: document.getElementById('customFoodMeal'),
+    saveToDatabase: document.getElementById('saveToDatabase'),
+    addCustomFood: document.getElementById('addCustomFood'),
+    
     // Exercise details
     exerciseDetailsTitle: document.getElementById('exerciseDetailsTitle'),
     exerciseInput: document.getElementById('exerciseInput'),
@@ -58,6 +72,8 @@ const elements = {
     setsRepsGroup: document.getElementById('setsRepsGroup'),
     setsInput: document.getElementById('setsInput'),
     repsInput: document.getElementById('repsInput'),
+    weightGroup: document.getElementById('weightGroup'),
+    weightInput: document.getElementById('weightInput'),
     estimatedCalories: document.getElementById('estimatedCalories'),
     addExerciseToLog: document.getElementById('addExerciseToLog')
 };
@@ -174,10 +190,16 @@ function setupEventListeners() {
     elements.exerciseInput.addEventListener('input', updateEstimatedCalories);
     elements.setsInput.addEventListener('input', updateEstimatedCalories);
     elements.repsInput.addEventListener('input', updateEstimatedCalories);
+    elements.weightInput.addEventListener('input', updateEstimatedCalories);
     elements.addExerciseToLog.addEventListener('click', addExerciseToLog);
     
+    // Custom food
+    elements.showCustomFood.addEventListener('click', showCustomFoodModal);
+    elements.closeCustomFoodModal.addEventListener('click', hideCustomFoodModal);
+    elements.addCustomFood.addEventListener('click', addCustomFoodToLog);
+    
     // Close modals on outside click
-    [elements.calendarModal, elements.foodModal, elements.exerciseModal, elements.exerciseDetailsModal].forEach(modal => {
+    [elements.calendarModal, elements.foodModal, elements.exerciseModal, elements.exerciseDetailsModal, elements.customFoodModal].forEach(modal => {
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 modal.classList.remove('show');
@@ -409,6 +431,9 @@ function createWorkoutItem(exercise, index) {
     let detailsText = '';
     if (exercise.sets && exercise.reps) {
         detailsText = `${exercise.sets} sets × ${exercise.reps} reps`;
+        if (exercise.weight) {
+            detailsText += ` @ ${exercise.weight} lbs`;
+        }
     } else if (exercise.duration) {
         detailsText = `${exercise.duration} ${exercise.unit}`;
     } else {
@@ -650,10 +675,13 @@ function showExerciseDetailsModal(exercise, category) {
     selectedExercise = { ...exercise, category };
     elements.exerciseDetailsTitle.textContent = exercise.name;
     
+    // Reset all optional groups
+    elements.setsRepsGroup.style.display = 'none';
+    elements.weightGroup.style.display = 'none';
+    
     // Configure input based on exercise type
     if (exercise.unit === 'minutes' || exercise.unit === 'seconds') {
         elements.exerciseInputLabel.textContent = `Duration (${exercise.unit}):`;
-        elements.setsRepsGroup.style.display = 'none';
         elements.exerciseInput.value = exercise.unit === 'minutes' ? 30 : 60;
     } else if (exercise.unit === 'reps') {
         elements.exerciseInputLabel.textContent = 'Total Reps:';
@@ -661,6 +689,12 @@ function showExerciseDetailsModal(exercise, category) {
         elements.exerciseInput.value = 10;
         elements.setsInput.value = 3;
         elements.repsInput.value = 10;
+    }
+    
+    // Show weight input for strength exercises
+    if (category === 'strength') {
+        elements.weightGroup.style.display = 'flex';
+        elements.weightInput.value = 45;
     }
     
     updateEstimatedCalories();
@@ -721,10 +755,81 @@ function addExerciseToLog() {
         }
     }
     
+    // Save weight for strength exercises
+    if (selectedExercise.category === 'strength') {
+        const weight = parseFloat(elements.weightInput.value) || 0;
+        if (weight > 0) {
+            exerciseLog.weight = weight;
+        }
+    }
+    
     dailyData.workouts.exercises.push(exerciseLog);
     renderWorkouts();
     saveDailyData();
     hideExerciseDetailsModal();
+}
+
+// Custom food functionality
+function showCustomFoodModal() {
+    // Sync meal selection from food modal
+    elements.customFoodMeal.value = elements.mealSelect.value;
+    hideFoodModal();
+    elements.customFoodModal.classList.add('show');
+}
+
+function hideCustomFoodModal() {
+    elements.customFoodModal.classList.remove('show');
+    // Clear form
+    elements.customFoodName.value = '';
+    elements.customFoodServing.value = '';
+    elements.customFoodCalories.value = '';
+    elements.customFoodProtein.value = '';
+    elements.customFoodCarbs.value = '';
+    elements.customFoodFat.value = '';
+}
+
+async function addCustomFoodToLog() {
+    const name = elements.customFoodName.value.trim();
+    const serving = elements.customFoodServing.value.trim() || '1 serving';
+    const calories = parseInt(elements.customFoodCalories.value) || 0;
+    const protein = parseFloat(elements.customFoodProtein.value) || 0;
+    const carbs = parseFloat(elements.customFoodCarbs.value) || 0;
+    const fat = parseFloat(elements.customFoodFat.value) || 0;
+    
+    if (!name) {
+        alert('Please enter a food name.');
+        return;
+    }
+    if (calories <= 0) {
+        alert('Please enter calories.');
+        return;
+    }
+    
+    const food = { name, serving, calories, protein, carbs, fat };
+    
+    // Add to today's meal
+    const mealType = elements.customFoodMeal.value;
+    dailyData.nutrition.meals[mealType].push(food);
+    renderNutrition();
+    saveDailyData();
+    
+    // Optionally save to database for future use
+    if (elements.saveToDatabase.checked) {
+        try {
+            await fetch('/api/foods/custom', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(food)
+            });
+            // Reload foods database so it shows up immediately
+            const response = await fetch('/api/foods');
+            foodsDatabase = await response.json();
+        } catch (error) {
+            console.error('Error saving custom food:', error);
+        }
+    }
+    
+    hideCustomFoodModal();
 }
 
 // Make functions globally available for HTML onclick handlers

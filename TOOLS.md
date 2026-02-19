@@ -35,6 +35,12 @@ Things like:
 
 Skills are shared. Your setup is yours. Keeping them apart means you can update skills without losing your notes, and share skills without leaking your infrastructure.
 
+### Perplexity (Sonar Pro)
+- API key: stored in ~/.openclaw/secrets/perplexity.key
+- Model: sonar-pro
+- Use for: deep research, stock briefings, market analysis
+- Keep Brave Search for quick/simple lookups
+
 ---
 
 Add whatever helps you do your job. This is your cheat sheet.

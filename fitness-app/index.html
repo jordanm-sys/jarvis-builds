@@ -142,6 +142,7 @@
                             <button class="category-btn" data-category="dairy">Dairy</button>
                             <button class="category-btn" data-category="snacks">Snacks</button>
                             <button class="category-btn" data-category="beverages">Beverages</button>
+                            <button class="category-btn" data-category="custom">Custom</button>
                         </div>
                     </div>
                     <div id="foodResults" class="food-results"></div>
@@ -153,6 +154,60 @@
                             <option value="dinner">Dinner</option>
                             <option value="snacks">Snacks</option>
                         </select>
+                    </div>
+                    <button id="showCustomFood" class="add-btn custom-food-btn">+ Create Custom Food</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Custom Food Modal -->
+        <div id="customFoodModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Create Custom Food</h3>
+                    <button id="closeCustomFoodModal" class="close-btn">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="custom-food-form">
+                        <div class="input-group">
+                            <label>Name:</label>
+                            <input type="text" id="customFoodName" placeholder="e.g. Protein Shake">
+                        </div>
+                        <div class="input-group">
+                            <label>Serving:</label>
+                            <input type="text" id="customFoodServing" placeholder="e.g. 1 scoop (30g)">
+                        </div>
+                        <div class="input-group">
+                            <label>Calories:</label>
+                            <input type="number" id="customFoodCalories" min="0" placeholder="120">
+                        </div>
+                        <div class="input-group">
+                            <label>Protein (g):</label>
+                            <input type="number" id="customFoodProtein" min="0" step="0.1" placeholder="0">
+                        </div>
+                        <div class="input-group">
+                            <label>Carbs (g):</label>
+                            <input type="number" id="customFoodCarbs" min="0" step="0.1" placeholder="0">
+                        </div>
+                        <div class="input-group">
+                            <label>Fat (g):</label>
+                            <input type="number" id="customFoodFat" min="0" step="0.1" placeholder="0">
+                        </div>
+                        <div class="meal-selector">
+                            <label for="customFoodMeal">Add to:</label>
+                            <select id="customFoodMeal">
+                                <option value="breakfast">Breakfast</option>
+                                <option value="lunch">Lunch</option>
+                                <option value="dinner">Dinner</option>
+                                <option value="snacks">Snacks</option>
+                            </select>
+                        </div>
+                        <div class="custom-food-actions">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="saveToDatabase" checked> Save to food list for future use
+                            </label>
+                            <button id="addCustomFood" class="add-btn">Add Food</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -200,6 +255,10 @@
                             <input type="number" id="setsInput" min="1" max="20" value="1">
                             <label>Reps:</label>
                             <input type="number" id="repsInput" min="1" max="100" value="1">
+                        </div>
+                        <div class="input-group" id="weightGroup" style="display: none;">
+                            <label>Weight (lbs):</label>
+                            <input type="number" id="weightInput" min="0" max="1000" step="2.5" value="0">
                         </div>
                         <div class="estimated-calories">
                             <span>Estimated calories burned: </span>

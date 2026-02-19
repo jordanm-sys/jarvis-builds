@@ -666,6 +666,58 @@ body {
     font-size: 0.9rem;
 }
 
+/* Custom Food */
+.custom-food-btn {
+    width: 100%;
+    margin-top: 10px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.custom-food-btn:hover {
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.custom-food-form .input-group {
+    margin-bottom: 12px;
+}
+
+.custom-food-form .input-group input[type="text"],
+.custom-food-form .input-group input[type="number"] {
+    background: #2d3748;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e2e8f0;
+    padding: 8px 12px;
+    border-radius: 6px;
+    flex: 1;
+}
+
+.custom-food-form .input-group input:focus {
+    outline: none;
+    border-color: #4fd1c7;
+}
+
+.custom-food-actions {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.checkbox-label {
+    color: #a0aec0;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    accent-color: #4fd1c7;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .app {
