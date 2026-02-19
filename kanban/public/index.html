@@ -130,6 +130,33 @@ header h1 span{color:var(--accent)}
 .source-tag{display:inline-block;font-size:10px;color:var(--text2);background:var(--surface2);padding:1px 6px;border-radius:4px;margin-left:6px}
 .earnings-empty{text-align:center;padding:60px 20px;color:var(--text2)}
 
+/* Market Insights */
+.market-day{margin-bottom:24px}
+.market-day-header{font-size:15px;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.market-day-header span{font-size:12px;color:var(--text2);font-weight:400}
+.market-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px}
+.market-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;position:relative;transition:transform .15s,box-shadow .15s}
+.market-card:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.market-card .card-actions{opacity:0;transition:opacity .15s;position:absolute;top:8px;right:8px}
+.market-card:hover .card-actions{opacity:1}
+.market-card .card-actions button{background:none;border:none;color:var(--text2);cursor:pointer;font-size:13px;padding:2px 4px;border-radius:4px}
+.market-card .card-actions button:hover{color:var(--red)}
+.market-type-badge{display:inline-block;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:600;text-transform:uppercase;margin-bottom:8px}
+.market-type-badge.shift{background:rgba(88,166,255,.15);color:var(--accent)}
+.market-type-badge.opportunity{background:rgba(63,185,80,.15);color:var(--green)}
+.market-type-badge.warning{background:rgba(248,81,73,.15);color:var(--red)}
+.market-type-badge.trend{background:rgba(210,153,34,.2);color:var(--yellow)}
+.market-title{font-weight:700;font-size:15px;margin-bottom:6px}
+.market-tickers{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}
+.market-ticker{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:2px 8px;font-size:11px;font-weight:600}
+.market-desc{color:var(--text2);font-size:13px;line-height:1.6;margin-bottom:10px}
+.market-thesis{font-size:12px;line-height:1.5;padding:8px 12px;background:var(--surface2);border-radius:6px;border-left:3px solid var(--accent)}
+.market-thesis .label{font-weight:600;font-size:11px;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+.market-conviction{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;margin-top:8px}
+.conviction-high{color:var(--green)}
+.conviction-med{color:var(--yellow)}
+.conviction-low{color:var(--text2)}
+
 /* Modal */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:100;align-items:center;justify-content:center}
 .modal-overlay.active{display:flex}
@@ -174,6 +201,7 @@ header h1 span{color:var(--accent)}
     <div class="sub-tab active" onclick="switchStockTab('portfolio')">💼 Portfolio</div>
     <div class="sub-tab" onclick="switchStockTab('watchlist')">👁 Watchlist</div>
     <div class="sub-tab" onclick="switchStockTab('earnings')">📅 Earnings Calendar</div>
+    <div class="sub-tab" onclick="switchStockTab('market')">🔍 Market</div>
   </div>
 
   <!-- Portfolio -->
@@ -213,6 +241,14 @@ header h1 span{color:var(--accent)}
         <tbody id="earningsBody"></tbody>
       </table>
     </div>
+  </div>
+
+  <!-- Market Insights -->
+  <div class="sub-section" id="marketView">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+      <h3 style="font-size:16px">🔍 Market Shifts & Early Opportunities</h3>
+    </div>
+    <div id="marketList"></div>
   </div>
 </div>
 
@@ -289,11 +325,9 @@ function updatePMBtn(){
 
 function switchStockTab(tab){
   currentStockTab=tab;
-  const tabs=['portfolio','watchlist','earnings'];
+  const tabs=['portfolio','watchlist','earnings','market'];
   document.querySelectorAll('#stockSubTabs .sub-tab').forEach((t,i)=>t.classList.toggle('active',tabs[i]===tab));
-  document.getElementById('portfolioView').classList.toggle('active',tab==='portfolio');
-  document.getElementById('watchlistView').classList.toggle('active',tab==='watchlist');
-  document.getElementById('earningsView').classList.toggle('active',tab==='earnings');
+  ['portfolioView','watchlistView','earningsView','marketView'].forEach((id,i)=>document.getElementById(id).classList.toggle('active',tabs[i]===tab));
 }
 
 // --- Tasks ---
@@ -415,7 +449,7 @@ async function deleteProject(id){if(confirm('Delete this project?')){await fetch
 document.getElementById('projectModal').addEventListener('click',e=>{if(e.target.id==='projectModal')closeProjectModal()});
 
 // --- Stocks ---
-async function loadStocks(){stocksData=await(await fetch('/api/stocks')).json();if(!stocksData.watchlist)stocksData.watchlist=[];if(!stocksData.earnings)stocksData.earnings=[];renderTickers();renderWatchlist();renderBriefings();renderWatchlistBriefings();renderEarnings()}
+async function loadStocks(){stocksData=await(await fetch('/api/stocks')).json();if(!stocksData.watchlist)stocksData.watchlist=[];if(!stocksData.earnings)stocksData.earnings=[];if(!stocksData.market)stocksData.market=[];renderTickers();renderWatchlist();renderBriefings();renderWatchlistBriefings();renderEarnings();renderMarket()}
 
 function renderTickers(){
   const bar=document.getElementById('tickerBar');bar.innerHTML='';
@@ -516,6 +550,43 @@ function renderEarnings(){
   document.getElementById('earningsLastUpdated').textContent=latest?`Last updated: ${new Date(latest).toLocaleDateString('en-US',{month:'short',day:'numeric'})} ${new Date(latest).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}`:'';
 }
 
+// --- Market Insights ---
+function renderMarket(){
+  const container=document.getElementById('marketList');container.innerHTML='';
+  const market=stocksData.market||[];
+  if(!market.length){container.innerHTML=`<div class="no-briefings"><div class="icon">🔍</div><p>No market insights yet. They'll appear here with your morning briefing.</p></div>`;return}
+  // Group by date
+  const grouped={};
+  market.forEach(m=>{const d=m.date||'Unknown';if(!grouped[d])grouped[d]=[];grouped[d].push(m)});
+  Object.keys(grouped).sort((a,b)=>b.localeCompare(a)).forEach(date=>{
+    const section=document.createElement('div');section.className='market-day';
+    const dateStr=new Date(date+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+    section.innerHTML=`<div class="market-day-header">📊 ${dateStr}</div>`;
+    const grid=document.createElement('div');grid.className='market-cards';
+    grouped[date].forEach(m=>{
+      const card=document.createElement('div');card.className='market-card';
+      const typeClass=m.type||'opportunity';
+      const typeLabel={'shift':'Market Shift','opportunity':'Opportunity','warning':'Warning','trend':'Trend'}[typeClass]||typeClass;
+      const tickers=(m.tickers||[]).map(t=>`<span class="market-ticker">${esc(t)}</span>`).join('');
+      const convClass=m.conviction==='high'?'conviction-high':m.conviction==='medium'?'conviction-med':'conviction-low';
+      const convLabel=(m.conviction||'').charAt(0).toUpperCase()+(m.conviction||'').slice(1);
+      const convDots=m.conviction==='high'?'🟢🟢🟢':m.conviction==='medium'?'🟡🟡':'⚪';
+      card.innerHTML=`
+        <div class="card-actions"><button onclick="deleteMarketInsight('${m.id}')">🗑</button></div>
+        <span class="market-type-badge ${typeClass}">${typeLabel}</span>
+        <div class="market-title">${esc(m.title||'')}</div>
+        ${tickers?`<div class="market-tickers">${tickers}</div>`:''}
+        <div class="market-desc">${esc(m.description||'')}</div>
+        ${m.thesis?`<div class="market-thesis"><div class="label">Thesis</div>${esc(m.thesis)}</div>`:''}
+        ${m.conviction?`<div class="market-conviction ${convClass}">${convDots} ${convLabel} Conviction</div>`:''}`;
+      grid.appendChild(card);
+    });
+    section.appendChild(grid);container.appendChild(section);
+  });
+}
+
+async function deleteMarketInsight(id){if(!confirm('Delete this insight?'))return;await fetch(`/api/stocks/market/${id}`,{method:'DELETE'});await loadStocks()}
+
 // Init
 load();loadProjects();loadStocks();
 
@@ -525,7 +596,7 @@ setInterval(async()=>{
     const[nt,np,ns]=await Promise.all([fetch('/api/tasks').then(r=>r.json()),fetch('/api/projects').then(r=>r.json()),fetch('/api/stocks').then(r=>r.json())]);
     if(JSON.stringify(nt)!==JSON.stringify(tasks)){tasks=nt;render()}
     if(JSON.stringify(np)!==JSON.stringify(projects)){projects=np;renderProjects()}
-    if(JSON.stringify(ns)!==JSON.stringify(stocksData)){stocksData=ns;renderTickers();renderWatchlist();renderBriefings();renderWatchlistBriefings();renderEarnings()}
+    if(JSON.stringify(ns)!==JSON.stringify(stocksData)){stocksData=ns;renderTickers();renderWatchlist();renderBriefings();renderWatchlistBriefings();renderEarnings();renderMarket()}
   }catch(e){}
 },2000);
 </script>

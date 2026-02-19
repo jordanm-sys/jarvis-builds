@@ -218,4 +218,27 @@ app.delete('/api/stocks/earnings/:id', (req, res) => {
   res.json({ ok: true });
 });
 
+// Market Insights API
+app.get('/api/stocks/market', (_, res) => {
+  const data = readStocks();
+  res.json(data.market || []);
+});
+
+app.post('/api/stocks/market', (req, res) => {
+  const data = readStocks();
+  if (!data.market) data.market = [];
+  const entry = { id: Date.now().toString(), date: new Date().toISOString().slice(0, 10), createdAt: new Date().toISOString(), ...req.body };
+  data.market.unshift(entry);
+  saveStocks(data);
+  res.json(entry);
+});
+
+app.delete('/api/stocks/market/:id', (req, res) => {
+  const data = readStocks();
+  if (!data.market) data.market = [];
+  data.market = data.market.filter(m => m.id !== req.params.id);
+  saveStocks(data);
+  res.json({ ok: true });
+});
+
 app.listen(3333, '0.0.0.0', () => console.log('Kanban server running on http://localhost:3333'));

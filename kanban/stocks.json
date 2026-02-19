@@ -1,18 +1,240 @@
 {
   "tickers": [
-    {"symbol": "FBTC", "currency": "CAD", "addedAt": "2026-02-18"},
-    {"symbol": "SOXX", "currency": "USD", "addedAt": "2026-02-18"},
-    {"symbol": "TE", "currency": "USD", "addedAt": "2026-02-18"},
-    {"symbol": "MSFT", "currency": "USD", "addedAt": "2026-02-18"},
-    {"symbol": "MU", "currency": "USD", "addedAt": "2026-02-18"},
-    {"symbol": "FCX", "currency": "USD", "addedAt": "2026-02-18"},
-    {"symbol": "AMPX", "currency": "USD", "addedAt": "2026-02-18"},
-    {"symbol": "NBIS", "currency": "USD", "addedAt": "2026-02-18"},
-    {"symbol": "CRWV", "currency": "USD", "addedAt": "2026-02-18"},
-    {"symbol": "CIFR", "currency": "USD", "addedAt": "2026-02-18"},
-    {"symbol": "IREN", "currency": "USD", "addedAt": "2026-02-18"}
+    {
+      "symbol": "FBTC",
+      "currency": "CAD",
+      "addedAt": "2026-02-18"
+    },
+    {
+      "symbol": "SOXX",
+      "currency": "USD",
+      "addedAt": "2026-02-18"
+    },
+    {
+      "symbol": "TE",
+      "currency": "USD",
+      "addedAt": "2026-02-18"
+    },
+    {
+      "symbol": "MSFT",
+      "currency": "USD",
+      "addedAt": "2026-02-18"
+    },
+    {
+      "symbol": "MU",
+      "currency": "USD",
+      "addedAt": "2026-02-18"
+    },
+    {
+      "symbol": "FCX",
+      "currency": "USD",
+      "addedAt": "2026-02-18"
+    },
+    {
+      "symbol": "AMPX",
+      "currency": "USD",
+      "addedAt": "2026-02-18"
+    },
+    {
+      "symbol": "NBIS",
+      "currency": "USD",
+      "addedAt": "2026-02-18"
+    },
+    {
+      "symbol": "CRWV",
+      "currency": "USD",
+      "addedAt": "2026-02-18"
+    },
+    {
+      "symbol": "CIFR",
+      "currency": "USD",
+      "addedAt": "2026-02-18"
+    },
+    {
+      "symbol": "IREN",
+      "currency": "USD",
+      "addedAt": "2026-02-18"
+    }
   ],
   "watchlist": [],
-  "earnings": [],
-  "briefings": []
+  "earnings": [
+    {
+      "id": "1771492314002",
+      "updatedAt": "2026-02-19T09:11:54.002Z",
+      "symbol": "MSFT",
+      "reportDate": "2026-01-28",
+      "source": "portfolio",
+      "bullCase": "Azure/AI growth beats, cloud revenue accelerates \u2192 stock rallies 5-10%",
+      "bearCase": "Cloud slowdown or AI capex concerns \u2192 pullback to $380 support",
+      "notes": "Already reported Q2 FY26 on Jan 28. Next report ~Apr 2026"
+    },
+    {
+      "id": "1771492314019",
+      "updatedAt": "2026-02-19T09:11:54.019Z",
+      "symbol": "MU",
+      "reportDate": "2026-03-19",
+      "source": "portfolio",
+      "bullCase": "HBM demand exceeds guidance, AI memory pricing power \u2192 could break $450",
+      "bearCase": "Inventory buildup or weak consumer DRAM \u2192 drops to $370 support",
+      "notes": "\u26a0\ufe0f REPORTING IN 29 DAYS. Key AI memory play."
+    },
+    {
+      "id": "1771492314036",
+      "updatedAt": "2026-02-19T09:11:54.036Z",
+      "symbol": "FCX",
+      "reportDate": null,
+      "source": "portfolio",
+      "bullCase": "Copper >$14K/ton + Grasberg extension = strong earnings beat \u2192 $55+",
+      "bearCase": "China demand slowdown, copper price pullback \u2192 sub-$40",
+      "notes": "Q4 2025 reported Jan. Next ~Apr 2026. Grasberg MOU is major catalyst."
+    },
+    {
+      "id": "1771492314051",
+      "updatedAt": "2026-02-19T09:11:54.051Z",
+      "symbol": "IREN",
+      "reportDate": "2026-02-18",
+      "source": "portfolio",
+      "bullCase": "AI cloud ARR ramp validates pivot \u2192 recovery rally to $15+",
+      "bearCase": "Continued BTC weakness + revenue misses \u2192 could test $8 support",
+      "notes": "\u26a0\ufe0f JUST REPORTED Q2 FY26. Revenue missed, -22% selloff. AI pivot intact."
+    },
+    {
+      "id": "1771492314063",
+      "updatedAt": "2026-02-19T09:11:54.063Z",
+      "symbol": "CIFR",
+      "reportDate": null,
+      "source": "portfolio",
+      "bullCase": "AWS/Google data center revenue starts flowing H2 2026 \u2192 re-rate higher",
+      "bearCase": "BTC stays weak, data center delays \u2192 further downside",
+      "notes": "$9.3B contracted AI data center leases. Revenue expected Aug-Sep 2026."
+    },
+    {
+      "id": "1771492314076",
+      "updatedAt": "2026-02-19T09:11:54.076Z",
+      "symbol": "CRWV",
+      "reportDate": "2026-02-25",
+      "source": "portfolio",
+      "bullCase": "Q4 revenue +105% YoY beats, backlog expansion \u2192 could break ATH",
+      "bearCase": "Debt concerns, OpenAI concentration risk \u2192 10-15% pullback",
+      "notes": "\u26a0\ufe0f REPORTING IN ~7 DAYS. Q3 was $1.4B rev (+134% YoY)."
+    },
+    {
+      "id": "1771492314087",
+      "updatedAt": "2026-02-19T09:11:54.087Z",
+      "symbol": "NBIS",
+      "reportDate": null,
+      "source": "portfolio",
+      "bullCase": "AI infrastructure demand + Nvidia backing \u2192 breakout above $100",
+      "bearCase": "Heavy investment phase, negative EPS \u2192 sentiment could sour",
+      "notes": "Nvidia maintained holdings. PT $142-152. EPS forecast negative for 2026."
+    },
+    {
+      "id": "1771492314099",
+      "updatedAt": "2026-02-19T09:11:54.099Z",
+      "symbol": "AMPX",
+      "reportDate": null,
+      "source": "portfolio",
+      "bullCase": "New battery contracts, aviation/defense demand \u2192 multi-bagger potential",
+      "bearCase": "Production delays, cash burn \u2192 dilution risk",
+      "notes": "Feb events schedule released. Silicon anode tech gaining traction."
+    },
+    {
+      "id": "1771492314110",
+      "updatedAt": "2026-02-19T09:11:54.110Z",
+      "symbol": "TE",
+      "reportDate": null,
+      "source": "portfolio",
+      "bullCase": "Tax credit eligibility confirmed, solar demand ramp \u2192 strong upside",
+      "bearCase": "Policy changes or supply chain issues \u2192 margin pressure",
+      "notes": "T1 Energy. Treasury guidance supports 45X tax credit eligibility."
+    },
+    {
+      "id": "1771492314120",
+      "updatedAt": "2026-02-19T09:11:54.120Z",
+      "symbol": "SOXX",
+      "reportDate": null,
+      "source": "portfolio",
+      "bullCase": "AI chip demand surge continues \u2192 new ATH above $361",
+      "bearCase": "Trade tensions, supply chain disruption \u2192 pullback to $320",
+      "notes": "ETF - no earnings. YTD +17.5%. Closed $357.33."
+    },
+    {
+      "id": "1771492314131",
+      "updatedAt": "2026-02-19T09:11:54.131Z",
+      "symbol": "FBTC",
+      "reportDate": null,
+      "source": "portfolio",
+      "bullCase": "BTC rally on ETF inflows \u2192 NAV recovery above $70",
+      "bearCase": "BTC drops below $60K \u2192 ETF tests 52wk low of $54",
+      "notes": "ETF - tracks BTC spot price. BTC at ~$67K, declining from 2025 highs."
+    }
+  ],
+  "briefings": [
+    {
+      "id": "1771492287008",
+      "date": "2026-02-18",
+      "createdAt": "2026-02-19T09:11:27.008Z",
+      "type": "portfolio",
+      "summary": "Markets rallied on tech strength \u2014 S&P 500 +0.6%, NASDAQ +0.8%, Dow +0.3%. Fed minutes revealed division on rate path. BTC weak at ~$67K, down from highs. MU was the big winner at +5.3%. Semis rallied on Meta-NVDA chip deal. FCX boosted by Grasberg extension MOU. IREN sold off post-earnings despite AI pivot progress.",
+      "stocks": [
+        {
+          "symbol": "FBTC",
+          "change": -0.3,
+          "note": "BTC ~$67K, under pressure. ETF tracking spot; 52wk range $54-$110"
+        },
+        {
+          "symbol": "SOXX",
+          "change": 1.43,
+          "note": "Semis rallied on Meta-NVDA chip deal. Closed $357.33. YTD +17.5%"
+        },
+        {
+          "symbol": "TE",
+          "change": 0.5,
+          "note": "T1 Energy \u2014 Treasury tax credit guidance supports eligibility"
+        },
+        {
+          "symbol": "MSFT",
+          "change": 0.69,
+          "note": "Closed $399.60. Ex-div Feb 19. Marginal gain with broader tech"
+        },
+        {
+          "symbol": "MU",
+          "change": 5.3,
+          "note": "\u2b50 TOP MOVER. Closed $420.95. AI/HBM demand catalyst. Earnings Mar 19"
+        },
+        {
+          "symbol": "FCX",
+          "change": 2.5,
+          "note": "Grasberg life-of-resource extension MOU with Indonesia. Copper >$14K/ton"
+        },
+        {
+          "symbol": "AMPX",
+          "change": 0,
+          "note": "Quiet day. Feb events schedule announced. Battery tech gaining traction"
+        },
+        {
+          "symbol": "NBIS",
+          "change": 0.5,
+          "note": "Nvidia maintained NBIS holdings. AI infrastructure play. PT $142-152"
+        },
+        {
+          "symbol": "CRWV",
+          "change": 0.8,
+          "note": "Q4 earnings coming \u2014 expected +105% YoY revenue. Q3 was $1.4B (+134%)"
+        },
+        {
+          "symbol": "CIFR",
+          "change": -1,
+          "note": "BTC weakness weighing. But $9.3B AI data center contracts (AWS/Google)"
+        },
+        {
+          "symbol": "IREN",
+          "change": -5,
+          "note": "\u26a0\ufe0f Post-Q2 selloff (-22%). Revenue $184.7M missed. AI pivot intact, 140K GPUs target"
+        }
+      ],
+      "analysis": "Tech led the market higher with semis the standout sector. MU surged 5.3% on renewed AI/HBM demand optimism after Meta announced a massive NVDA chip order. FCX got a major catalyst \u2014 Indonesia agreed to extend Grasberg operating rights for life of resource, huge for long-term copper production. BTC names (FBTC, CIFR, IREN) lagged as Bitcoin struggles around $67K. IREN took the biggest hit post-earnings \u2014 revenue missed but the AI cloud pivot ($3.4B ARR target) remains on track. Fed minutes showed deep divisions on rate cuts vs holds, keeping uncertainty elevated. PCE data Friday could be the next catalyst."
+    }
+  ],
+  "market": []
 }
