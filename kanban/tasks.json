@@ -1,6 +1,64 @@
 [
-  {"id":"1","title":"Set up email integration","description":"Configure email service for notifications and alerts","priority":"medium","column":"backlog","assignedTo":"Jarvis","createdAt":"2026-02-13T21:33:00Z"},
-  {"id":"2","title":"Research AI dropshipping tools","description":"Evaluate top AI-powered dropshipping platforms and automation tools","priority":"high","column":"backlog","assignedTo":"Jarvis","createdAt":"2026-02-13T21:33:00Z"},
-  {"id":"3","title":"Daily memory maintenance","description":"Review and consolidate daily memory files, update MEMORY.md","priority":"low","column":"recurring","assignedTo":"Jarvis","createdAt":"2026-02-13T21:33:00Z"},
-  {"id":"4","title":"Organize workspace files","description":"Clean up workspace directory structure and archive old files","priority":"medium","column":"inprogress","assignedTo":"Jarvis","createdAt":"2026-02-13T21:33:00Z"}
+  {
+    "id": "2",
+    "title": "Research AI dropshipping tools",
+    "description": "Evaluate top AI-powered dropshipping platforms and automation tools",
+    "priority": "medium",
+    "column": "done",
+    "assignedTo": "Jarvis",
+    "createdAt": "2026-02-13T21:33:00Z",
+    "projectId": "3"
+  },
+  {
+    "id": "3",
+    "title": "Daily memory maintenance",
+    "description": "Review and consolidate daily memory files, update MEMORY.md",
+    "priority": "low",
+    "column": "recurring",
+    "assignedTo": "Jarvis",
+    "createdAt": "2026-02-13T21:33:00Z"
+  },
+  {
+    "id": "1771051554374",
+    "createdAt": "2026-02-14T06:45:54.374Z",
+    "assignedTo": "Jarvis",
+    "title": "Build comprehensive fitness tracking web app",
+    "description": "✅ COMPLETED — Full fitness tracker with: calorie intake tracking (breakfast/lunch/dinner/snacks), workout logging with weight tracking for strength exercises, exercise database (cardio/strength/bodyweight/flexibility/sports), custom food creation & saving, calendar navigation with historical data, daily notes. Running on http://localhost:3334. No persistent highlight on calendar clicks. Server: fitness-app/server.js (Express on port 3334).",
+    "priority": "high",
+    "column": "done",
+    "projectId": "2"
+  },
+  {
+    "id": "1771135157227",
+    "createdAt": "2026-02-15T05:59:17.227Z",
+    "assignedTo": "Jarvis",
+    "title": "plan me stuff to do in Oahu Hawaii ",
+    "description": "im staying at the illikai hotel",
+    "priority": "high",
+    "column": "done",
+    "schedule": "instant",
+    "projectId": "4"
+  },
+  {
+    "id": "1771138009006",
+    "createdAt": "2026-02-15T06:46:49.006Z",
+    "assignedTo": "Jarvis",
+    "title": "Deep dive product research with logical reasoning for drop shipping",
+    "description": "✅ COMPLETED — Deep dive product research with 8 winning products analyzed: Peeling Facial Serum (83% margin), Magnetic Gym Bottle Bag (80%), Facial Ice Bath Bowl (75%), Bluetooth Smart Sunglasses (75%), Rain Cloud Aroma Diffuser (75%), Hidden Love Projection Necklace (80%), Roulette Watch (72%), Red Light Therapy Belt (70%). Each includes: why it wins, target audience, profit margins, direct supplier links (AliExpress, CJ Dropshipping, Alibaba, Spocket, etc.), and marketing angles. Plus strategic recommendations for beginners. Full report: dropship-product-research-2026.md",
+    "priority": "high",
+    "column": "done",
+    "schedule": "instant",
+    "projectId": "1771138009006"
+  },
+  {
+    "id": "1771298270666",
+    "createdAt": "2026-02-17T03:17:50.666Z",
+    "assignedTo": "Jarvis",
+    "title": "plan me a trip somewhere",
+    "description": "",
+    "priority": "medium",
+    "column": "done",
+    "schedule": "instant",
+    "projectId": "1771450414784"
+  }
 ]

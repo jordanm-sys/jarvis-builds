@@ -7,7 +7,8 @@
     "githubUrl": "https://github.com/jordanm-sys/jarvis-builds",
     "createdAt": "2026-02-13",
     "category": "websites",
-    "localUrl": "/"
+    "localUrl": "/",
+    "reviewed": true
   },
   {
     "id": "2",
@@ -18,7 +19,8 @@
     "createdAt": "2026-02-13",
     "category": "websites",
     "localUrl": "http://localhost:3334",
-    "note": "Access via Tailscale: http://100.109.88.104:3334"
+    "note": "Access via Tailscale: http://100.109.88.104:3334",
+    "reviewed": true
   },
   {
     "id": "3",
@@ -28,17 +30,19 @@
     "createdAt": "2026-02-14",
     "category": "research",
     "filePath": "research/ai-dropshipping-tools.pdf",
-    "localUrl": "/files/ai-dropshipping-tools.pdf"
+    "localUrl": "/files/ai-dropshipping-tools.pdf",
+    "reviewed": true
   },
   {
     "id": "4",
     "name": "Oahu Hawaii Trip Plan",
-    "description": "7-day Oahu itinerary based at the Ilikai Hotel \u2014 beaches, hikes, food, nightlife, budget breakdowns, and a condensed 3-day version. Includes reservation tips for Diamond Head, Hanauma Bay & Pearl Harbor.",
+    "description": "7-day Oahu itinerary based at the Ilikai Hotel — beaches, hikes, food, nightlife, budget breakdowns, and a condensed 3-day version. Includes reservation tips for Diamond Head, Hanauma Bay & Pearl Harbor.",
     "status": "completed",
     "createdAt": "2026-02-14",
     "category": "research",
     "filePath": "research/hawaii-oahu-trip-plan.pdf",
-    "localUrl": "/files/hawaii-oahu-trip-plan.pdf"
+    "localUrl": "/files/hawaii-oahu-trip-plan.pdf",
+    "reviewed": true
   },
   {
     "id": "1771136609676",
@@ -47,16 +51,18 @@
     "status": "completed",
     "createdAt": "2026-02-14",
     "category": "research",
-    "localUrl": "/files/winning-products-feb2026.pdf"
+    "localUrl": "/files/winning-products-feb2026.pdf",
+    "reviewed": true
   },
   {
     "id": "1771137670768",
     "createdAt": "2026-02-14",
     "name": "Product Saturation Analysis",
-    "description": "Deep competition & saturation analysis of 9 dropshipping products \u2014 Amazon competitors, TikTok presence, supplier costs, and GO/MAYBE/SKIP verdicts with re-ranking.",
+    "description": "Deep competition & saturation analysis of 9 dropshipping products — Amazon competitors, TikTok presence, supplier costs, and GO/MAYBE/SKIP verdicts with re-ranking.",
     "status": "completed",
     "category": "research",
-    "localUrl": "/files/product-saturation-analysis.pdf"
+    "localUrl": "/files/product-saturation-analysis.pdf",
+    "reviewed": true
   },
   {
     "id": "1771138009006",
@@ -67,6 +73,31 @@
     "category": "research",
     "githubUrl": "https://github.com/jordanm-sys/jarvis-builds",
     "filePath": "research/dropship-product-research-2026.pdf",
-    "localUrl": "/files/dropship-product-research-2026.pdf"
+    "localUrl": "/files/dropship-product-research-2026.pdf",
+    "reviewed": true
+  },
+  {
+    "id": "1771450414784",
+    "createdAt": "2026-02-18",
+    "name": "Spring Break 2026 Trip Plan",
+    "description": "4 destination options from Vancouver: Mexico City (recommended, ~$800 CAD), San Francisco (~$950), PNW Road Trip (~$630), LA (~$900). Budget breakdowns, flights, activities, and pro tips.",
+    "status": "completed",
+    "category": "research",
+    "githubUrl": "https://github.com/jordanm-sys/jarvis-builds",
+    "filePath": "research/spring-break-2026-trip-plan.pdf",
+    "localUrl": "/files/spring-break-2026-trip-plan.pdf",
+    "reviewed": true
+  },
+  {
+    "id": "1771451826811",
+    "createdAt": "2026-02-18",
+    "name": "3-Day Waikiki Plan",
+    "description": "Day-by-day itinerary for Waikiki: Diamond Head, North Shore day trip, Hanauma Bay, local food spots, and evening plans. Feb 18-20, 2026.",
+    "status": "completed",
+    "category": "research",
+    "githubUrl": "https://github.com/jordanm-sys/jarvis-builds",
+    "filePath": "research/waikiki-3-day-plan.pdf",
+    "localUrl": "/files/waikiki-3-day-plan.pdf",
+    "reviewed": true
   }
 ]

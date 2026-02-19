@@ -1,0 +1,16 @@
+{
+  "tickers": [
+    {"symbol": "FBTC", "currency": "CAD", "addedAt": "2026-02-18"},
+    {"symbol": "SOXX", "currency": "USD", "addedAt": "2026-02-18"},
+    {"symbol": "TE", "currency": "USD", "addedAt": "2026-02-18"},
+    {"symbol": "MSFT", "currency": "USD", "addedAt": "2026-02-18"},
+    {"symbol": "MU", "currency": "USD", "addedAt": "2026-02-18"},
+    {"symbol": "FCX", "currency": "USD", "addedAt": "2026-02-18"},
+    {"symbol": "AMPX", "currency": "USD", "addedAt": "2026-02-18"},
+    {"symbol": "NBIS", "currency": "USD", "addedAt": "2026-02-18"},
+    {"symbol": "CRWV", "currency": "USD", "addedAt": "2026-02-18"},
+    {"symbol": "CIFR", "currency": "USD", "addedAt": "2026-02-18"},
+    {"symbol": "IREN", "currency": "USD", "addedAt": "2026-02-18"}
+  ],
+  "briefings": []
+}

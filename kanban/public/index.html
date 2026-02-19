@@ -13,10 +13,23 @@ header h1 span{color:var(--accent)}
 .header-right{display:flex;align-items:center;gap:12px}
 .btn{background:var(--accent);color:#fff;border:none;padding:8px 16px;border-radius:var(--radius);cursor:pointer;font-size:14px;font-weight:500;transition:opacity .2s}
 .btn:hover{opacity:.85}
-.tabs{display:flex;gap:4px;padding:0 24px;background:var(--surface);border-bottom:1px solid var(--border)}
-.tab{padding:10px 20px;font-size:14px;font-weight:500;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s}
-.tab:hover{color:var(--text)}
-.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.btn-sm{padding:6px 12px;font-size:12px}
+
+/* Top-level navigation tabs */
+.top-tabs{display:flex;gap:0;background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px}
+.top-tab{padding:12px 24px;font-size:15px;font-weight:600;color:var(--text2);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;user-select:none}
+.top-tab:hover{color:var(--text)}
+.top-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+
+/* Sub tabs (Tasks/Projects within Project Management) */
+.sub-tabs{display:flex;gap:4px;padding:0 24px;background:var(--bg);border-bottom:1px solid var(--border)}
+.sub-tab{padding:8px 16px;font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s}
+.sub-tab:hover{color:var(--text)}
+.sub-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+
+.section{display:none;flex:1;overflow:hidden;flex-direction:column}
+.section.active{display:flex}
+
 .board{display:flex;gap:16px;padding:20px 24px;flex:1;overflow-x:auto}
 .column{background:var(--surface);border-radius:var(--radius);min-width:280px;width:280px;display:flex;flex-direction:column;border:1px solid var(--border)}
 .column-header{padding:14px 16px;font-weight:600;font-size:14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border)}
@@ -35,9 +48,9 @@ header h1 span{color:var(--accent)}
 .card:hover .card-actions{opacity:1}
 .card-actions button{background:none;border:none;color:var(--text2);cursor:pointer;font-size:14px;padding:2px 4px;border-radius:4px}
 .card-actions button:hover{background:var(--border);color:var(--red)}
-/* Projects Grid */
-.projects-view{display:none;padding:20px 24px;flex:1;overflow-y:auto}
-.projects-view.active{display:block}
+
+/* Projects */
+.projects-view{padding:20px 24px;flex:1;overflow-y:auto}
 .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
 .project-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:transform .15s,box-shadow .15s;position:relative}
 .project-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.3)}
@@ -47,17 +60,59 @@ header h1 span{color:var(--accent)}
 .project-card .card-actions button:hover{background:var(--border);color:var(--red)}
 .project-name{font-weight:600;font-size:16px;margin-bottom:8px}
 .project-desc{color:var(--text2);font-size:13px;line-height:1.5;margin-bottom:12px}
-.project-footer{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--text2)}
 .project-status{display:inline-block;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:600;text-transform:uppercase}
 .project-status.active{background:rgba(63,185,80,.15);color:var(--green)}
 .project-status.completed{background:rgba(88,166,255,.15);color:var(--accent)}
+.project-status.incomplete{background:rgba(248,81,73,.15);color:var(--red)}
+.incomplete-reason{color:var(--red);font-size:12px;line-height:1.4;margin-bottom:8px;padding:6px 10px;background:rgba(248,81,73,.08);border-radius:6px;border-left:3px solid var(--red)}
+.review-badge{display:inline-block;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:600;text-transform:uppercase;margin-left:8px;cursor:pointer;transition:all .2s;min-width:80px;max-width:80px;text-align:center;flex-shrink:0}
+.review-badge:hover{opacity:.8}
+.review-badge.needs-review{background:rgba(210,153,34,.2);color:var(--yellow);border:1px solid rgba(210,153,34,.3)}
+.review-badge.reviewed{background:rgba(63,185,80,.15);color:var(--green);border:1px solid rgba(63,185,80,.3)}
+.project-footer{display:grid;grid-template-columns:auto 80px 1fr;align-items:center;gap:8px;font-size:12px;color:var(--text2)}
+.project-links{display:flex;gap:10px;white-space:nowrap}
 .project-link{color:var(--accent);text-decoration:none;font-size:12px;display:inline-flex;align-items:center;gap:4px}
 .project-link:hover{text-decoration:underline}
-.project-links{display:flex;gap:12px}
 .category-section{margin-bottom:28px}
 .category-header{font-size:16px;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
 .category-header .cat-icon{font-size:18px}
 .category-header .cat-count{background:var(--surface2);color:var(--text2);font-size:12px;padding:2px 8px;border-radius:10px;font-weight:500}
+
+/* Stocks Section */
+.stocks-view{padding:20px 24px;flex:1;overflow-y:auto}
+.stocks-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.ticker-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.ticker-chip{display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:13px;font-weight:600;transition:all .2s}
+.ticker-chip .currency{font-size:10px;color:var(--text2);font-weight:400}
+.ticker-chip .remove-ticker{background:none;border:none;color:var(--text2);cursor:pointer;font-size:14px;padding:0 0 0 4px;line-height:1;transition:color .15s}
+.ticker-chip .remove-ticker:hover{color:var(--red)}
+.add-ticker-form{display:inline-flex;align-items:center;gap:6px}
+.add-ticker-form input{background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:6px 12px;color:var(--text);font-size:13px;width:90px;font-family:inherit}
+.add-ticker-form select{background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:6px 8px;color:var(--text);font-size:12px;font-family:inherit}
+
+.briefing-list{display:flex;flex-direction:column;gap:16px}
+.briefing-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.briefing-date-header{padding:14px 20px;font-weight:600;font-size:15px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.briefing-date-header .date-label{display:flex;align-items:center;gap:8px}
+.briefing-date-header .date-label span{font-size:12px;color:var(--text2);font-weight:400}
+.briefing-body{padding:20px}
+.briefing-body h3{font-size:14px;margin-bottom:8px;color:var(--accent)}
+.briefing-body p,.briefing-body li{font-size:13px;line-height:1.6;color:var(--text2)}
+.briefing-body ul{padding-left:18px;margin-bottom:12px}
+.briefing-body .summary{margin-bottom:16px;font-size:14px;line-height:1.6;color:var(--text)}
+.briefing-body .stock-row{display:grid;grid-template-columns:80px 80px 1fr;gap:12px;padding:8px 0;border-bottom:1px solid var(--border);align-items:center;font-size:13px}
+.briefing-body .stock-row:last-child{border-bottom:none}
+.briefing-body .stock-symbol{font-weight:700;color:var(--text)}
+.briefing-body .stock-change.up{color:var(--green)}
+.briefing-body .stock-change.down{color:var(--red)}
+.briefing-body .stock-change.flat{color:var(--text2)}
+.briefing-body .stock-note{color:var(--text2)}
+.briefing-delete{background:none;border:none;color:var(--text2);cursor:pointer;font-size:13px;padding:4px 8px;border-radius:4px;transition:all .15s}
+.briefing-delete:hover{background:var(--border);color:var(--red)}
+.no-briefings{text-align:center;padding:60px 20px;color:var(--text2)}
+.no-briefings .icon{font-size:48px;margin-bottom:12px}
+.no-briefings p{font-size:14px}
+
 /* Modal */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:100;align-items:center;justify-content:center}
 .modal-overlay.active{display:flex}
@@ -72,18 +127,40 @@ header h1 span{color:var(--accent)}
 </head>
 <body>
 <header>
-  <h1><span>▦</span> Kanban Board</h1>
+  <h1><span>▦</span> Jarvis Dashboard</h1>
   <div class="header-right">
     <button class="btn" id="actionBtn" onclick="openModal()">+ New Task</button>
   </div>
 </header>
-<div class="tabs">
-  <div class="tab active" onclick="switchTab('tasks')">Tasks</div>
-  <div class="tab" onclick="switchTab('projects')">Projects</div>
+
+<!-- Top-level tabs -->
+<div class="top-tabs">
+  <div class="top-tab active" onclick="switchSection('pm')">📋 Project Management</div>
+  <div class="top-tab" onclick="switchSection('stocks')">📈 Stock Updates</div>
 </div>
-<div class="board" id="board"></div>
-<div class="projects-view" id="projectsView">
-  <div class="projects-grid" id="projectsGrid"></div>
+
+<!-- PROJECT MANAGEMENT SECTION -->
+<div class="section active" id="sectionPM">
+  <div class="sub-tabs">
+    <div class="sub-tab active" onclick="switchSubTab('tasks')">Tasks</div>
+    <div class="sub-tab" onclick="switchSubTab('projects')">Projects</div>
+  </div>
+  <div class="board" id="board"></div>
+  <div class="projects-view" id="projectsView" style="display:none">
+    <div class="projects-grid" id="projectsGrid"></div>
+  </div>
+</div>
+
+<!-- STOCK UPDATES SECTION -->
+<div class="section" id="sectionStocks">
+  <div class="stocks-view">
+    <div class="stocks-header">
+      <h2 style="font-size:18px">Your Portfolio</h2>
+    </div>
+    <div class="ticker-bar" id="tickerBar"></div>
+    <h3 style="font-size:16px;margin-bottom:16px">📊 Daily Briefings</h3>
+    <div class="briefing-list" id="briefingList"></div>
+  </div>
 </div>
 
 <!-- Task Modal -->
@@ -115,7 +192,8 @@ header h1 span{color:var(--accent)}
     <label>Category</label>
     <select id="pCategory"><option value="websites">🌐 Websites</option><option value="research">🔍 Research</option><option value="tools">🛠️ Tools</option><option value="other">📦 Other</option></select>
     <label>Status</label>
-    <select id="pStatus"><option value="active">Active</option><option value="completed">Completed</option></select>
+    <select id="pStatus" onchange="toggleIncompleteReason()"><option value="active">Active</option><option value="completed">Completed</option><option value="incomplete">Incomplete</option></select>
+    <div id="incompleteReasonWrap" style="display:none"><label>Reason</label><input id="pIncompleteReason" placeholder="Why is it incomplete?"></div>
     <label>GitHub URL</label><input id="pGithub" placeholder="https://github.com/...">
     <label>Website / File</label><input id="pLocal" placeholder="http://localhost:3334 or file path">
     <div class="modal-btns">
@@ -127,15 +205,31 @@ header h1 span{color:var(--accent)}
 
 <script>
 const COLS=[{id:'backlog',name:'Backlog'},{id:'inprogress',name:'In Progress'},{id:'review',name:'Review'},{id:'done',name:'Done'},{id:'recurring',name:'Recurring'}];
-let tasks=[], projects=[], editId=null, editProjectId=null, currentTab='tasks';
+let tasks=[], projects=[], stocksData={tickers:[],briefings:[]}, editId=null, editProjectId=null;
+let currentSection='pm', currentSubTab='tasks';
 
-function switchTab(tab){
-  currentTab=tab;
-  document.querySelectorAll('.tab').forEach((t,i)=>{t.classList.toggle('active',i===(tab==='tasks'?0:1))});
-  document.getElementById('board').style.display=tab==='tasks'?'flex':'none';
-  document.getElementById('projectsView').classList.toggle('active',tab==='projects');
+function switchSection(section){
+  currentSection=section;
+  document.querySelectorAll('.top-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.top-tab')[section==='pm'?0:1].classList.add('active');
+  document.getElementById('sectionPM').classList.toggle('active',section==='pm');
+  document.getElementById('sectionStocks').classList.toggle('active',section==='stocks');
   const btn=document.getElementById('actionBtn');
-  if(tab==='tasks'){btn.textContent='+ New Task';btn.onclick=openModal}
+  if(section==='stocks'){btn.style.display='none'}
+  else{btn.style.display='';updateActionBtn()}
+}
+
+function switchSubTab(tab){
+  currentSubTab=tab;
+  document.querySelectorAll('.sub-tab').forEach((t,i)=>t.classList.toggle('active',i===(tab==='tasks'?0:1)));
+  document.getElementById('board').style.display=tab==='tasks'?'flex':'none';
+  document.getElementById('projectsView').style.display=tab==='projects'?'block':'none';
+  updateActionBtn();
+}
+
+function updateActionBtn(){
+  const btn=document.getElementById('actionBtn');
+  if(currentSubTab==='tasks'){btn.textContent='+ New Task';btn.onclick=openModal}
   else{btn.textContent='+ New Project';btn.onclick=openProjectModal}
 }
 
@@ -166,6 +260,10 @@ function render(){
     colTasks.forEach(t=>{
       const c=document.createElement('div');
       c.className='card';c.draggable=true;
+      if((col.id==='review'||col.id==='done')&&t.projectId){
+        c.style.cursor='pointer';
+        c.addEventListener('click',e=>{if(e.target.tagName==='BUTTON')return;goToProject(t)});
+      }
       c.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',t.id);c.classList.add('dragging')});
       c.addEventListener('dragend',()=>c.classList.remove('dragging'));
       const date=new Date(t.createdAt).toLocaleDateString('en-US',{month:'short',day:'numeric'});
@@ -179,6 +277,22 @@ function render(){
     div.appendChild(body);
     board.appendChild(div);
   });
+}
+
+function goToProject(task){
+  if(!task.projectId) return;
+  const match=projects.find(p=>p.id===task.projectId);
+  if(!match) return;
+  switchSubTab('projects');
+  setTimeout(()=>{
+    const card=document.querySelector(`.project-card[data-id="${match.id}"]`);
+    if(card){
+      card.scrollIntoView({behavior:'smooth',block:'center'});
+      card.style.outline='2px solid var(--accent)';
+      card.style.outlineOffset='2px';
+      setTimeout(()=>{card.style.outline='';card.style.outlineOffset=''},2000);
+    }
+  },100);
 }
 
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
@@ -242,25 +356,35 @@ function renderProjects(){
     section.innerHTML=`<div class="category-header"><span class="cat-icon">${catIcons[cat]||'📦'}</span>${catNames[cat]||cat}<span class="cat-count">${grouped[cat].length}</span></div>`;
     const catGrid=document.createElement('div');
     catGrid.className='projects-grid';
+    grouped[cat].sort((a,b)=>{
+      const aR=a.reviewed?1:0, bR=b.reviewed?1:0;
+      if(aR!==bR) return aR-bR;
+      return (b.createdAt||'').localeCompare(a.createdAt||'');
+    });
     grouped[cat].forEach(p=>{
       const card=document.createElement('div');
       card.className='project-card';
+      card.dataset.id=p.id;
       const date=p.createdAt||'';
       const rawLink=p.localUrl||'';
       const linkUrl=rawLink.replace(/localhost/g, window.location.hostname);
       const linkIcon=cat==='research'?'📄':'🌐';
       const linkLabel=cat==='research'?'Open PDF':'Open';
+      const isReviewed=p.reviewed===true;
+      const reviewClass=isReviewed?'reviewed':'needs-review';
+      const reviewLabel=isReviewed?'✓ Reviewed':'Review';
       card.innerHTML=`
         <div class="card-actions"><button onclick="editProject('${p.id}')">✏️</button><button onclick="deleteProject('${p.id}')">🗑</button></div>
-        <div class="project-name">${esc(p.name)}</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><div class="project-name" style="margin-bottom:0">${esc(p.name)}</div><span style="color:var(--text2);font-size:11px;white-space:nowrap;flex-shrink:0;margin-left:12px">${date}</span></div>
         ${p.description?`<div class="project-desc">${esc(p.description)}</div>`:''}
+        ${p.status==='incomplete'&&p.incompleteReason?`<div class="incomplete-reason">⚠️ ${esc(p.incompleteReason)}</div>`:''}
         <div class="project-footer">
           <span class="project-status ${p.status||'active'}">${p.status||'active'}</span>
+          <span class="review-badge ${reviewClass}" onclick="event.stopPropagation();toggleReview('${p.id}')" title="Click to toggle">${reviewLabel}</span>
           <span class="project-links">
             ${p.githubUrl?`<a class="project-link" href="${esc(p.githubUrl)}" target="_blank">🔗 GitHub</a>`:''}
             ${linkUrl?`<a class="project-link" href="${esc(linkUrl)}" target="_blank">${linkIcon} ${linkLabel}</a>`:''}
           </span>
-          <span>${date}</span>
         </div>`;
       catGrid.appendChild(card);
     });
@@ -269,13 +393,16 @@ function renderProjects(){
   });
 }
 
+function toggleIncompleteReason(){document.getElementById('incompleteReasonWrap').style.display=document.getElementById('pStatus').value==='incomplete'?'block':'none'}
+
 function openProjectModal(){
   editProjectId=null;
   document.getElementById('projectModalTitle').textContent='New Project';
   document.getElementById('projectModalSave').textContent='Create';
-  ['pName','pDesc','pGithub','pLocal'].forEach(id=>document.getElementById(id).value='');
+  ['pName','pDesc','pGithub','pLocal','pIncompleteReason'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('pCategory').value='websites';
   document.getElementById('pStatus').value='active';
+  toggleIncompleteReason();
   document.getElementById('projectModal').classList.add('active');
 }
 
@@ -290,25 +417,128 @@ function editProject(id){
   document.getElementById('pStatus').value=p.status||'active';
   document.getElementById('pGithub').value=p.githubUrl||'';
   document.getElementById('pLocal').value=p.localUrl||p.filePath||'';
+  document.getElementById('pIncompleteReason').value=p.incompleteReason||'';
+  toggleIncompleteReason();
   document.getElementById('projectModal').classList.add('active');
 }
 
 function closeProjectModal(){document.getElementById('projectModal').classList.remove('active')}
 
 async function saveProject(){
-  const data={name:document.getElementById('pName').value,description:document.getElementById('pDesc').value,category:document.getElementById('pCategory').value,status:document.getElementById('pStatus').value,githubUrl:document.getElementById('pGithub').value,localUrl:document.getElementById('pLocal').value};
+  const status=document.getElementById('pStatus').value;
+  const data={name:document.getElementById('pName').value,description:document.getElementById('pDesc').value,category:document.getElementById('pCategory').value,status,githubUrl:document.getElementById('pGithub').value,localUrl:document.getElementById('pLocal').value,incompleteReason:status==='incomplete'?document.getElementById('pIncompleteReason').value:''};
   if(!data.name)return;
   if(editProjectId){await fetch(`/api/projects/${editProjectId}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})}
   else{await fetch('/api/projects',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})}
   closeProjectModal();await loadProjects();
 }
 
+async function toggleReview(id){
+  const p=projects.find(x=>x.id===id);if(!p)return;
+  await fetch(`/api/projects/${id}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({reviewed:!p.reviewed})});
+  await loadProjects();
+}
+
 async function deleteProject(id){if(confirm('Delete this project?')){await fetch(`/api/projects/${id}`,{method:'DELETE'});await loadProjects()}}
 
 document.getElementById('projectModal').addEventListener('click',e=>{if(e.target.id==='projectModal')closeProjectModal()});
 
-load();
-loadProjects();
+// --- Stocks ---
+async function loadStocks(){
+  stocksData=await(await fetch('/api/stocks')).json();
+  renderTickers();
+  renderBriefings();
+}
+
+function renderTickers(){
+  const bar=document.getElementById('tickerBar');
+  bar.innerHTML='';
+  stocksData.tickers.forEach(t=>{
+    const chip=document.createElement('div');
+    chip.className='ticker-chip';
+    chip.innerHTML=`${esc(t.symbol)} <span class="currency">${t.currency}</span><button class="remove-ticker" onclick="removeTicker('${esc(t.symbol)}')" title="Remove">×</button>`;
+    bar.appendChild(chip);
+  });
+  // Add ticker form
+  const form=document.createElement('div');
+  form.className='add-ticker-form';
+  form.innerHTML=`<input id="newTickerSymbol" placeholder="AAPL" onkeydown="if(event.key==='Enter')addTicker()"><select id="newTickerCurrency"><option value="USD">USD</option><option value="CAD">CAD</option></select><button class="btn btn-sm" onclick="addTicker()">+ Add</button>`;
+  bar.appendChild(form);
+}
+
+async function addTicker(){
+  const sym=document.getElementById('newTickerSymbol').value.trim();
+  const cur=document.getElementById('newTickerCurrency').value;
+  if(!sym)return;
+  await fetch('/api/stocks/tickers',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({symbol:sym,currency:cur})});
+  document.getElementById('newTickerSymbol').value='';
+  await loadStocks();
+}
+
+async function removeTicker(symbol){
+  if(!confirm(`Remove ${symbol} from your portfolio?`))return;
+  await fetch(`/api/stocks/tickers/${symbol}`,{method:'DELETE'});
+  await loadStocks();
+}
+
+function renderBriefings(){
+  const list=document.getElementById('briefingList');
+  list.innerHTML='';
+  if(!stocksData.briefings||stocksData.briefings.length===0){
+    list.innerHTML=`<div class="no-briefings"><div class="icon">📈</div><p>No briefings yet. Your first daily briefing will appear here at 8:00 AM PST.</p></div>`;
+    return;
+  }
+  stocksData.briefings.forEach(b=>{
+    const card=document.createElement('div');
+    card.className='briefing-card';
+    const dateStr=new Date(b.date+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+    const timeStr=b.createdAt?new Date(b.createdAt).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):'';
+
+    let stockRows='';
+    if(b.stocks&&b.stocks.length){
+      stockRows=b.stocks.map(s=>{
+        const changeClass=s.change>0?'up':s.change<0?'down':'flat';
+        const changeStr=s.change>0?`+${s.change}%`:`${s.change}%`;
+        return `<div class="stock-row"><span class="stock-symbol">${esc(s.symbol)}</span><span class="stock-change ${changeClass}">${changeStr}</span><span class="stock-note">${esc(s.note||'')}</span></div>`;
+      }).join('');
+    }
+
+    card.innerHTML=`
+      <div class="briefing-date-header">
+        <div class="date-label">📊 ${dateStr} <span>${timeStr}</span></div>
+        <button class="briefing-delete" onclick="deleteBriefing('${b.id}')">🗑 Delete</button>
+      </div>
+      <div class="briefing-body">
+        ${b.summary?`<div class="summary">${b.summary}</div>`:''}
+        ${stockRows?`<div style="margin-top:8px">${stockRows}</div>`:''}
+        ${b.analysis?`<div style="margin-top:16px;color:var(--text2);font-size:13px;line-height:1.6">${b.analysis}</div>`:''}
+      </div>`;
+    list.appendChild(card);
+  });
+}
+
+async function deleteBriefing(id){
+  if(!confirm('Delete this briefing?'))return;
+  await fetch(`/api/stocks/briefings/${id}`,{method:'DELETE'});
+  await loadStocks();
+}
+
+// Init
+load();loadProjects();loadStocks();
+
+// Auto-refresh
+setInterval(async()=>{
+  try{
+    const [newTasks,newProjects,newStocks]=await Promise.all([
+      fetch('/api/tasks').then(r=>r.json()),
+      fetch('/api/projects').then(r=>r.json()),
+      fetch('/api/stocks').then(r=>r.json())
+    ]);
+    if(JSON.stringify(newTasks)!==JSON.stringify(tasks)){tasks=newTasks;render()}
+    if(JSON.stringify(newProjects)!==JSON.stringify(projects)){projects=newProjects;renderProjects()}
+    if(JSON.stringify(newStocks)!==JSON.stringify(stocksData)){stocksData=newStocks;renderTickers();renderBriefings()}
+  }catch(e){}
+},2000);
 </script>
 </body>
 </html>
