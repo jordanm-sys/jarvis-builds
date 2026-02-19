@@ -198,14 +198,14 @@ header h1 span{color:var(--accent)}
 <!-- STOCK UPDATES SECTION -->
 <div class="section" id="sectionStocks">
   <div class="sub-tabs" id="stockSubTabs">
-    <div class="sub-tab active" onclick="switchStockTab('portfolio')">💼 Portfolio</div>
+    <div class="sub-tab active" onclick="switchStockTab('market')">🔍 Market</div>
+    <div class="sub-tab" onclick="switchStockTab('portfolio')">💼 Portfolio</div>
     <div class="sub-tab" onclick="switchStockTab('watchlist')">👁 Watchlist</div>
     <div class="sub-tab" onclick="switchStockTab('earnings')">📅 Earnings Calendar</div>
-    <div class="sub-tab" onclick="switchStockTab('market')">🔍 Market</div>
   </div>
 
   <!-- Portfolio -->
-  <div class="sub-section active" id="portfolioView">
+  <div class="sub-section" id="portfolioView">
     <h3 style="font-size:16px;margin-bottom:16px">Your Holdings</h3>
     <div class="ticker-bar" id="tickerBar"></div>
     <h3 style="font-size:16px;margin-bottom:16px">📊 Daily Briefings</h3>
@@ -244,7 +244,7 @@ header h1 span{color:var(--accent)}
   </div>
 
   <!-- Market Insights -->
-  <div class="sub-section" id="marketView">
+  <div class="sub-section active" id="marketView">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
       <h3 style="font-size:16px">🔍 Market Shifts & Early Opportunities</h3>
     </div>
@@ -325,9 +325,9 @@ function updatePMBtn(){
 
 function switchStockTab(tab){
   currentStockTab=tab;
-  const tabs=['portfolio','watchlist','earnings','market'];
+  const tabs=['market','portfolio','watchlist','earnings'];
   document.querySelectorAll('#stockSubTabs .sub-tab').forEach((t,i)=>t.classList.toggle('active',tabs[i]===tab));
-  ['portfolioView','watchlistView','earningsView','marketView'].forEach((id,i)=>document.getElementById(id).classList.toggle('active',tabs[i]===tab));
+  ['marketView','portfolioView','watchlistView','earningsView'].forEach((id,i)=>document.getElementById(id).classList.toggle('active',tabs[i]===tab));
 }
 
 // --- Tasks ---
