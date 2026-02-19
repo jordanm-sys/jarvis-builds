@@ -200,9 +200,11 @@ header h1 span{color:var(--accent)}
   .briefing-body .summary{font-size:13px}
   .briefing-body .stock-row{grid-template-columns:60px 60px 1fr;gap:8px;font-size:12px;padding:6px 0}
 
-  /* Earnings table */
-  .earnings-table{font-size:11px;display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  /* Earnings table — sticky first column */
+  .earnings-table{font-size:11px}
+  #earningsView>div{overflow-x:auto;-webkit-overflow-scrolling:touch}
   .earnings-table th,.earnings-table td{padding:8px 8px;white-space:nowrap}
+  .earnings-table th:first-child,.earnings-table td:first-child{position:sticky;left:0;z-index:1;background:var(--surface)}
   .earnings-table th:nth-child(4),.earnings-table th:nth-child(5){min-width:140px!important}
 
   /* Market cards */
