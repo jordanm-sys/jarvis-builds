@@ -580,15 +580,20 @@ function renderEarnings(){
   const body=document.getElementById('earningsBody');body.innerHTML='';
   const earnings=stocksData.earnings||[];
   if(!earnings.length){body.innerHTML=`<tr><td colspan="6" class="earnings-empty"><div style="padding:40px">📅 No earnings data yet. It will be populated with your first morning briefing.</div></td></tr>`;return}
-  // Sort: imminent first, then upcoming, then TBD, then reported
   const now=new Date();
-  const sorted=[...earnings].sort((a,b)=>{
-    const aDate=a.reportDate?new Date(a.reportDate+'T00:00:00'):null;
-    const bDate=b.reportDate?new Date(b.reportDate+'T00:00:00'):null;
-    if(!aDate&&bDate)return 1;if(aDate&&!bDate)return -1;if(!aDate&&!bDate)return 0;
-    return aDate-bDate;
+  const sortByDate=(arr)=>[...arr].sort((a,b)=>{
+    const aD=a.reportDate?new Date(a.reportDate+'T00:00:00'):null;
+    const bD=b.reportDate?new Date(b.reportDate+'T00:00:00'):null;
+    if(!aD&&bD)return 1;if(aD&&!bD)return -1;if(!aD&&!bD)return 0;return aD-bD;
   });
-  sorted.forEach(e=>{
+  const portfolio=sortByDate(earnings.filter(e=>e.source!=='watchlist'));
+  const watchlist=sortByDate(earnings.filter(e=>e.source==='watchlist'));
+  const addSection=(label,items)=>{
+    if(!items.length)return;
+    const hdr=document.createElement('tr');
+    hdr.innerHTML=`<td colspan="6" style="padding:14px 12px 8px;font-weight:700;font-size:14px;border-bottom:2px solid var(--accent);background:var(--bg);color:var(--accent)">${label}</td>`;
+    body.appendChild(hdr);
+    items.forEach(e=>{
     const tr=document.createElement('tr');
     const reportDate=e.reportDate?new Date(e.reportDate+'T00:00:00'):null;
     let status='tbd',statusLabel='TBD';
@@ -600,14 +605,17 @@ function renderEarnings(){
     }
     const dateDisplay=reportDate?reportDate.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'}):'Not announced';
     tr.innerHTML=`
-      <td class="sym"><div>${esc(e.symbol)}</div><span class="source-tag">${e.source==='watchlist'?'👁 Watch':'💼 Held'}</span></td>
+      <td class="sym">${esc(e.symbol)}</td>
       <td class="date-cell">${dateDisplay}</td>
       <td><span class="earnings-badge ${status}">${statusLabel}</span></td>
       <td><div class="scenario"><span class="bull">${esc(e.bullCase||'—')}</span></div></td>
       <td><div class="scenario"><span class="bear">${esc(e.bearCase||'—')}</span></div></td>
       <td style="color:var(--text2);font-size:12px">${esc(e.notes||'')}</td>`;
     body.appendChild(tr);
-  });
+    });
+  };
+  addSection('💼 Portfolio',portfolio);
+  addSection('👁 Watchlist',watchlist);
   // Update timestamp
   const latest=earnings.reduce((max,e)=>e.updatedAt&&e.updatedAt>max?e.updatedAt:max,'');
   document.getElementById('earningsLastUpdated').textContent=latest?`Last updated: ${new Date(latest).toLocaleDateString('en-US',{month:'short',day:'numeric'})} ${new Date(latest).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}`:'';
