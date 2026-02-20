@@ -8,7 +8,7 @@ const STOCKS_FILE = path.join(__dirname, 'stocks.json');
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/files', express.static(path.join(__dirname, '..', 'research')));
+app.use('/files', express.static(path.join(__dirname, '..', 'research'), { maxAge: 0, etag: false, lastModified: true, setHeaders: (res) => { res.set('Cache-Control', 'no-cache, no-store, must-revalidate'); } }));
 
 const read = () => JSON.parse(fs.readFileSync(TASKS_FILE, 'utf8'));
 const save = (d) => fs.writeFileSync(TASKS_FILE, JSON.stringify(d, null, 2));
