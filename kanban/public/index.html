@@ -479,7 +479,7 @@ function renderProjects(){
       const card=document.createElement('div');card.className='project-card';card.dataset.id=p.id;
       const date=p.createdAt||'';const rawLink=p.localUrl||'';const linkUrl=rawLink.replace(/localhost/g,window.location.hostname);
       const linkIcon=cat==='research'?'📄':'🌐';const linkLabel=cat==='research'?'Open PDF':'Open';
-      const isReviewed=p.reviewed===true;const reviewClass=isReviewed?'reviewed':'needs-review';const reviewLabel=isReviewed?'✓ Reviewed':'Review';
+      const isReviewed=p.reviewed===true;const reviewClass=isReviewed?'reviewed':'needs-review';const reviewLabel=isReviewed?'Reviewed':'Review';
       card.innerHTML=`<div class="card-actions"><button onclick="editProject('${p.id}')">✏️</button><button onclick="deleteProject('${p.id}')">🗑</button></div>
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><div class="project-name" style="margin-bottom:0">${esc(p.name)}</div><span style="color:var(--text2);font-size:11px;white-space:nowrap;flex-shrink:0;margin-left:12px">${date}</span></div>
         ${p.description?`<div class="project-desc">${esc(p.description)}</div>`:''}
