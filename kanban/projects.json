@@ -99,5 +99,17 @@
     "filePath": "research/waikiki-3-day-plan.pdf",
     "localUrl": "/files/waikiki-3-day-plan.pdf",
     "reviewed": true
+  },
+  {
+    "id": "1771579640209",
+    "createdAt": "2026-02-19",
+    "name": "AI Smart Scale Market Research",
+    "description": "Deep market research on AI-powered kitchen scale with camera for automatic calorie/macro tracking. Covers: competitors (Qalzy), market size ($60B+ TAM), tech feasibility, patent risks (US10502614B2), business model analysis, SWOT, and go/no-go verdict. Conditionally GO with differentiation.",
+    "status": "completed",
+    "category": "research",
+    "githubUrl": "https://github.com/jordanm-sys/jarvis-builds",
+    "filePath": "research/ai-smart-scale-research-2026.pdf",
+    "localUrl": "/files/ai-smart-scale-research-2026.pdf",
+    "reviewed": false
   }
 ]
