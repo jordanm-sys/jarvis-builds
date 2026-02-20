@@ -162,6 +162,26 @@ header h1 span{color:var(--accent)}
 .conviction-med{color:var(--yellow)}
 .conviction-low{color:var(--text2)}
 
+/* Insider Trading */
+.insider-summary-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center}
+.insider-summary-card .label{font-size:12px;color:var(--text2);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.insider-summary-card .value{font-size:24px;font-weight:700}
+.insider-summary-card .sub{font-size:12px;color:var(--text2);margin-top:2px}
+.insider-summary-card.buy{border-left:3px solid var(--green)}
+.insider-summary-card.buy .value{color:var(--green)}
+.insider-summary-card.sell{border-left:3px solid var(--red)}
+.insider-summary-card.sell .value{color:var(--red)}
+.insider-summary-card.cluster{border-left:3px solid var(--yellow)}
+.insider-summary-card.cluster .value{color:var(--yellow)}
+.insider-row-buy{border-left:3px solid var(--green)}
+.insider-row-sell{border-left:3px solid var(--red)}
+.insider-type-badge{display:inline-block;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700;text-transform:uppercase}
+.insider-type-badge.buy{background:rgba(63,185,80,.15);color:var(--green)}
+.insider-type-badge.sell{background:rgba(248,81,73,.15);color:var(--red)}
+.cluster-alert{background:var(--surface);border:1px solid var(--yellow);border-radius:var(--radius);padding:14px 18px;font-size:14px;line-height:1.5}
+.insider-filter-chip{padding:4px 12px;border-radius:16px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text2);transition:all .2s}
+.insider-filter-chip:hover,.insider-filter-chip.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
 /* ===== MOBILE RESPONSIVE ===== */
 @media(max-width:768px){
   header{padding:10px 14px}
@@ -270,6 +290,7 @@ header h1 span{color:var(--accent)}
     <div class="sub-tab" onclick="switchStockTab('portfolio')">💼 Portfolio</div>
     <div class="sub-tab" onclick="switchStockTab('watchlist')">👁 Watchlist</div>
     <div class="sub-tab" onclick="switchStockTab('earnings')">📅 Earnings Calendar</div>
+    <div class="sub-tab" onclick="switchStockTab('insider')">🏛️ Insider</div>
   </div>
 
   <!-- Portfolio -->
@@ -307,6 +328,31 @@ header h1 span{color:var(--accent)}
           </tr>
         </thead>
         <tbody id="earningsBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Insider Trading -->
+  <div class="sub-section" id="insiderView">
+    <div id="insiderSummaryCards" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:20px"></div>
+    <div id="insiderClusterAlerts" style="margin-bottom:20px"></div>
+    <div id="insiderFilterChips" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px"></div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow-x:auto">
+      <table class="earnings-table" id="insiderTable">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Ticker</th>
+            <th>Insider</th>
+            <th>Role</th>
+            <th>Type</th>
+            <th>Shares</th>
+            <th>Price</th>
+            <th>Value</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="insiderBody"></tbody>
       </table>
     </div>
   </div>
@@ -393,9 +439,10 @@ function updatePMBtn(){
 
 function switchStockTab(tab){
   currentStockTab=tab;
-  const tabs=['market','portfolio','watchlist','earnings'];
+  const tabs=['market','portfolio','watchlist','earnings','insider'];
   document.querySelectorAll('#stockSubTabs .sub-tab').forEach((t,i)=>t.classList.toggle('active',tabs[i]===tab));
-  ['marketView','portfolioView','watchlistView','earningsView'].forEach((id,i)=>document.getElementById(id).classList.toggle('active',tabs[i]===tab));
+  ['marketView','portfolioView','watchlistView','earningsView','insiderView'].forEach((id,i)=>document.getElementById(id).classList.toggle('active',tabs[i]===tab));
+  if(tab==='insider')loadInsiders();
 }
 
 // --- Tasks ---
@@ -662,6 +709,83 @@ function renderMarket(){
 }
 
 async function deleteMarketInsight(id){if(!confirm('Delete this insight?'))return;await fetch(`/api/stocks/market/${id}`,{method:'DELETE'});await loadStocks()}
+
+// --- Insider Trading ---
+let insiderData=[], insiderSummary={alerts:[]}, insiderFilter=null;
+
+async function loadInsiders(){
+  try{
+    const[txns,summary]=await Promise.all([
+      fetch('/api/stocks/insiders').then(r=>r.json()),
+      fetch('/api/stocks/insiders/summary').then(r=>r.json())
+    ]);
+    insiderData=txns;insiderSummary=summary;
+    renderInsiders();
+  }catch(e){console.error('Failed to load insiders',e)}
+}
+
+function formatDollar(val){
+  if(val>=1e6)return'$'+(val/1e6).toFixed(1)+'M';
+  if(val>=1e3)return'$'+(val/1e3).toFixed(0)+'K';
+  return'$'+val.toFixed(0);
+}
+
+function renderInsiders(){
+  const now=new Date();const thirtyAgo=new Date(now-30*24*60*60*1000);
+  const recent=insiderData.filter(t=>new Date(t.date)>=thirtyAgo);
+  const buys=recent.filter(t=>t.type==='BUY');
+  const sells=recent.filter(t=>t.type==='SELL');
+  const buyVal=buys.reduce((s,t)=>s+(t.totalValue||0),0);
+  const sellVal=sells.reduce((s,t)=>s+(t.totalValue||0),0);
+  const alerts=insiderSummary.alerts||[];
+
+  // Summary cards
+  document.getElementById('insiderSummaryCards').innerHTML=`
+    <div class="insider-summary-card buy"><div class="label">Insider Buys (30d)</div><div class="value">${buys.length}</div><div class="sub">${formatDollar(buyVal)}</div></div>
+    <div class="insider-summary-card sell"><div class="label">Insider Sells (30d)</div><div class="value">${sells.length}</div><div class="sub">${formatDollar(sellVal)}</div></div>
+    <div class="insider-summary-card cluster"><div class="label">Cluster Alerts</div><div class="value">${alerts.length}</div><div class="sub">2+ insiders, 14 days</div></div>`;
+
+  // Cluster alerts
+  const alertsHtml=alerts.map(a=>{
+    const verb=a.type==='BUY'?'bought':'sold';
+    const emoji=a.type==='BUY'?'🔥':'⚠️';
+    return`<div class="cluster-alert">${emoji} <strong>${a.count} insiders ${verb} ${a.symbol}</strong> in the last 14 days — ${formatDollar(a.totalValue)} total</div>`;
+  }).join('');
+  document.getElementById('insiderClusterAlerts').innerHTML=alertsHtml;
+
+  // Filter chips
+  const tickers=[...new Set(insiderData.map(t=>t.symbol))].sort();
+  const chipsHtml=`<div class="insider-filter-chip ${!insiderFilter?'active':''}" onclick="setInsiderFilter(null)">All</div>`+
+    tickers.map(t=>`<div class="insider-filter-chip ${insiderFilter===t?'active':''}" onclick="setInsiderFilter('${t}')">${t}</div>`).join('');
+  document.getElementById('insiderFilterChips').innerHTML=chipsHtml;
+
+  // Table
+  const filtered=insiderFilter?insiderData.filter(t=>t.symbol===insiderFilter):insiderData;
+  const body=document.getElementById('insiderBody');
+  if(!filtered.length){
+    body.innerHTML=`<tr><td colspan="9" style="text-align:center;padding:60px 20px;color:var(--text2)"><div style="font-size:48px;margin-bottom:12px">🏛️</div><p>No insider transactions yet. Run fetch-insiders.js to populate data.</p></td></tr>`;
+    return;
+  }
+  body.innerHTML=filtered.map(t=>{
+    const rowClass=t.type==='BUY'?'insider-row-buy':'insider-row-sell';
+    const typeClass=t.type==='BUY'?'buy':'sell';
+    const dateStr=new Date(t.date+'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+    return`<tr class="${rowClass}">
+      <td style="white-space:nowrap">${dateStr}</td>
+      <td style="font-weight:700">${esc(t.symbol)}</td>
+      <td>${esc(t.insiderName)}</td>
+      <td style="color:var(--text2);font-size:12px">${esc(t.role||'')}</td>
+      <td><span class="insider-type-badge ${typeClass}">${t.type}</span></td>
+      <td style="text-align:right">${(t.shares||0).toLocaleString()}</td>
+      <td style="text-align:right">$${(t.pricePerShare||0).toFixed(2)}</td>
+      <td style="text-align:right;font-weight:600">${formatDollar(t.totalValue||0)}</td>
+      <td><button onclick="deleteInsider('${t.id}')" style="background:none;border:none;color:var(--text2);cursor:pointer;font-size:13px" title="Delete">🗑</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function setInsiderFilter(ticker){insiderFilter=ticker;renderInsiders()}
+async function deleteInsider(id){if(!confirm('Delete this transaction?'))return;await fetch(`/api/stocks/insiders/${id}`,{method:'DELETE'});await loadInsiders()}
 
 // Init
 load();loadProjects();loadStocks();

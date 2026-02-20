@@ -5,6 +5,7 @@ const app = express();
 const TASKS_FILE = path.join(__dirname, 'tasks.json');
 const PROJECTS_FILE = path.join(__dirname, 'projects.json');
 const STOCKS_FILE = path.join(__dirname, 'stocks.json');
+const INSIDERS_FILE = path.join(__dirname, 'insiders.json');
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -16,6 +17,8 @@ const readProjects = () => JSON.parse(fs.readFileSync(PROJECTS_FILE, 'utf8'));
 const saveProjects = (d) => fs.writeFileSync(PROJECTS_FILE, JSON.stringify(d, null, 2));
 const readStocks = () => JSON.parse(fs.readFileSync(STOCKS_FILE, 'utf8'));
 const saveStocks = (d) => fs.writeFileSync(STOCKS_FILE, JSON.stringify(d, null, 2));
+const readInsiders = () => { try { return JSON.parse(fs.readFileSync(INSIDERS_FILE, 'utf8')); } catch(e) { return []; } };
+const saveInsiders = (d) => fs.writeFileSync(INSIDERS_FILE, JSON.stringify(d, null, 2));
 
 // Tasks API
 app.get('/api/tasks', (_, res) => res.json(read()));
@@ -238,6 +241,55 @@ app.delete('/api/stocks/market/:id', (req, res) => {
   if (!data.market) data.market = [];
   data.market = data.market.filter(m => m.id !== req.params.id);
   saveStocks(data);
+  res.json({ ok: true });
+});
+
+// Insider Trading API
+app.get('/api/stocks/insiders/summary', (req, res) => {
+  const insiders = readInsiders();
+  const now = new Date();
+  const fourteenDaysAgo = new Date(now - 14 * 24 * 60 * 60 * 1000);
+  const recent = insiders.filter(t => new Date(t.date) >= fourteenDaysAgo);
+  const clusters = {};
+  recent.forEach(t => {
+    const key = `${t.symbol}_${t.type}`;
+    if (!clusters[key]) clusters[key] = { symbol: t.symbol, type: t.type, insiders: [], totalValue: 0, txnCount: 0 };
+    if (!clusters[key].insiders.includes(t.insiderName)) clusters[key].insiders.push(t.insiderName);
+    clusters[key].totalValue += (t.totalValue || 0);
+    clusters[key].txnCount++;
+  });
+  const alerts = Object.values(clusters)
+    .map(c => ({ ...c, count: c.insiders.length }))
+    .filter(c => c.count >= 2);
+  res.json({ alerts });
+});
+
+app.get('/api/stocks/insiders', (req, res) => {
+  let insiders = readInsiders();
+  if (req.query.symbol) insiders = insiders.filter(t => t.symbol === req.query.symbol.toUpperCase());
+  insiders.sort((a, b) => new Date(b.date) - new Date(a.date));
+  res.json(insiders);
+});
+
+app.post('/api/stocks/insiders', (req, res) => {
+  const insiders = readInsiders();
+  const items = Array.isArray(req.body) ? req.body : [req.body];
+  let added = 0;
+  items.forEach(item => {
+    const dup = insiders.find(t => t.insiderName === item.insiderName && t.symbol === item.symbol && t.date === item.date && t.shares === item.shares);
+    if (!dup) {
+      insiders.push({ id: Date.now().toString() + '_' + Math.random().toString(36).slice(2, 6), createdAt: new Date().toISOString(), ...item });
+      added++;
+    }
+  });
+  saveInsiders(insiders);
+  res.json({ added, total: insiders.length });
+});
+
+app.delete('/api/stocks/insiders/:id', (req, res) => {
+  let insiders = readInsiders();
+  insiders = insiders.filter(t => t.id !== req.params.id);
+  saveInsiders(insiders);
   res.json({ ok: true });
 });
 
