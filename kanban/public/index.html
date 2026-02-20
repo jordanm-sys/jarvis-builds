@@ -181,6 +181,12 @@ header h1 span{color:var(--accent)}
 .cluster-alert{background:var(--surface);border:1px solid var(--yellow);border-radius:var(--radius);padding:14px 18px;font-size:14px;line-height:1.5}
 .insider-filter-chip{padding:4px 12px;border-radius:16px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text2);transition:all .2s}
 .insider-filter-chip:hover,.insider-filter-chip.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.insights-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:20px}
+.insights-panel h3{margin:0 0 12px;font-size:15px;font-weight:700;color:var(--text)}
+.insight-row{padding:6px 10px;margin-bottom:6px;border-left:3px solid var(--text2);border-radius:2px;font-size:13px;line-height:1.5;color:var(--text)}
+.insight-row.green{border-left-color:var(--green);color:var(--green)}
+.insight-row.yellow{border-left-color:var(--yellow);color:var(--yellow)}
+.insight-row.grey{border-left-color:var(--text2);color:var(--text2);font-style:italic}
 
 /* ===== MOBILE RESPONSIVE ===== */
 @media(max-width:768px){
@@ -335,6 +341,7 @@ header h1 span{color:var(--accent)}
   <!-- Insider Trading -->
   <div class="sub-section" id="insiderView">
     <div id="insiderSummaryCards" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:20px"></div>
+    <div id="insiderInsights" class="insights-panel" style="display:none"></div>
     <div id="insiderClusterAlerts" style="margin-bottom:20px"></div>
     <div id="insiderFilterChips" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px"></div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow-x:auto">
@@ -720,7 +727,10 @@ async function loadInsiders(){
       fetch('/api/stocks/insiders/summary').then(r=>r.json())
     ]);
     insiderData=txns;insiderSummary=summary;
+    let earningsData=[];
+    try{earningsData=await fetch('/api/stocks/earnings').then(r=>r.json())}catch(e){}
     renderInsiders();
+    renderInsights(earningsData);
   }catch(e){console.error('Failed to load insiders',e)}
 }
 
@@ -782,6 +792,57 @@ function renderInsiders(){
       <td><button onclick="deleteInsider('${t.id}')" style="background:none;border:none;color:var(--text2);cursor:pointer;font-size:13px" title="Delete">🗑</button></td>
     </tr>`;
   }).join('');
+}
+
+function renderInsights(earningsData){
+  const panel=document.getElementById('insiderInsights');
+  const insights=[];
+  const megaCaps=['NVDA','MSFT','MU','AAPL','GOOGL','AMZN','META','TSLA'];
+  const now=new Date();const thirtyAgo=new Date(now-30*24*60*60*1000);
+  const recent=insiderData.filter(t=>new Date(t.date)>=thirtyAgo);
+  const buys=recent.filter(t=>t.type==='BUY');
+  const sells=recent.filter(t=>t.type==='SELL');
+
+  // Earnings map: symbol → nearest future date
+  const earningsMap={};
+  (earningsData||[]).forEach(e=>{
+    const d=new Date(e.date||e.earningsDate);
+    if(d>=now&&(!earningsMap[e.symbol]||d<earningsMap[e.symbol]))earningsMap[e.symbol]=d;
+  });
+
+  // Insider buys
+  buys.forEach(t=>{
+    insights.push({type:'green',text:`🟢 Insider buy detected — ${esc(t.insiderName)} bought ${esc(t.symbol)}. Insiders only buy when they're bullish.`});
+  });
+
+  // Cluster alerts from summary
+  const alerts=insiderSummary.alerts||[];
+  alerts.filter(a=>a.type==='SELL').forEach(a=>{
+    // Check if near earnings
+    const ed=earningsMap[a.symbol];
+    if(ed){
+      const daysTil=Math.round((ed-now)/(24*60*60*1000));
+      if(daysTil>=0&&daysTil<=14){
+        insights.push({type:'yellow',text:`⚠️ ${a.symbol} insiders selling ahead of earnings on ${ed.toLocaleDateString('en-US',{month:'short',day:'numeric'})} — consider tightening stop loss`});
+        return;
+      }
+    }
+    insights.push({type:'yellow',text:`⚠️ ${a.count} insiders sold ${a.symbol} totaling ${formatDollar(a.totalValue)} — elevated activity worth monitoring`});
+  });
+
+  // Mega-cap routine sells
+  const megaSells={};
+  sells.filter(t=>megaCaps.includes(t.symbol)).forEach(t=>{megaSells[t.symbol]=(megaSells[t.symbol]||0)+1});
+  Object.entries(megaSells).filter(([,c])=>c>=2).forEach(([sym])=>{
+    insights.push({type:'grey',text:`${sym}: Routine compensation sales — common for mega-cap executives with 10b5-1 plans`});
+  });
+
+  // General note
+  insights.push({type:'grey',text:`Most insider sells are routine (pre-scheduled 10b5-1 plans, compensation liquidation). Insider BUYS are the stronger signal — executives only buy with their own money when they're confident.`});
+
+  if(insights.length<=1&&!buys.length){panel.style.display='none';return}
+  panel.style.display='';
+  panel.innerHTML=`<h3>🧠 Insider Insights</h3>`+insights.map(i=>`<div class="insight-row ${i.type}">${i.text}</div>`).join('');
 }
 
 function setInsiderFilter(ticker){insiderFilter=ticker;renderInsiders()}

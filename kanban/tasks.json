@@ -80,5 +80,25 @@
     "column": "review",
     "schedule": "instant",
     "projectId": "1771579640209"
+  },
+  {
+    "id": "1771585391059",
+    "createdAt": "2026-02-20T11:03:11.059Z",
+    "assignedTo": "Jarvis",
+    "title": "Build insider trading tracker",
+    "description": "Built insider trading tracker: Backend API (GET/POST/DELETE /api/stocks/insiders + /summary cluster detection), fetch-insiders.js script (SEC EDGAR Form 4 XML parsing, dedup, filters P/S transactions only), Dashboard UI with Insider tab (summary cards, cluster alerts, filterable transaction table). Populated with 145 real transactions. Clusters detected: FCX 4 insiders selling $34M, CRWV 2 insiders selling $25.3M.",
+    "priority": "high",
+    "column": "review",
+    "schedule": "instant",
+    "projectId": "1771585868878"
+  },
+  {
+    "id": "1771585888501",
+    "createdAt": "2026-02-20T11:11:28.501Z",
+    "assignedTo": "Jarvis",
+    "title": "Daily insider trading scan (8:15am PST)",
+    "description": "Cron job runs fetch-insiders.js daily at 8:15am PST (after stock briefing). Fetches new SEC Form 4 filings, alerts via Telegram only for notable activity (insider buys, large sells, cluster activity).",
+    "priority": "medium",
+    "column": "recurring"
   }
 ]

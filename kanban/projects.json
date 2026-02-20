@@ -111,5 +111,15 @@
     "filePath": "research/ai-smart-scale-research-2026.pdf",
     "localUrl": "/files/ai-smart-scale-research-2026.pdf",
     "reviewed": false
+  },
+  {
+    "id": "1771585868878",
+    "createdAt": "2026-02-20",
+    "name": "Insider Trading Tracker",
+    "description": "SEC Form 4 insider trading monitor. Tracks buys/sells for all portfolio + watchlist tickers via SEC EDGAR. Dashboard tab with summary cards, cluster detection, filterable transaction table. Daily cron job fetches new filings.",
+    "status": "active",
+    "category": "websites",
+    "githubUrl": "https://github.com/jordanm-sys/jarvis-builds",
+    "localUrl": "http://localhost:3333"
   }
 ]
