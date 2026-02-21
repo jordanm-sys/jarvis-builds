@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/icons/icon-192.png">
-<title>Jarvis Dashboard v7</title>
+<title>Jarvis Dashboard v8</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#0d1117;--surface:#161b22;--surface2:#21262d;--border:#30363d;--text:#e6edf3;--text2:#8b949e;--accent:#58a6ff;--green:#3fb950;--yellow:#d29922;--red:#f85149;--orange:#d29922;--radius:8px}
@@ -1123,90 +1123,128 @@ async function loadSummary() {
     const market = stocks.market || [];
     const options = opts.alerts || [];
     const insiders = Array.isArray(ins) ? ins : [];
+    const tickers = (stocks.tickers || []).map(t => t.symbol);
     const now = new Date();
 
-    // Gather signals
-    const earningSoon = earnings.filter(e => e.reportDate && ((new Date(e.reportDate)-now)/86400000) >= 0 && ((new Date(e.reportDate)-now)/86400000) <= 7);
-    const bullOpts = options.filter(o => o.sentiment==='bullish' && o.unusualScore >= 50);
-    const bearOpts = options.filter(o => o.sentiment==='bearish' && o.unusualScore >= 50);
-    const topOpt = options.filter(o => o.unusualScore >= 70)[0];
-    const buys = insiders.filter(t => t.type==='BUY' && t.date && ((now-new Date(t.date))/86400000) <= 30);
-    const sells = insiders.filter(t => t.type==='SELL' && t.date && ((now-new Date(t.date))/86400000) <= 14);
-    const sellsByTicker = {};
-    sells.forEach(t => { sellsByTicker[t.symbol] = (sellsByTicker[t.symbol]||0) + 1; });
-    const clusterTickers = Object.keys(sellsByTicker).filter(s => sellsByTicker[s] >= 2);
-    const highMkt = market.filter(m => m.conviction === 'high').slice(0, 2);
-
-    // Build simple action items
-    const actions = [];
+    // Gather signals per ticker
+    const signals = {};
+    tickers.forEach(sym => { signals[sym] = { bull: [], bear: [], neutral: [] }; });
 
     // Earnings
-    earningSoon.forEach(e => {
-      const days = Math.round((new Date(e.reportDate)-now)/86400000);
-      const when = days === 0 ? 'today' : days === 1 ? 'tomorrow' : 'in ' + days + ' days';
-      actions.push({ emoji: '📅', text: '<strong>' + e.symbol + ' reports earnings ' + when + '</strong> (' + e.reportDate + '). Expect volatility — decide if you want to hold through it or trim before.' });
+    earnings.forEach(e => {
+      if (!e.reportDate || !signals[e.symbol]) return;
+      const days = Math.round((new Date(e.reportDate) - now) / 86400000);
+      if (days >= 0 && days <= 7) {
+        const when = days === 0 ? 'today' : days === 1 ? 'tomorrow' : 'in ' + days + ' days';
+        signals[e.symbol].neutral.push('Earnings ' + when + ' (' + e.reportDate + ') — expect big price swings');
+      }
+    });
+
+    // Options
+    options.filter(o => o.unusualScore >= 50 && signals[o.symbol]).forEach(o => {
+      const pr = o.premium >= 1000000 ? '$'+(o.premium/1000000).toFixed(1)+'M' : '$'+Math.round(o.premium/1000)+'K';
+      if (o.sentiment === 'bullish') signals[o.symbol].bull.push(pr + ' bet it goes above $' + o.strike + ' by ' + o.expiry);
+      else signals[o.symbol].bear.push(pr + ' bet it drops below $' + o.strike + ' by ' + o.expiry);
     });
 
     // Insider buys
-    buys.slice(0,2).forEach(t => {
-      const val = t.totalValue ? ' ($' + Math.round(t.totalValue/1000) + 'K)' : '';
-      actions.push({ emoji: '🟢', text: '<strong>' + t.symbol + ' insider buying' + val + '</strong> — ' + (t.insiderName||'An insider') + ' bought shares on ' + t.date + '. This is a confident signal.' });
+    insiders.filter(t => t.type === 'BUY' && t.date && signals[t.symbol] && ((now - new Date(t.date))/86400000) <= 30).forEach(t => {
+      signals[t.symbol].bull.push((t.insiderName||'Insider') + ' bought shares — insiders only buy when confident');
     });
 
-    // Options — simplify to per-ticker summary
-    const optTickers = {};
-    options.filter(o => o.unusualScore >= 50).forEach(o => {
-      if (!optTickers[o.symbol]) optTickers[o.symbol] = { bull: 0, bear: 0, maxScore: 0, topPremium: 0 };
-      if (o.sentiment === 'bullish') optTickers[o.symbol].bull++;
-      else optTickers[o.symbol].bear++;
-      optTickers[o.symbol].maxScore = Math.max(optTickers[o.symbol].maxScore, o.unusualScore);
-      optTickers[o.symbol].topPremium = Math.max(optTickers[o.symbol].topPremium, o.premium || 0);
+    // Insider sells
+    const sellCounts = {};
+    insiders.filter(t => t.type === 'SELL' && t.date && signals[t.symbol] && ((now - new Date(t.date))/86400000) <= 14).forEach(t => {
+      sellCounts[t.symbol] = (sellCounts[t.symbol] || 0) + 1;
     });
-    Object.entries(optTickers).sort((a,b) => b[1].maxScore - a[1].maxScore).slice(0,3).forEach(([sym, d]) => {
-      const pr = d.topPremium >= 1000000 ? '$'+(d.topPremium/1000000).toFixed(1)+'M' : '$'+Math.round(d.topPremium/1000)+'K';
-      let direction;
-      if (d.bull > 0 && d.bear > 0) direction = 'Both bullish AND bearish bets — big move expected either direction.';
-      else if (d.bull > d.bear) direction = 'Bullish — smart money betting it goes up.';
-      else direction = 'Bearish — smart money hedging or betting it drops.';
-      actions.push({ emoji: '📊', text: '<strong>' + sym + ' has unusual options activity</strong> (up to ' + pr + ' in single bets). ' + direction });
+    Object.entries(sellCounts).filter(([,c]) => c >= 2).forEach(([sym, c]) => {
+      if (signals[sym]) signals[sym].bear.push(c + ' insiders selling in the last 2 weeks');
     });
 
-    // Insider sell clusters
-    clusterTickers.slice(0,2).forEach(sym => {
-      const count = sellsByTicker[sym];
-      actions.push({ emoji: '⚠️', text: '<strong>' + count + ' insiders at ' + sym + ' are selling</strong>. Could be routine compensation plans, but worth watching — especially if other signals also point down.' });
-    });
+    // Generate recommendation per ticker
+    const recs = [];
+    tickers.forEach(sym => {
+      const s = signals[sym];
+      if (!s) return;
+      const bullN = s.bull.length;
+      const bearN = s.bear.length;
+      const hasEarnings = s.neutral.length > 0;
+      if (bullN === 0 && bearN === 0 && !hasEarnings) return; // nothing to report
 
-    // Market insights
-    highMkt.forEach(m => {
-      actions.push({ emoji: '💡', text: '<strong>' + (m.title||'Market shift') + '</strong> — ' + (m.thesis || m.description || '') });
+      let action, actionColor, actionEmoji;
+      if (hasEarnings) {
+        if (bearN > bullN) { action = 'Consider trimming before earnings'; actionColor = '#f85149'; actionEmoji = '🔴'; }
+        else if (bullN > bearN) { action = 'Hold through earnings — signals are bullish'; actionColor = '#3fb950'; actionEmoji = '🟢'; }
+        else { action = 'Earnings coming — set a stop loss or trim if uncomfortable'; actionColor = '#d29922'; actionEmoji = '⚠️'; }
+      } else if (bullN > 0 && bearN > 0) {
+        action = 'Conflicting signals — hold but watch closely, big move likely'; actionColor = '#d29922'; actionEmoji = '⚠️';
+      } else if (bullN > bearN) {
+        action = 'Bullish signals — hold or consider adding'; actionColor = '#3fb950'; actionEmoji = '🟢';
+      } else if (bearN > bullN) {
+        action = 'Bearish signals — consider trimming or setting a stop loss'; actionColor = '#f85149'; actionEmoji = '🔴';
+      } else {
+        action = 'Mixed — hold and monitor'; actionColor = '#d29922'; actionEmoji = '⚠️';
+      }
+
+      const reasons = [];
+      s.bull.forEach(r => reasons.push('🟢 ' + r));
+      s.bear.forEach(r => reasons.push('🔴 ' + r));
+      s.neutral.forEach(r => reasons.push('📅 ' + r));
+
+      recs.push({ sym, action, actionColor, actionEmoji, reasons });
     });
 
     // Overall verdict
+    const bullTotal = options.filter(o => o.sentiment==='bullish' && o.unusualScore >= 50).length;
+    const bearTotal = options.filter(o => o.sentiment==='bearish' && o.unusualScore >= 50).length;
+    const buySignals = insiders.filter(t => t.type==='BUY' && t.date && ((now-new Date(t.date))/86400000) <= 30).length;
     let verdict, verdictColor;
-    if (bullOpts.length > bearOpts.length + 3) { verdict = '🟢 Overall bullish — more smart money betting up than down.'; verdictColor = '#3fb950'; }
-    else if (bearOpts.length > bullOpts.length + 3) { verdict = '🔴 Overall bearish — more smart money hedging or betting down.'; verdictColor = '#f85149'; }
-    else if (bullOpts.length > 0 || bearOpts.length > 0) { verdict = '⚖️ Mixed signals — big bets on both sides. Expect volatility.'; verdictColor = '#d29922'; }
-    else { verdict = '😴 Quiet day — no unusual signals detected.'; verdictColor = 'var(--text2)'; }
+    if (bullTotal > bearTotal + 3) { verdict = 'Smart money is leaning bullish across your portfolio. Generally safe to hold — look for buying opportunities on dips.'; verdictColor = '#3fb950'; }
+    else if (bearTotal > bullTotal + 3) { verdict = 'More bearish bets than bullish across your holdings. Consider tightening stop losses and being cautious about adding.'; verdictColor = '#f85149'; }
+    else if (bullTotal > 0 || bearTotal > 0) { verdict = 'Mixed signals — big money is betting both ways. Expect volatility. Don\'t make big moves, but have a plan for each holding.'; verdictColor = '#d29922'; }
+    else { verdict = 'No unusual activity detected. Business as usual — hold your positions and wait for Monday\'s data.'; verdictColor = 'var(--text2)'; }
 
-    if (actions.length === 0 && !verdict) {
+    // Market context
+    const highMkt = market.filter(m => m.conviction === 'high').slice(0, 2);
+    let mktContext = '';
+    if (highMkt.length > 0) {
+      mktContext = '<div style="margin-top:24px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:8px">' +
+        '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text2);margin-bottom:10px">🌍 Bigger Picture</div>' +
+        highMkt.map(m => '<div style="font-size:14px;line-height:1.6;margin-bottom:8px"><strong>' + (m.title||'') + '</strong> — ' + (m.thesis || m.description || '') + '</div>').join('') +
+        '</div>';
+    }
+
+    if (recs.length === 0 && !verdict) {
       el.innerHTML = '<div style="text-align:center;padding:60px 20px;color:var(--text2)"><div style="font-size:32px;margin-bottom:12px">⚡</div><div style="font-size:15px;font-weight:600">Nothing to report</div><div style="font-size:13px;margin-top:8px">Morning briefings arrive weekdays at 7:30am PST.</div></div>';
       return;
     }
 
     el.innerHTML =
-      '<div style="padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:24px">' +
-        '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text2);margin-bottom:8px">Today\'s Verdict</div>' +
-        '<div style="font-size:16px;font-weight:600;color:' + verdictColor + '">' + verdict + '</div>' +
+      // Overall recommendation
+      '<div style="padding:20px;background:var(--surface);border:1px solid var(--border);border-left:3px solid ' + verdictColor + ';border-radius:8px;margin-bottom:24px">' +
+        '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text2);margin-bottom:8px">⚡ Jarvis\'s Overall Take</div>' +
+        '<div style="font-size:15px;line-height:1.6;color:var(--text)">' + verdict + '</div>' +
       '</div>' +
-      (actions.length > 0 ?
-        '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text2);margin-bottom:12px">What You Should Know</div>' +
-        actions.map((a,i) =>
-          '<div style="display:flex;gap:12px;padding:14px 0;' + (i < actions.length-1 ? 'border-bottom:1px solid var(--border)' : '') + '">' +
-            '<div style="font-size:18px;flex-shrink:0;margin-top:1px">' + a.emoji + '</div>' +
-            '<div style="font-size:14px;line-height:1.6;color:var(--text)">' + a.text + '</div>' +
+
+      // Per-ticker recommendations
+      (recs.length > 0 ?
+        '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text2);margin-bottom:14px">Your Holdings — What I\'d Do</div>' +
+        recs.map(r =>
+          '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:12px">' +
+            '<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">' +
+              '<span style="font-size:18px;font-weight:700">' + r.sym + '</span>' +
+              '<span style="font-size:13px;font-weight:600;color:' + r.actionColor + '">' + r.actionEmoji + ' ' + r.action + '</span>' +
+            '</div>' +
+            '<div style="padding-left:4px">' +
+              r.reasons.map(reason =>
+                '<div style="font-size:13px;color:var(--text2);line-height:1.6;padding:2px 0">' + reason + '</div>'
+              ).join('') +
+            '</div>' +
           '</div>'
-        ).join('') : '');
+        ).join('') : '') +
+
+      // Bigger picture
+      mktContext;
 
   } catch(err) {
     el.innerHTML = '<div style="padding:20px;color:#f85149">Error: ' + err.message + '</div>';
