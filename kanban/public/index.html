@@ -1108,7 +1108,7 @@ function renderOptions() {
 // --- Summary ---
 async function loadSummary() {
   try {
-    if (!insidersData || insidersData.length === 0) await loadInsiders();
+    if (!insiderData || insiderData.length === 0) await loadInsiders();
     if (!optionsData.scannedAt) await loadOptions();
     renderSummary();
   } catch(e) { renderSummary(); }
@@ -1120,15 +1120,13 @@ function renderSummary() {
   if (!el) return;
   if (upEl) upEl.textContent = 'Updated ' + new Date().toLocaleTimeString();
 
-  const tickers = stocksData.tickers || [];
-  const watchlist = stocksData.watchlist || [];
   const earnings = stocksData.earnings || [];
   const market = stocksData.market || [];
   const options = optionsData.alerts || [];
-  const insiders = Array.isArray(insidersData) ? insidersData : [];
+  const insiders = Array.isArray(insiderData) ? insiderData : [];
   const briefings = stocksData.briefings || [];
 
-  const recs = []; // { priority, icon, title, body, tag }
+  const recs = [];
 
   // --- Earnings alerts (within 7 days) ---
   const now = new Date();
@@ -1143,7 +1141,16 @@ function renderSummary() {
     const daysStr = days === 0 ? 'TODAY' : days === 1 ? 'tomorrow' : `in ${days} days`;
     recs.push({ priority: 1, icon: '⚠️', tag: 'EARNINGS', tagColor: 'var(--yellow)',
       title: `${e.symbol} earnings ${daysStr}`,
-      body: `Reports on ${e.reportDate}. ${e.bullCase ? '🟢 Bull: ' + e.bullCase : ''} ${e.bearCase ? '🔴 Bear: ' + e.bearCase : ''}`.trim()
+      body: `Reports on ${e.reportDate}.${e.bullCase ? ' 🟢 Bull: ' + e.bullCase : ''}${e.bearCase ? ' 🔴 Bear: ' + e.bearCase : ''}`
+    });
+  });
+
+  // --- Insider buys (strong signal) ---
+  const recentBuys = insiders.filter(t => t.type === 'BUY' && ((new Date() - new Date(t.date)) / 86400000) <= 30);
+  recentBuys.slice(0, 2).forEach(t => {
+    recs.push({ priority: 1, icon: '🏛️', tag: 'INSIDER BUY', tagColor: 'var(--green)',
+      title: `${t.symbol} insider bought ${t.totalValue ? '$' + (t.totalValue/1000).toFixed(0) + 'K' : ''}`,
+      body: `${t.insiderName} (${t.role || 'insider'}) purchased ${t.shares?.toLocaleString() || '?'} shares on ${t.date}. Insiders only buy with their own money when they're confident — this is a strong signal.`
     });
   });
 
@@ -1158,32 +1165,22 @@ function renderSummary() {
     });
   });
 
-  // --- Insider buys (strong signal) ---
-  const recentBuys = insiders.filter(t => t.transactionType === 'P' && (() => { const d=(new Date()-new Date(t.filingDate))/86400000; return d<=30; })());
-  recentBuys.slice(0, 2).forEach(t => {
-    recs.push({ priority: 1, icon: '🏛️', tag: 'INSIDER BUY', tagColor: 'var(--green)',
-      title: `${t.symbol} insider bought $${t.value ? (t.value/1000).toFixed(0)+'K' : '?'}`,
-      body: `${t.insiderName} (${t.title || 'insider'}) purchased ${t.shares?.toLocaleString() || '?'} shares on ${t.filingDate}. Insiders only buy with their own money when they're confident.`
-    });
-  });
-
-  // --- Large insider sells (cluster = warning) ---
-  const recentSells = insiders.filter(t => t.transactionType === 'S' && (() => { const d=(new Date()-new Date(t.filingDate))/86400000; return d<=14; })());
+  // --- Insider sell clusters ---
+  const recentSells = insiders.filter(t => t.type === 'SELL' && ((new Date() - new Date(t.date)) / 86400000) <= 14);
   const sellClusters = {};
   recentSells.forEach(t => { sellClusters[t.symbol] = (sellClusters[t.symbol]||[]).concat(t); });
   Object.entries(sellClusters).filter(([,v])=>v.length>=2).slice(0,2).forEach(([sym, txs]) => {
-    const total = txs.reduce((s,t)=>s+(t.value||0),0);
+    const total = txs.reduce((s,t)=>s+(t.totalValue||0),0);
     recs.push({ priority: 3, icon: '🔴', tag: 'INSIDER SELL CLUSTER', tagColor: 'var(--red)',
       title: `${sym} — ${txs.length} insiders selling`,
-      body: `${txs.length} insiders sold a combined $${(total/1000000).toFixed(1)}M in the last 14 days. Could be routine, but worth monitoring — especially alongside any other signals.`
+      body: `${txs.length} insiders sold a combined $${(total/1000000).toFixed(1)}M in the last 14 days. Could be routine (scheduled plans), but worth monitoring alongside other signals.`
     });
   });
 
   // --- Market insights (high conviction) ---
-  const highMkt = market.filter(m => m.conviction === 'high').slice(0, 2);
-  highMkt.forEach(m => {
+  market.filter(m => m.conviction === 'high').slice(0, 2).forEach(m => {
     const typeIcon = m.type === 'opportunity' ? '💡' : m.type === 'warning' ? '⚠️' : m.type === 'shift' ? '🔄' : '📈';
-    recs.push({ priority: 3, icon: typeIcon, tag: m.type?.toUpperCase() || 'MARKET', tagColor: 'var(--accent)',
+    recs.push({ priority: 3, icon: typeIcon, tag: (m.type||'MARKET').toUpperCase(), tagColor: 'var(--accent)',
       title: m.title,
       body: m.thesis || m.description || ''
     });
@@ -1191,14 +1188,13 @@ function renderSummary() {
 
   // --- Portfolio movers from latest briefing ---
   const latestBriefing = briefings.filter(b=>b.type!=='watchlist').sort((a,b)=>new Date(b.date)-new Date(a.date))[0];
-  if (latestBriefing && latestBriefing.stocks) {
-    const movers = latestBriefing.stocks.filter(s=>s.change).sort((a,b)=>{
-      const av=parseFloat((a.change||'').replace('%','').replace('+',''));
-      const bv=parseFloat((b.change||'').replace('%','').replace('+',''));
+  if (latestBriefing?.stocks?.length > 1) {
+    latestBriefing.stocks.filter(s=>s.change).sort((a,b)=>{
+      const av=parseFloat((a.change||'0').replace('%','').replace('+',''));
+      const bv=parseFloat((b.change||'0').replace('%','').replace('+',''));
       return Math.abs(bv)-Math.abs(av);
-    }).slice(0,3);
-    movers.forEach(s => {
-      const val = parseFloat((s.change||'').replace('%','').replace('+',''));
+    }).slice(0,3).forEach(s => {
+      const val = parseFloat((s.change||'0').replace('%','').replace('+',''));
       if (Math.abs(val) < 2) return;
       const up = val > 0;
       recs.push({ priority: 4, icon: up?'📈':'📉', tag: up?'MOVER UP':'MOVER DOWN', tagColor: up?'var(--green)':'var(--red)',
@@ -1212,55 +1208,48 @@ function renderSummary() {
   if (recs.length === 0) {
     el.innerHTML = `<div style="text-align:center;padding:60px 20px;color:var(--text2)">
       <div style="font-size:32px;margin-bottom:12px">⚡</div>
-      <div style="font-size:15px;font-weight:600;margin-bottom:8px">No data yet</div>
-      <div style="font-size:13px">Your first morning briefing arrives weekdays at 7:30am PST. Check back then for recommendations.</div>
+      <div style="font-size:15px;font-weight:600;margin-bottom:8px">No recommendations yet</div>
+      <div style="font-size:13px">Morning briefings arrive weekdays at 7:30am PST. Once data flows in, this page fills with actionable insights.</div>
     </div>`;
     return;
   }
 
-  // Sort by priority then render
   recs.sort((a,b)=>a.priority-b.priority);
 
-  // Overall sentiment
   const bullCount = options.filter(o=>o.sentiment==='bullish'&&o.unusualScore>=50).length;
   const bearCount = options.filter(o=>o.sentiment==='bearish'&&o.unusualScore>=50).length;
-  const earningSoon = soon.length;
   const sentimentText = bullCount > bearCount ? '🟢 Bullish lean' : bearCount > bullCount ? '🔴 Bearish lean' : '⚖️ Mixed';
   const sentimentColor = bullCount > bearCount ? 'var(--green)' : bearCount > bullCount ? 'var(--red)' : 'var(--yellow)';
 
   el.innerHTML = `
-    <!-- Sentiment bar -->
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:24px">
       <div style="padding:14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);text-align:center">
-        <div style="font-size:18px;font-weight:700;color:${sentimentColor}">${sentimentText}</div>
+        <div style="font-size:16px;font-weight:700;color:${sentimentColor}">${sentimentText}</div>
         <div style="font-size:11px;color:var(--text2);margin-top:4px">Options Signal</div>
       </div>
       <div style="padding:14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);text-align:center">
-        <div style="font-size:18px;font-weight:700;color:${earningSoon>0?'var(--yellow)':'var(--text)'}">${earningSoon}</div>
+        <div style="font-size:22px;font-weight:700;color:${soon.length>0?'var(--yellow)':'var(--text)'}">${soon.length}</div>
         <div style="font-size:11px;color:var(--text2);margin-top:4px">Earnings This Week</div>
       </div>
       <div style="padding:14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);text-align:center">
-        <div style="font-size:18px;font-weight:700;color:var(--accent)">${recs.length}</div>
+        <div style="font-size:22px;font-weight:700;color:var(--accent)">${recs.length}</div>
         <div style="font-size:11px;color:var(--text2);margin-top:4px">Action Items</div>
       </div>
       <div style="padding:14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);text-align:center">
-        <div style="font-size:18px;font-weight:700;color:${recentBuys.length>0?'var(--green)':'var(--text2)'}">${recentBuys.length>0?'YES':'NONE'}</div>
+        <div style="font-size:22px;font-weight:700;color:${recentBuys.length>0?'var(--green)':'var(--text2)'}">${recentBuys.length>0?'YES':'NONE'}</div>
         <div style="font-size:11px;color:var(--text2);margin-top:4px">Insider Buys (30d)</div>
       </div>
     </div>
-
-    <!-- Recommendations -->
     <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text2);margin-bottom:12px">📋 What to Watch / Act On</div>
-    ${recs.map(r => `
+    ${recs.map(r=>`
       <div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid ${r.tagColor};border-radius:var(--radius);padding:14px 16px;margin-bottom:10px">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap">
           <span style="font-size:16px">${r.icon}</span>
           <span style="font-weight:700;font-size:14px">${r.title}</span>
           <span style="margin-left:auto;font-size:10px;font-weight:700;padding:2px 8px;border-radius:8px;background:${r.tagColor}22;color:${r.tagColor}">${r.tag}</span>
         </div>
-        ${r.body ? `<div style="font-size:13px;color:var(--text2);line-height:1.6;padding-left:26px">${r.body}</div>` : ''}
-      </div>`).join('')}
-  `;
+        ${r.body?`<div style="font-size:13px;color:var(--text2);line-height:1.6;padding-left:26px">${r.body}</div>`:''}
+      </div>`).join('')}`;
 }
 
 // Init
