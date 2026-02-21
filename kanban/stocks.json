@@ -65,127 +65,272 @@
   ],
   "earnings": [
     {
-      "id": "1771536660773",
-      "updatedAt": "2026-02-19T21:31:00.773Z",
+      "id": "1771631173726",
+      "updatedAt": "2026-02-20T23:46:13.726Z",
       "symbol": "MSFT",
-      "reportDate": null,
+      "reportDate": "2026-04-29",
       "source": "portfolio",
-      "bullCase": "Azure/AI growth beats → stock rallies",
-      "bearCase": "Cloud slowdown → pullback to $380",
-      "notes": "Last reported Jan 28. Next ~Apr 2026."
+      "bullCase": "Azure/AI growth beats, OpenAI deal through 2032 → $450+",
+      "bearCase": "Cloud slowdown, AI spend concerns → pullback to $380",
+      "notes": "Earnings Apr 29. Insider bought $2M. PT $596. Steady."
     },
     {
-      "id": "1771536660780",
-      "updatedAt": "2026-02-19T21:31:00.780Z",
+      "id": "1771631173737",
+      "updatedAt": "2026-02-20T23:46:13.737Z",
       "symbol": "MU",
-      "reportDate": "2026-03-19",
+      "reportDate": "2026-03-18",
       "source": "portfolio",
-      "bullCase": "HBM demand exceeds guidance, AI memory pricing power",
-      "bearCase": "Inventory buildup or weak consumer DRAM → $370 support",
-      "notes": "⚠️ REPORTING IN 28 DAYS. Key AI memory play."
+      "bullCase": "HBM demand exceeds guidance, AI memory pricing power → $450+",
+      "bearCase": "Inventory buildup or weak consumer DRAM → pullback",
+      "notes": "⚠️ EARNINGS IN 26 DAYS (Mar 18). Morgan Stanley PT $450."
     },
     {
-      "id": "1771536660786",
-      "updatedAt": "2026-02-19T21:31:00.786Z",
+      "id": "1771631173748",
+      "updatedAt": "2026-02-20T23:46:13.748Z",
       "symbol": "FCX",
       "reportDate": null,
       "source": "portfolio",
-      "bullCase": "Copper >$14K/ton + Grasberg extension → $55+",
-      "bearCase": "China demand slowdown → sub-$40",
-      "notes": "Next earnings ~Apr 2026. Grasberg MOU catalyst."
+      "bullCase": "Copper >$14K/ton + Grasberg extension → $70+",
+      "bearCase": "China demand slowdown → mean reversion to $55",
+      "notes": "Next earnings ~Apr 2026. Copper rally sustaining. +2.83% today."
     },
     {
-      "id": "1771536660823",
-      "updatedAt": "2026-02-19T21:31:00.823Z",
+      "id": "1771631173794",
+      "updatedAt": "2026-02-20T23:46:13.794Z",
       "symbol": "IREN",
       "reportDate": null,
       "source": "portfolio",
-      "bullCase": "AI cloud ARR ramp validates pivot → $15+",
-      "bearCase": "BTC weakness + revenue miss → $8 support",
-      "notes": "Just reported Q2 FY26 on Feb 18. Next ~May 2026."
+      "bullCase": "AI cloud ARR ramp validates pivot → PT $105",
+      "bearCase": "BTC weakness + post-earnings drift → $35 support",
+      "notes": "Just reported Q2 FY26 on Feb 18. Next ~May 2026. Drifting lower."
     },
     {
-      "id": "1771536660817",
-      "updatedAt": "2026-02-19T21:31:00.817Z",
+      "id": "1771631173785",
+      "updatedAt": "2026-02-20T23:46:13.785Z",
       "symbol": "CIFR",
-      "reportDate": null,
+      "reportDate": "2026-02-24",
       "source": "portfolio",
-      "bullCase": "AWS/Google data center revenue H2 2026 → re-rate",
-      "bearCase": "BTC weak, data center delays → downside",
-      "notes": "$9.3B contracted AI data center leases."
+      "bullCase": "Q4 rev $77.9M (+84% YoY) beats, AI DC pivot validates → $20+",
+      "bearCase": "BTC weakness + execution risk on AI transition → $12",
+      "notes": "⚠️ EARNINGS IN 4 DAYS (Feb 24). Consensus rev $77.9M. PT $28.23."
     },
     {
-      "id": "1771536660811",
-      "updatedAt": "2026-02-19T21:31:00.811Z",
+      "id": "1771631173776",
+      "updatedAt": "2026-02-20T23:46:13.776Z",
       "symbol": "CRWV",
-      "reportDate": "2026-02-25",
+      "reportDate": "2026-02-26",
       "source": "portfolio",
-      "bullCase": "Q4 rev +105% YoY beats, backlog expansion → ATH",
-      "bearCase": "Debt concerns, OpenAI concentration → 10-15% pullback",
-      "notes": "⚠️ REPORTING IN 6 DAYS. Q3 was $1.4B rev (+134%)."
+      "bullCase": "Q4 rev +105% YoY beats, $55B backlog validates → $120+",
+      "bearCase": "$29B debt + Blue Owl failed placement + MS downgrade → sub-$80",
+      "notes": "⚠️ EARNINGS IN 6 DAYS (Feb 26). Morgan Stanley downgraded. Blue Owl $4B debt placement failed. High risk event."
     },
     {
-      "id": "1771536660800",
-      "updatedAt": "2026-02-19T21:31:00.800Z",
+      "id": "1771631173767",
+      "updatedAt": "2026-02-20T23:46:13.767Z",
       "symbol": "NBIS",
       "reportDate": null,
       "source": "portfolio",
-      "bullCase": "AI infra demand + Nvidia backing → breakout",
-      "bearCase": "Heavy investment, negative EPS → sentiment sour",
-      "notes": "Nvidia maintained holdings. PT $142. EPS negative 2026."
+      "bullCase": "508% rev growth 2026, Nvidia backing → breakout to $140+",
+      "bearCase": "Heavy investment, -9% today shows volatility risk",
+      "notes": "No confirmed earnings date. Sold off 9% today on profit-taking."
     },
     {
-      "id": "1771536660793",
-      "updatedAt": "2026-02-19T21:31:00.793Z",
+      "id": "1771631173758",
+      "updatedAt": "2026-02-20T23:46:13.758Z",
       "symbol": "AMPX",
-      "reportDate": null,
+      "reportDate": "2026-03-05",
       "source": "portfolio",
-      "bullCase": "New battery contracts, aviation/defense demand",
+      "bullCase": "Defense battery contracts accelerate revenue → $15+",
       "bearCase": "Production delays, cash burn → dilution risk",
-      "notes": "Silicon anode tech. No earnings date announced."
+      "notes": "⚠️ EARNINGS IN 13 DAYS (Mar 5). Defense partnership momentum. FV $17.57."
     },
     {
-      "id": "1771536660765",
-      "updatedAt": "2026-02-19T21:31:00.765Z",
+      "id": "1771631173712",
+      "updatedAt": "2026-02-20T23:46:13.712Z",
       "symbol": "TE",
       "reportDate": null,
       "source": "portfolio",
-      "bullCase": "Tax credit confirmed, solar demand ramp",
-      "bearCase": "Policy changes or supply chain issues",
-      "notes": "T1 Energy. CAO transition announced. No earnings date set."
+      "bullCase": "Tax credit confirmed, solar demand ramp → $9+",
+      "bearCase": "Governance concerns (CAO termination) weigh on sentiment",
+      "notes": "No earnings date set. CAO terminated Feb 5, new accounting chief."
     },
     {
-      "id": "1771536660756",
-      "updatedAt": "2026-02-19T21:31:00.756Z",
+      "id": "1771631173696",
+      "updatedAt": "2026-02-20T23:46:13.696Z",
       "symbol": "SOXX",
       "reportDate": null,
       "source": "portfolio",
-      "bullCase": "AI chip demand surge → new ATH",
-      "bearCase": "Trade tensions → pullback to $320",
-      "notes": "ETF - no earnings. YTD tracking semis."
+      "bullCase": "AI chip demand surge + semis earnings beats → new ATH",
+      "bearCase": "High put volume, trade tensions → breakdown below $340",
+      "notes": "ETF - no earnings. Put volume elevated, signals hedging."
     },
     {
-      "id": "1771536660744",
-      "updatedAt": "2026-02-19T21:31:00.744Z",
+      "id": "1771631173680",
+      "updatedAt": "2026-02-20T23:46:13.680Z",
       "symbol": "FBTC",
       "reportDate": null,
       "source": "portfolio",
-      "bullCase": "BTC rally on ETF inflows → NAV recovery",
-      "bearCase": "BTC drops below $60K → tests lows",
-      "notes": "ETF - no earnings. Tracks BTC spot."
+      "bullCase": "BTC rally on ETF inflows → NAV recovery above $35 CAD",
+      "bearCase": "BTC drops below $66.5K support → tests $60K",
+      "notes": "ETF - no earnings. Tracks BTC spot. BTC at $68.9K, rising trend."
     },
     {
-      "id": "1771536586667",
-      "updatedAt": "2026-02-19T21:29:46.667Z",
+      "id": "1771631421481",
+      "updatedAt": "2026-02-20T23:50:21.481Z",
       "symbol": "NVDA",
       "reportDate": "2026-02-25",
       "source": "watchlist",
       "bullCase": "Q4 FY26 beats on Blackwell ramp + surging AI data center demand. Revenue guidance above $40B. Meta/hyperscaler orders validate capex cycle → rally to $200+",
       "bearCase": "Margins compress on Blackwell production costs, DeepSeek narrative reduces AI capex urgency, guidance disappoints → pullback to $165-170",
-      "notes": "⚠️ REPORTING IN 6 DAYS (Feb 25 AMC). Consensus EPS $1.52. Stock down from $190+ on tech rotation. Critical catalyst."
+      "notes": "⚠️ REPORTING IN 5 DAYS (Feb 25 AMC). Consensus EPS $1.52. Stock at $186.50, down from $190+. Critical catalyst for entire AI trade."
     }
   ],
   "briefings": [
+    {
+      "id": "1771631421457",
+      "date": "2026-02-20",
+      "createdAt": "2026-02-20T23:50:21.457Z",
+      "type": "watchlist",
+      "summary": "NVDA closed at $186.50, down -1.72% on continued tech rotation. Earnings Feb 25 (5 days away). No major news today — stock drifting lower ahead of critical Q4 FY26 report.",
+      "stocks": [
+        {
+          "symbol": "NVDA",
+          "change": -1.72,
+          "note": "$186.50. Down on tech rotation. Q4 FY26 earnings Feb 25 AMC. Consensus EPS $1.52."
+        }
+      ],
+      "analysis": "NVDA continues to drift lower from $190+ levels as the tech-to-value rotation persists. The Feb 25 earnings report is the next major catalyst — Blackwell ramp and AI data center demand will determine direction. Stock is approaching a key support zone around $185. Elevated implied volatility heading into the event."
+    },
+    {
+      "id": "1771631149722",
+      "date": "2026-02-20",
+      "createdAt": "2026-02-20T23:45:49.722Z",
+      "type": "portfolio",
+      "summary": "Rough day for AI infra — NBIS cratered -9.0% and CRWV dumped -8.1% on Morgan Stanley downgrade and Blue Owl failed $4B debt placement respectively. FCX was the bright spot at +2.83% on copper rally. AMPX surged +4.4%. MSFT flat at $397.23. MU dipped slightly. BTC holding ~$68.9K keeping FBTC stable. CIFR earnings Monday Feb 24, CRWV earnings Thursday Feb 26.",
+      "stocks": [
+        {
+          "symbol": "FBTC",
+          "change": 0.5,
+          "note": "~$30.60 CAD. BTC stable near $68.9K. Support $66.5K, resistance $73.3K."
+        },
+        {
+          "symbol": "SOXX",
+          "change": 0.3,
+          "note": "$356. High put volume signals hedging. Semis holding despite rotation."
+        },
+        {
+          "symbol": "TE",
+          "change": -1,
+          "note": "~$6.30. Quiet, governance overhang from CAO termination lingers."
+        },
+        {
+          "symbol": "MSFT",
+          "change": -0.31,
+          "note": "$397.23. Flat. OpenAI deal through 2032. Insider bought $2M shares. Earnings Apr 29."
+        },
+        {
+          "symbol": "MU",
+          "change": -1.5,
+          "note": "~$418. Gave back gains. Morgan Stanley PT $450 intact. Earnings Mar 18."
+        },
+        {
+          "symbol": "FCX",
+          "change": 2.83,
+          "note": "$64.34. TOP MOVER. Copper rally continues. Grasberg extension confirmed."
+        },
+        {
+          "symbol": "AMPX",
+          "change": 4.44,
+          "note": "$10.35. Strong rally on defense battery momentum. Earnings Mar 5."
+        },
+        {
+          "symbol": "NBIS",
+          "change": -9,
+          "note": "$97.92. BIGGEST LOSER. Sold off hard — profit-taking after Zacks Bull of Day hype."
+        },
+        {
+          "symbol": "CRWV",
+          "change": -8.12,
+          "note": "$89.25. Blue Owl failed $4B data center debt placement. Morgan Stanley downgrade. Earnings Feb 26."
+        },
+        {
+          "symbol": "CIFR",
+          "change": 1,
+          "note": "~$15.95. Holding ahead of Q4 earnings Feb 24. AI DC pivot narrative intact."
+        },
+        {
+          "symbol": "IREN",
+          "change": -2,
+          "note": "~$41.50. Drifting lower post-earnings. AI pivot on track but BTC headwinds."
+        }
+      ],
+      "analysis": "Brutal session for AI infrastructure names. NBIS (-9.0%) and CRWV (-8.12%) led the downside — CRWV hit hard by Blue Owl Capital's failed $4B debt placement plus a Morgan Stanley downgrade to Equal Weight ahead of Feb 26 earnings. NBIS gave back yesterday's gains on profit-taking. Commodities outperformed again with FCX +2.83% as copper stays elevated. AMPX +4.44% on defense battery demand. MSFT flat, MU pulled back slightly. Key catalysts ahead: CIFR earnings Feb 24, CRWV earnings Feb 26. The rotation out of high-beta AI names into value/commodities continued today."
+    },
+    {
+      "id": "1771630966107",
+      "date": "2026-02-20",
+      "createdAt": "2026-02-20T23:42:46.107Z",
+      "type": "portfolio",
+      "summary": "Green across the board Friday. FCX led at +2.43% on copper strength. MU +1.70% ahead of Mar 19 earnings — HBM/AI demand narrative strong. MSFT +0.31% steady. FBTC +0.73% as BTC stabilizes. AI infra names (CRWV, NBIS, IREN) pulled back slightly on sector rotation concerns. CIFR flat pre-earnings. AMPX dipped on profit-taking after defense partnership rally.",
+      "stocks": [
+        {
+          "symbol": "FBTC",
+          "change": 0.73,
+          "note": "$30.48 CAD. BTC stabilizing, ETF tracking spot. Short-term rising trend."
+        },
+        {
+          "symbol": "SOXX",
+          "change": -0.3,
+          "note": "~$355. Opened flat. High put option volume signals caution in semis."
+        },
+        {
+          "symbol": "TE",
+          "change": -0.5,
+          "note": "~$6.40. Quiet. CAO terminated Feb 5, new accounting chief appointed."
+        },
+        {
+          "symbol": "MSFT",
+          "change": 0.31,
+          "note": "$398.31. Steady. Analysts PT $592. Next earnings ~Apr 29."
+        },
+        {
+          "symbol": "MU",
+          "change": 1.7,
+          "note": "$424.43. Rallying on AI/HBM demand. Morgan Stanley PT $450. Earnings Mar 19."
+        },
+        {
+          "symbol": "FCX",
+          "change": 2.43,
+          "note": "$64.09. TOP MOVER. Copper rally continues. 72.7% 1Y return."
+        },
+        {
+          "symbol": "AMPX",
+          "change": -1,
+          "note": "~$9.91. Pullback after defense battery partnership rally. Fair value $17.57."
+        },
+        {
+          "symbol": "NBIS",
+          "change": -1.5,
+          "note": "~$106. Zacks Bull of Day — 508% rev growth expected 2026. Buy reiterated."
+        },
+        {
+          "symbol": "CRWV",
+          "change": 0,
+          "note": "$97.14. Flat ahead of Q4 earnings Feb 25. $55B backlog vs $29B debt."
+        },
+        {
+          "symbol": "CIFR",
+          "change": 0.5,
+          "note": "~$15.80. Pre-earnings positioning. Q4 consensus rev $77.9M (+84% YoY)."
+        },
+        {
+          "symbol": "IREN",
+          "change": -1,
+          "note": "~$42.50. AI stock rotation pullback today. PT $105 (Compass Point)."
+        }
+      ],
+      "analysis": "Commodities outperformed Friday with FCX +2.43% leading the portfolio on sustained copper strength. MU continues its momentum at $424 ahead of the critical Mar 19 earnings. The AI infra complex (CRWV, NBIS, IREN) saw mild profit-taking — a TipRanks report flagged sector rotation concerns. CRWV earnings Feb 25 is the next major catalyst. NBIS named Zacks Bull of the Day with 508% expected revenue growth. Portfolio remains well-positioned for AI/crypto themes despite near-term rotation noise."
+    },
     {
       "id": "1771536640151",
       "date": "2026-02-19",
@@ -398,6 +543,79 @@
     }
   ],
   "market": [
+    {
+      "id": "1771631533331",
+      "date": "2026-02-20",
+      "createdAt": "2026-02-20T23:52:13.331Z",
+      "type": "trend",
+      "title": "Seasonal Pattern: February Weak, March Recovery",
+      "description": "February historically shows ~50% positive months with flat-to-negative average returns. March typically sees recovery as markets prep for a bullish Q2. Year 2 post-election cycles average 3.1-6.2% annual returns.",
+      "tickers": [],
+      "thesis": "Don't panic on February weakness — it's seasonal. Patient capital gets rewarded in March. This is a rotation, not a correction. Broad-based gains expected as the year progresses.",
+      "conviction": "medium"
+    },
+    {
+      "id": "1771631533316",
+      "date": "2026-02-20",
+      "createdAt": "2026-02-20T23:52:13.316Z",
+      "type": "warning",
+      "title": "AI Capex Fatigue — Tech Under Pressure",
+      "description": "Mega-cap tech is losing favor as investors question ROI timelines on AI infrastructure spending. Alphabet's $20B bond sale raised red flags. The Mag 7 concentration trade is unwinding.",
+      "tickers": [
+        "GOOGL",
+        "MSFT",
+        "NVDA",
+        "META"
+      ],
+      "thesis": "This rotation could accelerate if Q1 earnings show AI spending without proportional revenue growth. Tech isn't dead but the easy money phase is over. Relevant for Jordan's MSFT position — monitor for further weakness.",
+      "conviction": "high"
+    },
+    {
+      "id": "1771631533297",
+      "date": "2026-02-20",
+      "createdAt": "2026-02-20T23:52:13.297Z",
+      "type": "opportunity",
+      "title": "Caterpillar Riding Energy Transition Wave",
+      "description": "CAT up 32% YTD — the top industrial performer. Benefiting from sustainable energy transition capex and infrastructure spending. Leading the industrial sector's contribution to broader market gains.",
+      "tickers": [
+        "CAT",
+        "GEV"
+      ],
+      "thesis": "Energy transition requires heavy equipment and power infrastructure. CAT and GEV are the picks-and-shovels play on the green transition. Stretched valuations are a concern but the secular trend is intact.",
+      "conviction": "medium"
+    },
+    {
+      "id": "1771631533272",
+      "date": "2026-02-20",
+      "createdAt": "2026-02-20T23:52:13.272Z",
+      "type": "opportunity",
+      "title": "Energy Sector Dominance — Oil +12% YTD",
+      "description": "Energy is the best-performing sector in 2026, up 22%+ YTD. XOM up 26%, fair value raised to $142. Oil prices surged ~12% since Jan 1, providing sustained tailwinds for the entire sector.",
+      "tickers": [
+        "XOM",
+        "CVX"
+      ],
+      "thesis": "Oil momentum + rotation from tech = energy keeps running. XOM's upgraded fair value suggests fundamental support, not just momentum. Watch for pullbacks as entry points — current levels are extended.",
+      "conviction": "medium"
+    },
+    {
+      "id": "1771631517870",
+      "date": "2026-02-20",
+      "createdAt": "2026-02-20T23:51:57.870Z",
+      "type": "shift",
+      "title": "The Great Rotation: Tech → Real Economy",
+      "description": "Capital is flowing out of mega-cap tech into industrials, energy, and consumer defensives. AI capex fatigue is driving investors to question ROI on massive infrastructure spending. Alphabet's $20B bond sale on Feb 10 intensified concerns.",
+      "tickers": [
+        "XOM",
+        "CVX",
+        "CAT",
+        "GEV",
+        "WMT",
+        "COST"
+      ],
+      "thesis": "This isn't a blip — it's a structural shift. Investors want earnings NOW, not AI promises. Energy up 22% YTD, industrials driving broader market gains. However, none of these leaders are undervalued per Morningstar, so chasing here is risky.",
+      "conviction": "high"
+    },
     {
       "id": "1771536604814",
       "date": "2026-02-19",

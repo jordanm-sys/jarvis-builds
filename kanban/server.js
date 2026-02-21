@@ -6,6 +6,7 @@ const TASKS_FILE = path.join(__dirname, 'tasks.json');
 const PROJECTS_FILE = path.join(__dirname, 'projects.json');
 const STOCKS_FILE = path.join(__dirname, 'stocks.json');
 const INSIDERS_FILE = path.join(__dirname, 'insiders.json');
+const OPTIONS_FILE = path.join(__dirname, 'options-flow.json');
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -19,6 +20,8 @@ const readStocks = () => JSON.parse(fs.readFileSync(STOCKS_FILE, 'utf8'));
 const saveStocks = (d) => fs.writeFileSync(STOCKS_FILE, JSON.stringify(d, null, 2));
 const readInsiders = () => { try { return JSON.parse(fs.readFileSync(INSIDERS_FILE, 'utf8')); } catch(e) { return []; } };
 const saveInsiders = (d) => fs.writeFileSync(INSIDERS_FILE, JSON.stringify(d, null, 2));
+const readOptions = () => { try { return JSON.parse(fs.readFileSync(OPTIONS_FILE, 'utf8')); } catch(e) { return { scannedAt: null, alerts: [] }; } };
+const saveOptions = (d) => fs.writeFileSync(OPTIONS_FILE, JSON.stringify(d, null, 2));
 
 // Tasks API
 app.get('/api/tasks', (_, res) => res.json(read()));
@@ -290,6 +293,28 @@ app.delete('/api/stocks/insiders/:id', (req, res) => {
   let insiders = readInsiders();
   insiders = insiders.filter(t => t.id !== req.params.id);
   saveInsiders(insiders);
+  res.json({ ok: true });
+});
+
+// Options Flow API
+app.get('/api/stocks/options', (_, res) => res.json(readOptions()));
+
+app.post('/api/stocks/options', (req, res) => {
+  const data = req.body;
+  if (!data.scannedAt || !Array.isArray(data.alerts)) return res.status(400).json({ error: 'Invalid payload' });
+  saveOptions(data);
+  res.json({ ok: true, count: data.alerts.length });
+});
+
+app.get('/api/stocks/options/alerts', (req, res) => {
+  const data = readOptions();
+  const minScore = parseInt(req.query.minScore) || 50;
+  const alerts = (data.alerts || []).filter(a => a.unusualScore >= minScore);
+  res.json({ scannedAt: data.scannedAt, alerts });
+});
+
+app.delete('/api/stocks/options', (_, res) => {
+  saveOptions({ scannedAt: null, alerts: [] });
   res.json({ ok: true });
 });
 
