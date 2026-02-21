@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/icons/icon-192.png">
-<title>Jarvis Dashboard</title>
+<title>Jarvis Dashboard v6</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#0d1117;--surface:#161b22;--surface2:#21262d;--border:#30363d;--text:#e6edf3;--text2:#8b949e;--accent:#58a6ff;--green:#3fb950;--yellow:#d29922;--red:#f85149;--orange:#d29922;--radius:8px}
@@ -556,7 +556,7 @@ function switchStockTab(tab){
   ['summaryView','marketView','portfolioView','watchlistView','earningsView','insiderView','optionsView'].forEach((id,i)=>document.getElementById(id).classList.toggle('active',tabs[i]===tab));
   if(tab==='insider')loadInsiders();
   if(tab==='options')loadOptions();
-  if(tab==='summary'){loadSummary();}
+  if(tab==='summary')loadSummary();
 }
 
 // --- Tasks ---
@@ -1107,153 +1107,125 @@ function renderOptions() {
 
 // --- Summary ---
 async function loadSummary() {
-  try {
-    if (!insiderData || insiderData.length === 0) await loadInsiders();
-    if (!optionsData.scannedAt) await loadOptions();
-    renderSummary();
-  } catch(e) { renderSummary(); }
-}
-
-function renderSummary() {
   const el = document.getElementById('summaryContent');
   const upEl = document.getElementById('summaryUpdatedAt');
   if (!el) return;
-  if (upEl) upEl.textContent = 'Updated ' + new Date().toLocaleTimeString();
+  el.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text2)">Loading...</div>';
+  try {
+    const [stocks, opts, ins] = await Promise.all([
+      fetch('/api/stocks').then(r=>r.json()).catch(()=>({})),
+      fetch('/api/stocks/options').then(r=>r.json()).catch(()=>({alerts:[]})),
+      fetch('/api/stocks/insiders').then(r=>r.json()).catch(()=>[])
+    ]);
+    if (upEl) upEl.textContent = 'Updated ' + new Date().toLocaleTimeString();
+    const earnings = stocks.earnings || [];
+    const market = stocks.market || [];
+    const briefings = stocks.briefings || [];
+    const options = opts.alerts || [];
+    const insiders = Array.isArray(ins) ? ins : [];
+    const recs = [];
+    const now = new Date();
 
-  const earnings = stocksData.earnings || [];
-  const market = stocksData.market || [];
-  const options = optionsData.alerts || [];
-  const insiders = Array.isArray(insiderData) ? insiderData : [];
-  const briefings = stocksData.briefings || [];
-
-  const recs = [];
-
-  // --- Earnings alerts (within 7 days) ---
-  const now = new Date();
-  const soon = earnings.filter(e => {
-    if (!e.reportDate) return false;
-    const d = new Date(e.reportDate);
-    const days = (d - now) / 86400000;
-    return days >= 0 && days <= 7;
-  }).sort((a,b) => new Date(a.reportDate) - new Date(b.reportDate));
-  soon.forEach(e => {
-    const days = Math.round((new Date(e.reportDate) - now) / 86400000);
-    const daysStr = days === 0 ? 'TODAY' : days === 1 ? 'tomorrow' : `in ${days} days`;
-    recs.push({ priority: 1, icon: '⚠️', tag: 'EARNINGS', tagColor: 'var(--yellow)',
-      title: `${e.symbol} earnings ${daysStr}`,
-      body: `Reports on ${e.reportDate}.${e.bullCase ? ' 🟢 Bull: ' + e.bullCase : ''}${e.bearCase ? ' 🔴 Bear: ' + e.bearCase : ''}`
-    });
-  });
-
-  // --- Insider buys (strong signal) ---
-  const recentBuys = insiders.filter(t => t.type === 'BUY' && ((new Date() - new Date(t.date)) / 86400000) <= 30);
-  recentBuys.slice(0, 2).forEach(t => {
-    recs.push({ priority: 1, icon: '🏛️', tag: 'INSIDER BUY', tagColor: 'var(--green)',
-      title: `${t.symbol} insider bought ${t.totalValue ? '$' + (t.totalValue/1000).toFixed(0) + 'K' : ''}`,
-      body: `${t.insiderName} (${t.role || 'insider'}) purchased ${t.shares?.toLocaleString() || '?'} shares on ${t.date}. Insiders only buy with their own money when they're confident — this is a strong signal.`
-    });
-  });
-
-  // --- High-conviction options flow ---
-  const topOpts = options.filter(o => o.unusualScore >= 70).slice(0, 4);
-  topOpts.forEach(o => {
-    const dir = o.sentiment === 'bullish' ? '🟢' : '🔴';
-    const action = o.sentiment === 'bullish' ? 'targeting upside' : 'hedging downside';
-    recs.push({ priority: 2, icon: '📊', tag: 'OPTIONS', tagColor: o.sentiment === 'bullish' ? 'var(--green)' : 'var(--red)',
-      title: `${o.symbol} unusual ${o.type} activity (Score: ${o.unusualScore})`,
-      body: `${dir} $${o.strike}${o.type==='call'?'C':'P'} exp ${o.expiry} — ${fmtPremium(o.premium)} in premium, ${o.volOiRatio}x normal volume. Smart money ${action} before ${o.expiry}.`
-    });
-  });
-
-  // --- Insider sell clusters ---
-  const recentSells = insiders.filter(t => t.type === 'SELL' && ((new Date() - new Date(t.date)) / 86400000) <= 14);
-  const sellClusters = {};
-  recentSells.forEach(t => { sellClusters[t.symbol] = (sellClusters[t.symbol]||[]).concat(t); });
-  Object.entries(sellClusters).filter(([,v])=>v.length>=2).slice(0,2).forEach(([sym, txs]) => {
-    const total = txs.reduce((s,t)=>s+(t.totalValue||0),0);
-    recs.push({ priority: 3, icon: '🔴', tag: 'INSIDER SELL CLUSTER', tagColor: 'var(--red)',
-      title: `${sym} — ${txs.length} insiders selling`,
-      body: `${txs.length} insiders sold a combined $${(total/1000000).toFixed(1)}M in the last 14 days. Could be routine (scheduled plans), but worth monitoring alongside other signals.`
-    });
-  });
-
-  // --- Market insights (high conviction) ---
-  market.filter(m => m.conviction === 'high').slice(0, 2).forEach(m => {
-    const typeIcon = m.type === 'opportunity' ? '💡' : m.type === 'warning' ? '⚠️' : m.type === 'shift' ? '🔄' : '📈';
-    recs.push({ priority: 3, icon: typeIcon, tag: (m.type||'MARKET').toUpperCase(), tagColor: 'var(--accent)',
-      title: m.title,
-      body: m.thesis || m.description || ''
-    });
-  });
-
-  // --- Portfolio movers from latest briefing ---
-  const latestBriefing = briefings.filter(b=>b.type!=='watchlist').sort((a,b)=>new Date(b.date)-new Date(a.date))[0];
-  if (latestBriefing?.stocks?.length > 1) {
-    latestBriefing.stocks.filter(s=>s.change).sort((a,b)=>{
-      const av=parseFloat((a.change||'0').replace('%','').replace('+',''));
-      const bv=parseFloat((b.change||'0').replace('%','').replace('+',''));
-      return Math.abs(bv)-Math.abs(av);
-    }).slice(0,3).forEach(s => {
-      const val = parseFloat((s.change||'0').replace('%','').replace('+',''));
-      if (Math.abs(val) < 2) return;
-      const up = val > 0;
-      recs.push({ priority: 4, icon: up?'📈':'📉', tag: up?'MOVER UP':'MOVER DOWN', tagColor: up?'var(--green)':'var(--red)',
-        title: `${s.symbol} ${s.change} today`,
-        body: s.note || ''
+    // Earnings within 7 days
+    earnings.filter(e => {
+      if (!e.reportDate) return false;
+      const days = (new Date(e.reportDate) - now) / 86400000;
+      return days >= 0 && days <= 7;
+    }).sort((a,b) => new Date(a.reportDate) - new Date(b.reportDate))
+    .forEach(e => {
+      const days = Math.round((new Date(e.reportDate) - now) / 86400000);
+      const daysStr = days === 0 ? 'TODAY' : days === 1 ? 'tomorrow' : 'in ' + days + ' days';
+      recs.push({ priority: 1, icon: '⚠️', tag: 'EARNINGS', color: '#d29922',
+        title: e.symbol + ' earnings ' + daysStr,
+        body: 'Reports on ' + e.reportDate + (e.bullCase ? '. 🟢 Bull: ' + e.bullCase : '') + (e.bearCase ? '. 🔴 Bear: ' + e.bearCase : '')
       });
     });
+
+    // Insider buys
+    insiders.filter(t => t.type === 'BUY' && t.date && ((now - new Date(t.date)) / 86400000) <= 30)
+    .slice(0,2).forEach(t => {
+      recs.push({ priority: 1, icon: '🏛️', tag: 'INSIDER BUY', color: '#3fb950',
+        title: t.symbol + ' insider bought' + (t.totalValue ? ' $' + Math.round(t.totalValue/1000) + 'K' : ''),
+        body: (t.insiderName||'Insider') + ' (' + (t.role||'insider') + ') bought ' + ((t.shares||0).toLocaleString()) + ' shares on ' + t.date + '. Insiders only buy with their own money when confident.'
+      });
+    });
+
+    // High conviction options
+    options.filter(o => o.unusualScore >= 70).slice(0,4).forEach(o => {
+      const bull = o.sentiment === 'bullish';
+      const pr = o.premium >= 1000000 ? '$'+(o.premium/1000000).toFixed(1)+'M' : '$'+(Math.round(o.premium/1000))+'K';
+      recs.push({ priority: 2, icon: '📊', tag: 'OPTIONS', color: bull ? '#3fb950' : '#f85149',
+        title: o.symbol + ' unusual ' + o.type + ' activity (Score: ' + o.unusualScore + ')',
+        body: (bull?'🟢':'🔴') + ' $' + o.strike + (o.type==='call'?'C':'P') + ' exp ' + o.expiry + ' — ' + pr + ' in premium, ' + o.volOiRatio + 'x normal volume. Smart money ' + (bull?'betting upside':'hedging downside') + '.'
+      });
+    });
+
+    // Insider sell clusters
+    const sells = insiders.filter(t => t.type === 'SELL' && t.date && ((now - new Date(t.date)) / 86400000) <= 14);
+    const clusters = {};
+    sells.forEach(t => { if (!clusters[t.symbol]) clusters[t.symbol]=[]; clusters[t.symbol].push(t); });
+    Object.keys(clusters).filter(s=>clusters[s].length>=2).slice(0,2).forEach(sym => {
+      const txs = clusters[sym];
+      const total = txs.reduce((s,t)=>s+(t.totalValue||0),0);
+      recs.push({ priority: 3, icon: '🔴', tag: 'INSIDER SELL CLUSTER', color: '#f85149',
+        title: sym + ' — ' + txs.length + ' insiders selling',
+        body: txs.length + ' insiders sold $' + (total/1000000).toFixed(1) + 'M combined in 14 days. Could be routine, but monitor alongside other signals.'
+      });
+    });
+
+    // High conviction market insights
+    market.filter(m=>m.conviction==='high').slice(0,2).forEach(m => {
+      const icons = {opportunity:'💡',warning:'⚠️',shift:'🔄',trend:'📈'};
+      recs.push({ priority: 3, icon: icons[m.type]||'📈', tag: (m.type||'MARKET').toUpperCase(), color: '#58a6ff',
+        title: m.title || '',
+        body: m.thesis || m.description || ''
+      });
+    });
+
+    if (recs.length === 0) {
+      el.innerHTML = '<div style="text-align:center;padding:60px 20px;color:var(--text2)"><div style="font-size:32px;margin-bottom:12px">⚡</div><div style="font-size:15px;font-weight:600;margin-bottom:8px">No recommendations yet</div><div style="font-size:13px">Morning briefings arrive weekdays at 7:30am PST.</div></div>';
+      return;
+    }
+
+    recs.sort((a,b)=>a.priority-b.priority);
+    const bullC = options.filter(o=>o.sentiment==='bullish'&&o.unusualScore>=50).length;
+    const bearC = options.filter(o=>o.sentiment==='bearish'&&o.unusualScore>=50).length;
+    const sent = bullC > bearC ? '🟢 Bullish lean' : bearC > bullC ? '🔴 Bearish lean' : '⚖️ Mixed';
+    const sentCol = bullC > bearC ? '#3fb950' : bearC > bullC ? '#f85149' : '#d29922';
+    const buyCount = insiders.filter(t=>t.type==='BUY'&&t.date&&((now-new Date(t.date))/86400000)<=30).length;
+    const earnSoon = earnings.filter(e=>e.reportDate&&((new Date(e.reportDate)-now)/86400000)>=0&&((new Date(e.reportDate)-now)/86400000)<=7).length;
+
+    const statBox = (val, label, color) =>
+      '<div style="padding:14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;text-align:center">' +
+      '<div style="font-size:16px;font-weight:700;color:'+color+'">'+val+'</div>' +
+      '<div style="font-size:11px;color:var(--text2);margin-top:4px">'+label+'</div></div>';
+
+    const recCard = r =>
+      '<div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid '+r.color+';border-radius:8px;padding:14px 16px;margin-bottom:10px">' +
+      '<div style="display:flex;align-items:center;gap:8px;margin-bottom:'+(r.body?'6px':'0')+';flex-wrap:wrap">' +
+      '<span>'+r.icon+'</span>' +
+      '<span style="font-weight:700;font-size:14px;flex:1">'+r.title+'</span>' +
+      '<span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:8px;background:'+r.color+'33;color:'+r.color+'">'+r.tag+'</span></div>' +
+      (r.body ? '<div style="font-size:13px;color:var(--text2);line-height:1.6;margin-top:4px">'+r.body+'</div>' : '') +
+      '</div>';
+
+    el.innerHTML =
+      '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:24px">' +
+      statBox(sent, 'Options Signal', sentCol) +
+      statBox(earnSoon, 'Earnings This Week', earnSoon>0?'#d29922':'var(--text)') +
+      statBox(recs.length, 'Action Items', '#58a6ff') +
+      statBox(buyCount>0?'YES':'NONE', 'Insider Buys (30d)', buyCount>0?'#3fb950':'var(--text2)') +
+      '</div>' +
+      '<div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text2);margin-bottom:12px">📋 What to Watch / Act On</div>' +
+      recs.map(recCard).join('');
+
+  } catch(err) {
+    el.innerHTML = '<div style="padding:20px;color:#f85149;font-size:13px">Error loading summary: ' + err.message + '</div>';
   }
-
-  // No data fallback
-  if (recs.length === 0) {
-    el.innerHTML = `<div style="text-align:center;padding:60px 20px;color:var(--text2)">
-      <div style="font-size:32px;margin-bottom:12px">⚡</div>
-      <div style="font-size:15px;font-weight:600;margin-bottom:8px">No recommendations yet</div>
-      <div style="font-size:13px">Morning briefings arrive weekdays at 7:30am PST. Once data flows in, this page fills with actionable insights.</div>
-    </div>`;
-    return;
-  }
-
-  recs.sort((a,b)=>a.priority-b.priority);
-
-  const bullCount = options.filter(o=>o.sentiment==='bullish'&&o.unusualScore>=50).length;
-  const bearCount = options.filter(o=>o.sentiment==='bearish'&&o.unusualScore>=50).length;
-  const sentimentText = bullCount > bearCount ? '🟢 Bullish lean' : bearCount > bullCount ? '🔴 Bearish lean' : '⚖️ Mixed';
-  const sentimentColor = bullCount > bearCount ? 'var(--green)' : bearCount > bullCount ? 'var(--red)' : 'var(--yellow)';
-
-  el.innerHTML = `
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:24px">
-      <div style="padding:14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);text-align:center">
-        <div style="font-size:16px;font-weight:700;color:${sentimentColor}">${sentimentText}</div>
-        <div style="font-size:11px;color:var(--text2);margin-top:4px">Options Signal</div>
-      </div>
-      <div style="padding:14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);text-align:center">
-        <div style="font-size:22px;font-weight:700;color:${soon.length>0?'var(--yellow)':'var(--text)'}">${soon.length}</div>
-        <div style="font-size:11px;color:var(--text2);margin-top:4px">Earnings This Week</div>
-      </div>
-      <div style="padding:14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);text-align:center">
-        <div style="font-size:22px;font-weight:700;color:var(--accent)">${recs.length}</div>
-        <div style="font-size:11px;color:var(--text2);margin-top:4px">Action Items</div>
-      </div>
-      <div style="padding:14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);text-align:center">
-        <div style="font-size:22px;font-weight:700;color:${recentBuys.length>0?'var(--green)':'var(--text2)'}">${recentBuys.length>0?'YES':'NONE'}</div>
-        <div style="font-size:11px;color:var(--text2);margin-top:4px">Insider Buys (30d)</div>
-      </div>
-    </div>
-    <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text2);margin-bottom:12px">📋 What to Watch / Act On</div>
-    ${recs.map(r=>`
-      <div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid ${r.tagColor};border-radius:var(--radius);padding:14px 16px;margin-bottom:10px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap">
-          <span style="font-size:16px">${r.icon}</span>
-          <span style="font-weight:700;font-size:14px">${r.title}</span>
-          <span style="margin-left:auto;font-size:10px;font-weight:700;padding:2px 8px;border-radius:8px;background:${r.tagColor}22;color:${r.tagColor}">${r.tag}</span>
-        </div>
-        ${r.body?`<div style="font-size:13px;color:var(--text2);line-height:1.6;padding-left:26px">${r.body}</div>`:''}
-      </div>`).join('')}`;
 }
 
 // Init
-load();loadProjects();loadStocks().then(()=>loadSummary());
+load();loadProjects();loadStocks();loadSummary();
 
 // Auto-refresh
 setInterval(async()=>{
