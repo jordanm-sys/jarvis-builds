@@ -9,6 +9,19 @@ const INSIDERS_FILE = path.join(__dirname, 'insiders.json');
 const OPTIONS_FILE = path.join(__dirname, 'options-flow.json');
 
 app.use(express.json());
+
+// Cache nuke — visit /clear to wipe service worker + caches and redirect home
+app.get('/clear', (req, res) => {
+  res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.send(`<!DOCTYPE html><html><body><p style="font-family:sans-serif;padding:40px">Clearing cache...</p><script>
+    (async()=>{
+      if('serviceWorker' in navigator){const r=await navigator.serviceWorker.getRegistrations();for(const s of r)await s.unregister();}
+      if('caches' in window){const k=await caches.keys();for(const c of k)await caches.delete(c);}
+      window.location='/';
+    })();
+  </script></body></html>`);
+});
+
 app.use(express.static(path.join(__dirname, 'public'), {
   maxAge: 0,
   etag: false,
