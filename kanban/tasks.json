@@ -100,5 +100,15 @@
     "description": "Cron job runs fetch-insiders.js daily at 8:15am PST (after stock briefing). Fetches new SEC Form 4 filings, alerts via Telegram only for notable activity (insider buys, large sells, cluster activity).",
     "priority": "medium",
     "column": "recurring"
+  },
+  {
+    "id": "1771655583588",
+    "createdAt": "2026-02-21T06:33:03.588Z",
+    "assignedTo": "Jarvis",
+    "title": "Verify Monday morning cron runs",
+    "description": "After 6:30am Hawaii time Monday Feb 23, check all 5 cron jobs ran at the correct time (6am Hawaii). Confirm: portfolio briefing, watchlist, market insights, insider scan, options flow. Report results to Jordan via Telegram.",
+    "priority": "high",
+    "column": "backlog",
+    "schedule": "2026-02-23T16:30:00.000Z"
   }
 ]
