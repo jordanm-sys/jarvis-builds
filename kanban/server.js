@@ -9,7 +9,16 @@ const INSIDERS_FILE = path.join(__dirname, 'insiders.json');
 const OPTIONS_FILE = path.join(__dirname, 'options-flow.json');
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), {
+  maxAge: 0,
+  etag: false,
+  lastModified: false,
+  setHeaders: (res) => {
+    res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.set('Pragma', 'no-cache');
+    res.set('Expires', '0');
+  }
+}));
 app.use('/files', express.static(path.join(__dirname, '..', 'research'), { maxAge: 0, etag: false, lastModified: true, setHeaders: (res) => { res.set('Cache-Control', 'no-cache, no-store, must-revalidate'); } }));
 
 const read = () => JSON.parse(fs.readFileSync(TASKS_FILE, 'utf8'));
