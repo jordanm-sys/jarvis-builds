@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jarvis-v1';
+const CACHE_NAME = 'jarvis-v3';
 const STATIC_ASSETS = ['/', '/index.html', '/manifest.json', '/icons/icon-192.png', '/icons/icon-512.png'];
 
 self.addEventListener('install', e => {

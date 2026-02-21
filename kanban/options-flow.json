@@ -1,8 +1,8 @@
 {
-  "scannedAt": "2026-02-21T04:50:50.041Z",
+  "scannedAt": "2026-02-21T05:20:06.761Z",
   "alerts": [
     {
-      "id": "IREN_2026-02-27_43_call_1771649450041_pnw",
+      "id": "IREN_2026-02-27_43_call_1771651206761_4lg",
       "symbol": "IREN",
       "strike": 43,
       "expiry": "2026-02-27",
@@ -18,7 +18,7 @@
       "sentiment": "bullish"
     },
     {
-      "id": "FCX_2026-03-06_68_call_1771649450041_3oy",
+      "id": "FCX_2026-03-06_68_call_1771651206761_15l",
       "symbol": "FCX",
       "strike": 68,
       "expiry": "2026-03-06",
@@ -34,7 +34,7 @@
       "sentiment": "bullish"
     },
     {
-      "id": "IREN_2026-02-27_47_call_1771649450041_33l",
+      "id": "IREN_2026-02-27_47_call_1771651206761_34q",
       "symbol": "IREN",
       "strike": 47,
       "expiry": "2026-02-27",
@@ -50,7 +50,7 @@
       "sentiment": "bullish"
     },
     {
-      "id": "IREN_2026-03-06_43_call_1771649450041_ywr",
+      "id": "IREN_2026-03-06_43_call_1771651206761_1b5",
       "symbol": "IREN",
       "strike": 43,
       "expiry": "2026-03-06",
@@ -66,7 +66,7 @@
       "sentiment": "bullish"
     },
     {
-      "id": "IREN_2026-02-27_37_put_1771649450041_l7a",
+      "id": "IREN_2026-02-27_37_put_1771651206761_wnn",
       "symbol": "IREN",
       "strike": 37,
       "expiry": "2026-02-27",
@@ -82,7 +82,7 @@
       "sentiment": "bearish"
     },
     {
-      "id": "IREN_2026-02-27_41.5_put_1771649450041_tjm",
+      "id": "IREN_2026-02-27_41.5_put_1771651206761_jyp",
       "symbol": "IREN",
       "strike": 41.5,
       "expiry": "2026-02-27",
@@ -98,7 +98,7 @@
       "sentiment": "bearish"
     },
     {
-      "id": "IREN_2026-02-27_43.5_put_1771649450041_hkb",
+      "id": "IREN_2026-02-27_43.5_put_1771651206761_0kf",
       "symbol": "IREN",
       "strike": 43.5,
       "expiry": "2026-02-27",
@@ -114,7 +114,7 @@
       "sentiment": "bearish"
     },
     {
-      "id": "MSFT_2026-02-23_400_call_1771649450041_zy5",
+      "id": "MSFT_2026-02-23_400_call_1771651206760_1bc",
       "symbol": "MSFT",
       "strike": 400,
       "expiry": "2026-02-23",
@@ -130,7 +130,7 @@
       "sentiment": "bullish"
     },
     {
-      "id": "NVDA_2026-02-23_185_call_1771649450041_58m",
+      "id": "NVDA_2026-02-23_185_call_1771651206761_nr0",
       "symbol": "NVDA",
       "strike": 185,
       "expiry": "2026-02-23",
@@ -146,7 +146,7 @@
       "sentiment": "bullish"
     },
     {
-      "id": "NVDA_2026-02-23_190_call_1771649450041_e0p",
+      "id": "NVDA_2026-02-23_190_call_1771651206761_j76",
       "symbol": "NVDA",
       "strike": 190,
       "expiry": "2026-02-23",
@@ -162,7 +162,7 @@
       "sentiment": "bullish"
     },
     {
-      "id": "NVDA_2026-02-23_185_put_1771649450041_w1x",
+      "id": "NVDA_2026-02-23_185_put_1771651206761_6b6",
       "symbol": "NVDA",
       "strike": 185,
       "expiry": "2026-02-23",
@@ -178,7 +178,7 @@
       "sentiment": "bearish"
     },
     {
-      "id": "NVDA_2026-02-23_187.5_put_1771649450041_51s",
+      "id": "NVDA_2026-02-23_187.5_put_1771651206761_mwh",
       "symbol": "NVDA",
       "strike": 187.5,
       "expiry": "2026-02-23",
@@ -194,7 +194,7 @@
       "sentiment": "bearish"
     },
     {
-      "id": "NVDA_2026-02-23_190_put_1771649450041_bfs",
+      "id": "NVDA_2026-02-23_190_put_1771651206761_uwr",
       "symbol": "NVDA",
       "strike": 190,
       "expiry": "2026-02-23",
@@ -210,7 +210,7 @@
       "sentiment": "bearish"
     },
     {
-      "id": "NVDA_2026-02-27_85_put_1771649450041_fhg",
+      "id": "NVDA_2026-02-27_85_put_1771651206761_koy",
       "symbol": "NVDA",
       "strike": 85,
       "expiry": "2026-02-27",
@@ -226,7 +226,7 @@
       "sentiment": "bearish"
     },
     {
-      "id": "MSFT_2026-02-23_367.5_call_1771649450041_jgo",
+      "id": "MSFT_2026-02-23_367.5_call_1771651206760_tk4",
       "symbol": "MSFT",
       "strike": 367.5,
       "expiry": "2026-02-23",
@@ -242,7 +242,7 @@
       "sentiment": "bullish"
     },
     {
-      "id": "MSFT_2026-02-23_375_call_1771649450041_su6",
+      "id": "MSFT_2026-02-23_375_call_1771651206760_bsz",
       "symbol": "MSFT",
       "strike": 375,
       "expiry": "2026-02-23",
@@ -258,7 +258,7 @@
       "sentiment": "bullish"
     },
     {
-      "id": "MSFT_2026-02-23_397.5_call_1771649450041_535",
+      "id": "MSFT_2026-02-23_397.5_call_1771651206760_mau",
       "symbol": "MSFT",
       "strike": 397.5,
       "expiry": "2026-02-23",
@@ -274,7 +274,7 @@
       "sentiment": "bullish"
     },
     {
-      "id": "MSFT_2026-02-23_395_put_1771649450041_16a",
+      "id": "MSFT_2026-02-23_395_put_1771651206760_itp",
       "symbol": "MSFT",
       "strike": 395,
       "expiry": "2026-02-23",
@@ -290,7 +290,7 @@
       "sentiment": "bearish"
     },
     {
-      "id": "MSFT_2026-02-23_430_put_1771649450041_bxw",
+      "id": "MSFT_2026-02-23_430_put_1771651206760_4bx",
       "symbol": "MSFT",
       "strike": 430,
       "expiry": "2026-02-23",
@@ -306,7 +306,7 @@
       "sentiment": "bearish"
     },
     {
-      "id": "CRWV_2026-03-06_101_put_1771649450041_hf6",
+      "id": "CRWV_2026-03-06_101_put_1771651206761_fwd",
       "symbol": "CRWV",
       "strike": 101,
       "expiry": "2026-03-06",
@@ -322,7 +322,7 @@
       "sentiment": "bearish"
     },
     {
-      "id": "CRWV_2026-03-06_102_put_1771649450041_q2w",
+      "id": "CRWV_2026-03-06_102_put_1771651206761_1i0",
       "symbol": "CRWV",
       "strike": 102,
       "expiry": "2026-03-06",
@@ -338,7 +338,7 @@
       "sentiment": "bearish"
     },
     {
-      "id": "CRWV_2026-03-06_103_put_1771649450041_ufh",
+      "id": "CRWV_2026-03-06_103_put_1771651206761_t22",
       "symbol": "CRWV",
       "strike": 103,
       "expiry": "2026-03-06",
@@ -354,7 +354,7 @@
       "sentiment": "bearish"
     },
     {
-      "id": "CRWV_2026-03-06_45_put_1771649450041_6kn",
+      "id": "CRWV_2026-03-06_45_put_1771651206761_6k7",
       "symbol": "CRWV",
       "strike": 45,
       "expiry": "2026-03-06",
@@ -370,7 +370,7 @@
       "sentiment": "bearish"
     },
     {
-      "id": "CIFR_2026-02-27_1_call_1771649450041_9pg",
+      "id": "CIFR_2026-02-27_1_call_1771651206761_nsi",
       "symbol": "CIFR",
       "strike": 1,
       "expiry": "2026-02-27",
@@ -386,7 +386,7 @@
       "sentiment": "bullish"
     },
     {
-      "id": "FCX_2026-02-27_63_call_1771649450041_xxc",
+      "id": "FCX_2026-02-27_63_call_1771651206761_b9g",
       "symbol": "FCX",
       "strike": 63,
       "expiry": "2026-02-27",
@@ -402,7 +402,7 @@
       "sentiment": "bullish"
     },
     {
-      "id": "FCX_2026-03-06_69_call_1771649450041_gtm",
+      "id": "FCX_2026-03-06_69_call_1771651206761_5o5",
       "symbol": "FCX",
       "strike": 69,
       "expiry": "2026-03-06",
@@ -418,7 +418,7 @@
       "sentiment": "bullish"
     },
     {
-      "id": "CRWV_2026-03-06_100_call_1771649450041_x4b",
+      "id": "CRWV_2026-03-06_100_call_1771651206761_hq5",
       "symbol": "CRWV",
       "strike": 100,
       "expiry": "2026-03-06",
@@ -434,7 +434,7 @@
       "sentiment": "bullish"
     },
     {
-      "id": "CRWV_2026-03-06_90_call_1771649450041_sf6",
+      "id": "CRWV_2026-03-06_90_call_1771651206761_4w1",
       "symbol": "CRWV",
       "strike": 90,
       "expiry": "2026-03-06",
@@ -450,7 +450,7 @@
       "sentiment": "bullish"
     },
     {
-      "id": "FCX_2026-03-06_65_call_1771649450041_o3y",
+      "id": "FCX_2026-03-06_65_call_1771651206761_u73",
       "symbol": "FCX",
       "strike": 65,
       "expiry": "2026-03-06",
@@ -466,7 +466,7 @@
       "sentiment": "bullish"
     },
     {
-      "id": "FCX_2026-03-06_66_call_1771649450041_kkx",
+      "id": "FCX_2026-03-06_66_call_1771651206761_q8y",
       "symbol": "FCX",
       "strike": 66,
       "expiry": "2026-03-06",
@@ -482,7 +482,7 @@
       "sentiment": "bullish"
     },
     {
-      "id": "FCX_2026-02-27_65_call_1771649450041_c4q",
+      "id": "FCX_2026-02-27_65_call_1771651206761_41y",
       "symbol": "FCX",
       "strike": 65,
       "expiry": "2026-02-27",
