@@ -41,7 +41,7 @@
 - **Research outputs**: always styled PDFs, readable, using puppeteer for HTML→PDF
 
 ## Cron Schedule (all PST, weekdays unless noted)
-- **Every 2 min** — Task Watcher (Gemini, free) — checks kanban backlog, alerts me on new/instant tasks
+- **Webhook** — Kanban server instantly triggers Telegram notification when a new task is added (no cron needed)
 - **7:25 AM** — Daily Earnings Calendar Refresh (Sonnet) — yfinance dates + Perplexity bull/bear cases for upcoming earnings + cleans old briefings/market insights
 - **7:30 AM** — Portfolio Briefing (Sonnet) — prices, changes, news via Perplexity → posts to API + Telegram
 - **7:35 AM** — Watchlist Briefing (Sonnet) — same for watchlist tickers

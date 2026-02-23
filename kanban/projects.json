@@ -131,6 +131,7 @@
     "category": "websites",
     "localUrl": "http://localhost:3341",
     "githubUrl": "https://github.com/jordanm-sys/jarvis-builds",
-    "reviewed": false
+    "reviewed": false,
+    "note": "Access via Tailscale. Localhost: http://localhost:3341"
   }
 ]
