@@ -121,5 +121,16 @@
     "category": "websites",
     "githubUrl": "https://github.com/jordanm-sys/jarvis-builds",
     "localUrl": "http://localhost:3333"
+  },
+  {
+    "id": "1771844419819",
+    "createdAt": "2026-02-23",
+    "name": "Fun Fact Test Page",
+    "description": "Simple fun fact page — test of the instant task pickup system.",
+    "status": "active",
+    "category": "websites",
+    "localUrl": "http://localhost:8888",
+    "githubUrl": "https://github.com/jordanm-sys/jarvis-builds",
+    "reviewed": false
   }
 ]

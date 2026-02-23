@@ -110,5 +110,15 @@
     "priority": "high",
     "column": "backlog",
     "schedule": "2026-02-23T16:30:00.000Z"
+  },
+  {
+    "id": "1771844277850",
+    "createdAt": "2026-02-23T10:57:57.850Z",
+    "assignedTo": "Jarvis",
+    "title": "test - give me any fun fact and post it on a local website",
+    "description": "Fun fact website posted at http://localhost:8888. Octopus fun fact about three hearts and blue blood. Created by task watcher as a test.",
+    "priority": "high",
+    "column": "review",
+    "schedule": "instant"
   }
 ]

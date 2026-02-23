@@ -60,19 +60,14 @@ app.post('/api/tasks', (req, res) => {
   tasks.push(task);
   save(tasks);
   res.json(task);
-  // Notify via Telegram when a new task is added to backlog
+  // Trigger task watcher + Telegram notify when a new task is added to backlog
   if (!req.body.column || req.body.column === 'backlog') {
-    const https = require('https');
-    const token = '8264096565:AAHYHmqMYXzVnwL-kG_jVlvQUQvfVf7f7bk';
-    const chatId = '7560914858';
-    const text = `⚡ New task: ${task.title}${task.schedule === 'instant' ? ' (INSTANT)' : ''}`;
-    const url = `https://api.telegram.org/bot${token}/sendMessage`;
-    const data = JSON.stringify({ chat_id: chatId, text });
-    const req2 = https.request(url, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(data) } });
-    req2.on('error', (e) => console.log('Telegram notify failed:', e.message));
-    req2.write(data);
-    req2.end();
-    console.log('⚡ Telegram notified — new task:', task.title);
+    const { exec } = require('child_process');
+    const env = { HOME: '/Users/jordanmaragliano', PATH: '/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin' };
+    exec('/opt/homebrew/bin/openclaw cron run c4a983dd-d9dd-4a41-9f33-44627ae8b870', { timeout: 15000, env }, (err) => {
+      if (err) console.log('Task watcher trigger failed:', err.message);
+      else console.log('⚡ Task watcher triggered — new task:', task.title);
+    });
   }
 });
 
