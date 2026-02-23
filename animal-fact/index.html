@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animal Fun Fact</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0a0a0a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;overflow:hidden}
+.bg{position:fixed;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(59,130,246,.12),transparent 60%),radial-gradient(ellipse at 70% 80%,rgba(168,85,247,.1),transparent 60%)}
+.card{position:relative;max-width:520px;margin:24px;padding:48px 40px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:24px;backdrop-filter:blur(20px);animation:float 6s ease-in-out infinite}
+.emoji{font-size:64px;margin-bottom:24px;display:block;animation:pulse 3s ease-in-out infinite}
+.fact{font-size:22px;line-height:1.6;color:rgba(255,255,255,.9);font-weight:400;letter-spacing:-.01em}
+.highlight{color:#818cf8;font-weight:600}
+.source{margin-top:24px;font-size:13px;color:rgba(255,255,255,.3)}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="card">
+  <span class="emoji">🦐</span>
+  <p class="fact">The <span class="highlight">mantis shrimp</span> can punch with the force of a <span class="highlight">.22 caliber bullet</span> — so fast it boils the water around its fist and creates a flash of light.</p>
+  <div class="source">One of nature's most powerful strikes.</div>
+</div>
+</body>
+</html>

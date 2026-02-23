@@ -123,13 +123,14 @@
     "localUrl": "http://localhost:3333"
   },
   {
-    "id": "1771844645863",
+    "id": "1771845188058",
     "createdAt": "2026-02-23",
     "name": "Animal Fun Fact Site",
-    "description": "Minimal single-page website displaying a fun fact about the mantis shrimp with glassmorphism card design and floating animation.",
+    "description": "Minimal dark-themed site displaying a fun fact about the mantis shrimp. Floating glassmorphism card with animations.",
     "status": "active",
     "category": "websites",
-    "localUrl": "http://localhost:3340",
-    "githubUrl": "https://github.com/jordanm-sys/jarvis-builds"
+    "localUrl": "http://localhost:3341",
+    "githubUrl": "https://github.com/jordanm-sys/jarvis-builds",
+    "reviewed": false
   }
 ]

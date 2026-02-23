@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fun Animal Facts</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Georgia', serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #fff;
+      padding: 2rem;
+      transition: background 0.6s;
+    }
+    .card {
+      max-width: 600px;
+      text-align: center;
+      animation: fadeIn 0.6s ease;
+    }
+    .emoji { font-size: 5rem; margin-bottom: 1.5rem; }
+    .fact {
+      font-size: 1.6rem;
+      line-height: 1.6;
+      font-style: italic;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .btn {
+      margin-top: 2.5rem;
+      padding: 0.9rem 2.5rem;
+      font-size: 1.1rem;
+      border: 2px solid rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      border-radius: 50px;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+      transition: all 0.3s;
+      font-family: inherit;
+    }
+    .btn:hover { background: rgba(255,255,255,0.25); border-color: #fff; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="emoji" id="emoji">🐙</div>
+    <p class="fact" id="fact"></p>
+    <button class="btn" onclick="showFact()">Another Fact</button>
+  </div>
+  <script>
+    const facts = [
+      { emoji: "🐙", fact: "An octopus has three hearts — two pump blood to the gills, and one pumps it to the rest of the body." },
+      { emoji: "🦐", fact: "The mantis shrimp can punch with the force of a .22 caliber bullet, fast enough to boil the water around its fist." },
+      { emoji: "🐬", fact: "Dolphins sleep with one eye open — literally. Half their brain stays awake to keep breathing." },
+      { emoji: "🦜", fact: "African grey parrots can learn over 1,000 words and use them in context to hold basic conversations." },
+      { emoji: "🐘", fact: "Elephants are the only animals that can't jump, but they can communicate through vibrations felt up to 6 miles away." },
+      { emoji: "🦑", fact: "The colossal squid has the largest eyes in the animal kingdom — each one the size of a dinner plate." },
+      { emoji: "🐝", fact: "Honeybees can recognize human faces and remember them for at least two days." },
+      { emoji: "🦈", fact: "Sharks have been around longer than trees. They've existed for over 400 million years." },
+      { emoji: "🐢", fact: "Some turtles can breathe through their butts — a process called cloacal respiration." },
+      { emoji: "🦩", fact: "Flamingos are born grey or white and only turn pink from the pigments in the shrimp and algae they eat." },
+      { emoji: "🐈", fact: "Cats have over 20 different vocalizations, including a purr that vibrates at a frequency known to promote bone healing." },
+      { emoji: "🦎", fact: "The horned lizard can shoot blood from its eyes up to 5 feet as a defense mechanism." },
+      { emoji: "🐋", fact: "A blue whale's heart is so big that a small child could crawl through its arteries." },
+      { emoji: "🦦", fact: "Sea otters hold hands while they sleep so they don't drift apart from each other." },
+      { emoji: "🐺", fact: "Wolves can eat up to 20 pounds of meat in a single meal — that's like eating 80 hamburgers." },
+      { emoji: "🦇", fact: "Bats are the only mammals that can truly fly, and some species can reach speeds of 100 mph." },
+      { emoji: "🐊", fact: "Crocodiles have barely changed in 200 million years — they once shared the planet with dinosaurs." },
+      { emoji: "🐝", fact: "A single bee colony can pollinate 300 million flowers each day." },
+      { emoji: "🦚", fact: "A peacock's tail feathers can make up 60% of its total body length." },
+      { emoji: "🐸", fact: "The wood frog can survive being frozen solid — its heart stops, and it thaws back to life in spring." }
+    ];
+    let last = -1;
+    function showFact() {
+      let i;
+      do { i = Math.floor(Math.random() * facts.length); } while (i === last && facts.length > 1);
+      last = i;
+      document.getElementById('emoji').textContent = facts[i].emoji;
+      const el = document.getElementById('fact');
+      el.style.animation = 'none';
+      el.offsetHeight;
+      el.parentElement.style.animation = 'none';
+      el.parentElement.offsetHeight;
+      el.parentElement.style.animation = 'fadeIn 0.6s ease';
+      el.textContent = facts[i].fact;
+    }
+    showFact();
+  </script>
+</body>
+</html>
