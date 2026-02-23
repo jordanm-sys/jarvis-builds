@@ -69,8 +69,10 @@
 
 ## Workflow Rules (NON-NEGOTIABLE)
 - **ALWAYS move tasks to "inprogress" before starting work** — no exceptions, even for small fixes
+- **ALWAYS create a project and link it via projectId** — every task must have a projectId so Jordan can click through
+- Create the project FIRST (POST /api/projects), get the ID, THEN update the task with that projectId
 - Show ALL tasks in progress on the kanban board so Jordan can see what I'm working on
-- When done → move to "review" with detailed description of what was done
+- When done → move to "review" with detailed description of what was done + projectId
 - Never move tasks to "done" — that's Jordan's call
 
 ## Decisions & Lessons

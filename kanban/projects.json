@@ -123,14 +123,13 @@
     "localUrl": "http://localhost:3333"
   },
   {
-    "id": "1771844419819",
+    "id": "1771844645863",
     "createdAt": "2026-02-23",
-    "name": "Fun Fact Test Page",
-    "description": "Simple fun fact page — test of the instant task pickup system.",
+    "name": "Animal Fun Fact Site",
+    "description": "Minimal single-page website displaying a fun fact about the mantis shrimp with glassmorphism card design and floating animation.",
     "status": "active",
     "category": "websites",
-    "localUrl": "http://localhost:8888",
-    "githubUrl": "https://github.com/jordanm-sys/jarvis-builds",
-    "reviewed": false
+    "localUrl": "http://localhost:3340",
+    "githubUrl": "https://github.com/jordanm-sys/jarvis-builds"
   }
 ]
