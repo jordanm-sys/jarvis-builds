@@ -60,6 +60,20 @@ app.post('/api/tasks', (req, res) => {
   tasks.push(task);
   save(tasks);
   res.json(task);
+  // Notify via Telegram when a new task is added to backlog
+  if (!req.body.column || req.body.column === 'backlog') {
+    const https = require('https');
+    const token = '8264096565:AAHYHmqMYXzVnwL-kG_jVlvQUQvfVf7f7bk';
+    const chatId = '7560914858';
+    const text = `⚡ New task: ${task.title}${task.schedule === 'instant' ? ' (INSTANT)' : ''}`;
+    const url = `https://api.telegram.org/bot${token}/sendMessage`;
+    const data = JSON.stringify({ chat_id: chatId, text });
+    const req2 = https.request(url, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(data) } });
+    req2.on('error', (e) => console.log('Telegram notify failed:', e.message));
+    req2.write(data);
+    req2.end();
+    console.log('⚡ Telegram notified — new task:', task.title);
+  }
 });
 
 app.put('/api/tasks/:id', (req, res) => {
