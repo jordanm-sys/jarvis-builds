@@ -66,6 +66,12 @@
 - **Insider alerts (as of Feb 23):** FCX 4 insiders selling $34M, CRWV 3 insiders selling $48M
 - **Earnings week of Feb 24:** CIFR (Mon), NVDA (Tue), CRWV (Thu) — big week
 
+## Workflow Rules (NON-NEGOTIABLE)
+- **ALWAYS move tasks to "inprogress" before starting work** — no exceptions, even for small fixes
+- Show ALL tasks in progress on the kanban board so Jordan can see what I'm working on
+- When done → move to "review" with detailed description of what was done
+- Never move tasks to "done" — that's Jordan's call
+
 ## Decisions & Lessons
 - Briefing crons should NOT write to earnings data — that's the refresh script's job (avoids Perplexity overwriting good yfinance data)
 - Old briefings/market insights should be auto-cleaned (7 days / 5 days) to prevent stale accumulation
