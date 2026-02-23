@@ -65,124 +65,124 @@
   ],
   "earnings": [
     {
-      "id": "1771631173726",
-      "updatedAt": "2026-02-20T23:46:13.726Z",
+      "id": "1771839783159",
+      "updatedAt": "2026-02-23T09:43:03.159Z",
       "symbol": "MSFT",
       "reportDate": "2026-04-29",
       "source": "portfolio",
       "bullCase": "Azure/AI growth beats, OpenAI deal through 2032 → $450+",
       "bearCase": "Cloud slowdown, AI spend concerns → pullback to $380",
-      "notes": "Earnings Apr 29. Insider bought $2M. PT $596. Steady."
+      "notes": "Earnings in 65 days"
     },
     {
-      "id": "1771631173737",
-      "updatedAt": "2026-02-20T23:46:13.737Z",
+      "id": "1771839783162",
+      "updatedAt": "2026-02-23T09:43:03.162Z",
       "symbol": "MU",
       "reportDate": "2026-03-18",
       "source": "portfolio",
       "bullCase": "HBM demand exceeds guidance, AI memory pricing power → $450+",
       "bearCase": "Inventory buildup or weak consumer DRAM → pullback",
-      "notes": "⚠️ EARNINGS IN 26 DAYS (Mar 18). Morgan Stanley PT $450."
+      "notes": "Earnings in 23 days"
     },
     {
-      "id": "1771631173748",
-      "updatedAt": "2026-02-20T23:46:13.748Z",
+      "id": "1771839783164",
+      "updatedAt": "2026-02-23T09:43:03.164Z",
       "symbol": "FCX",
-      "reportDate": null,
+      "reportDate": "2026-04-23",
       "source": "portfolio",
       "bullCase": "Copper >$14K/ton + Grasberg extension → $70+",
       "bearCase": "China demand slowdown → mean reversion to $55",
-      "notes": "Next earnings ~Apr 2026. Copper rally sustaining. +2.83% today."
+      "notes": "Earnings in 59 days"
     },
     {
-      "id": "1771631173794",
-      "updatedAt": "2026-02-20T23:46:13.794Z",
+      "id": "1771839783176",
+      "updatedAt": "2026-02-23T09:43:03.176Z",
       "symbol": "IREN",
-      "reportDate": null,
+      "reportDate": "2026-05-13",
       "source": "portfolio",
       "bullCase": "AI cloud ARR ramp validates pivot → PT $105",
       "bearCase": "BTC weakness + post-earnings drift → $35 support",
-      "notes": "Just reported Q2 FY26 on Feb 18. Next ~May 2026. Drifting lower."
+      "notes": "Earnings in 79 days"
     },
     {
-      "id": "1771631173785",
-      "updatedAt": "2026-02-20T23:46:13.785Z",
+      "id": "1771839783174",
+      "updatedAt": "2026-02-23T09:43:03.174Z",
       "symbol": "CIFR",
       "reportDate": "2026-02-24",
       "source": "portfolio",
       "bullCase": "Q4 rev $77.9M (+84% YoY) beats, AI DC pivot validates → $20+",
       "bearCase": "BTC weakness + execution risk on AI transition → $12",
-      "notes": "⚠️ EARNINGS IN 4 DAYS (Feb 24). Consensus rev $77.9M. PT $28.23."
+      "notes": "⚠️ REPORTING TOMORROW"
     },
     {
-      "id": "1771631173776",
-      "updatedAt": "2026-02-20T23:46:13.776Z",
+      "id": "1771839783171",
+      "updatedAt": "2026-02-23T09:43:03.171Z",
       "symbol": "CRWV",
       "reportDate": "2026-02-26",
       "source": "portfolio",
       "bullCase": "Q4 rev +105% YoY beats, $55B backlog validates → $120+",
       "bearCase": "$29B debt + Blue Owl failed placement + MS downgrade → sub-$80",
-      "notes": "⚠️ EARNINGS IN 6 DAYS (Feb 26). Morgan Stanley downgraded. Blue Owl $4B debt placement failed. High risk event."
+      "notes": "⚠️ EARNINGS IN 3 DAYS"
     },
     {
-      "id": "1771631173767",
-      "updatedAt": "2026-02-20T23:46:13.767Z",
+      "id": "1771839783169",
+      "updatedAt": "2026-02-23T09:43:03.169Z",
       "symbol": "NBIS",
-      "reportDate": null,
+      "reportDate": "2026-04-29",
       "source": "portfolio",
       "bullCase": "508% rev growth 2026, Nvidia backing → breakout to $140+",
       "bearCase": "Heavy investment, -9% today shows volatility risk",
-      "notes": "No confirmed earnings date. Sold off 9% today on profit-taking."
+      "notes": "Earnings in 65 days"
     },
     {
-      "id": "1771631173758",
-      "updatedAt": "2026-02-20T23:46:13.758Z",
+      "id": "1771839783166",
+      "updatedAt": "2026-02-23T09:43:03.166Z",
       "symbol": "AMPX",
       "reportDate": "2026-03-05",
       "source": "portfolio",
       "bullCase": "Defense battery contracts accelerate revenue → $15+",
       "bearCase": "Production delays, cash burn → dilution risk",
-      "notes": "⚠️ EARNINGS IN 13 DAYS (Mar 5). Defense partnership momentum. FV $17.57."
+      "notes": "Earnings in 10 days"
     },
     {
-      "id": "1771631173712",
-      "updatedAt": "2026-02-20T23:46:13.712Z",
+      "id": "1771839783156",
+      "updatedAt": "2026-02-23T09:43:03.156Z",
       "symbol": "TE",
-      "reportDate": null,
+      "reportDate": "2026-03-24",
       "source": "portfolio",
       "bullCase": "Tax credit confirmed, solar demand ramp → $9+",
       "bearCase": "Governance concerns (CAO termination) weigh on sentiment",
-      "notes": "No earnings date set. CAO terminated Feb 5, new accounting chief."
+      "notes": "Earnings in 29 days"
     },
     {
-      "id": "1771631173696",
-      "updatedAt": "2026-02-20T23:46:13.696Z",
+      "id": "1771840900016",
+      "updatedAt": "2026-02-23T10:01:40.016Z",
       "symbol": "SOXX",
       "reportDate": null,
       "source": "portfolio",
       "bullCase": "AI chip demand surge + semis earnings beats → new ATH",
-      "bearCase": "High put volume, trade tensions → breakdown below $340",
-      "notes": "ETF - no earnings. Put volume elevated, signals hedging."
+      "bearCase": "Trade tensions + elevated put volume → breakdown",
+      "notes": "ETF — tracks semiconductor index. No earnings."
     },
     {
-      "id": "1771631173680",
-      "updatedAt": "2026-02-20T23:46:13.680Z",
+      "id": "1771840900033",
+      "updatedAt": "2026-02-23T10:01:40.033Z",
       "symbol": "FBTC",
       "reportDate": null,
       "source": "portfolio",
-      "bullCase": "BTC rally on ETF inflows → NAV recovery above $35 CAD",
-      "bearCase": "BTC drops below $66.5K support → tests $60K",
-      "notes": "ETF - no earnings. Tracks BTC spot. BTC at $68.9K, rising trend."
+      "bullCase": "BTC rally on ETF inflows → NAV recovery",
+      "bearCase": "BTC drops below key support → drawdown",
+      "notes": "ETF — tracks BTC spot price. No earnings."
     },
     {
-      "id": "1771631421481",
-      "updatedAt": "2026-02-20T23:50:21.481Z",
+      "id": "1771839783178",
+      "updatedAt": "2026-02-23T09:43:03.178Z",
       "symbol": "NVDA",
       "reportDate": "2026-02-25",
       "source": "watchlist",
       "bullCase": "Q4 FY26 beats on Blackwell ramp + surging AI data center demand. Revenue guidance above $40B. Meta/hyperscaler orders validate capex cycle → rally to $200+",
       "bearCase": "Margins compress on Blackwell production costs, DeepSeek narrative reduces AI capex urgency, guidance disappoints → pullback to $165-170",
-      "notes": "⚠️ REPORTING IN 5 DAYS (Feb 25 AMC). Consensus EPS $1.52. Stock at $186.50, down from $190+. Critical catalyst for entire AI trade."
+      "notes": "⚠️ EARNINGS IN 2 DAYS"
     }
   ],
   "briefings": [

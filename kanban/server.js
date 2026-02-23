@@ -346,4 +346,21 @@ app.delete('/api/stocks/options', (_, res) => {
   res.json({ ok: true });
 });
 
+// Summary API — Jarvis's daily written analysis
+const SUMMARY_FILE = path.join(__dirname, 'summary.json');
+const readSummary = () => { try { return JSON.parse(fs.readFileSync(SUMMARY_FILE, 'utf8')); } catch(e) { return null; } };
+const saveSummary = (d) => fs.writeFileSync(SUMMARY_FILE, JSON.stringify(d, null, 2));
+
+app.get('/api/stocks/summary', (_, res) => {
+  const summary = readSummary();
+  if (!summary) return res.json(null);
+  res.json(summary);
+});
+
+app.post('/api/stocks/summary', (req, res) => {
+  const summary = { updatedAt: new Date().toISOString(), ...req.body };
+  saveSummary(summary);
+  res.json(summary);
+});
+
 app.listen(3333, '0.0.0.0', () => console.log('Kanban server running on http://localhost:3333'));

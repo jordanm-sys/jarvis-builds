@@ -1,0 +1,68 @@
+{
+  "updatedAt": "2026-02-23T09:58:30.424Z",
+  "sentiment": "mixed",
+  "overall": "Massive week ahead — 3 earnings in your portfolio (CIFR tomorrow, NVDA Wednesday, CRWV Thursday). NVDA is the big one and options market is extremely bullish with over $19M in call premium stacked on $197-210 strikes expiring Friday. But your insider data tells a different story on some names — FCX has 4 insiders dumping $34M and CRWV has 3 insiders selling $48M. I would not be making big new bets this week. Let earnings play out, protect what you have, and look for entries after the dust settles.",
+  "picks": [
+    {
+      "symbol": "NVDA",
+      "action": "hold",
+      "reasoning": "Earnings Wednesday after close. Options market is wildly bullish — $10.3M on $200 calls alone. But this is priced for perfection. If they beat and guide up, easy run to $200+. If they disappoint even slightly, it could dump hard. You are on the watchlist not holding, so no action needed — but if you want in, wait until after the report."
+    },
+    {
+      "symbol": "CIFR",
+      "action": "hold",
+      "reasoning": "Reports tomorrow. Consensus is $77.9M revenue (+84% YoY). The BTC mining to AI data center pivot is the story here. If they show real AI revenue traction, this could break above $20. I would hold through earnings — the risk/reward is decent at $14.65 and the market is giving crypto miners a chance to prove the AI pivot."
+    },
+    {
+      "symbol": "CRWV",
+      "action": "trim",
+      "reasoning": "Earnings Thursday, but the insider picture is ugly — 3 insiders have sold $48M in the last 2 weeks. Morgan Stanley downgraded. Blue Owl failed to place $4B in debt. The $29B debt load is a real risk. If you are sitting on gains, I would trim before earnings. This could go either way but the downside scenario is nasty."
+    },
+    {
+      "symbol": "FCX",
+      "action": "watch",
+      "reasoning": "No earnings until April, but 4 insiders have sold $34M recently including the CEO. Copper prices are still strong which supports the bull case, but when the CEO is selling that aggressively, pay attention. Not saying sell, but tighten your stop loss and do not add here."
+    },
+    {
+      "symbol": "MSFT",
+      "action": "hold",
+      "reasoning": "Steady as always. Options show some bullish activity on $400 calls. Earnings not until late April. Azure and AI narrative still intact. No reason to touch this — just hold."
+    },
+    {
+      "symbol": "MU",
+      "action": "hold",
+      "reasoning": "Earnings March 18 — still 3 weeks out. HBM demand story is strong and NVDA earnings Wednesday could be a catalyst for MU too. If NVDA beats on Blackwell numbers, that is bullish for memory. Hold and revisit after NVDA reports."
+    },
+    {
+      "symbol": "AMPX",
+      "action": "hold",
+      "reasoning": "Earnings March 5. Small position, defense battery contracts are the catalyst. Not much signal in options or insider data. Just let it ride to earnings."
+    },
+    {
+      "symbol": "FBTC",
+      "action": "hold",
+      "reasoning": "BTC ETF — tracks spot bitcoin. No earnings to worry about. BTC has been grinding higher. Hold unless your thesis on crypto changes."
+    },
+    {
+      "symbol": "IREN",
+      "action": "hold",
+      "reasoning": "Just reported Feb 18, next earnings not until May. Post-earnings drift is normal. The AI cloud pivot story needs time to play out. Hold and be patient."
+    },
+    {
+      "symbol": "TE",
+      "action": "watch",
+      "reasoning": "Earnings March 24. The CAO termination in February is a governance red flag. Solar demand thesis is intact but management instability makes me cautious. Watch closely heading into earnings."
+    },
+    {
+      "symbol": "NBIS",
+      "action": "hold",
+      "reasoning": "Nvidia-backed, 508% revenue growth projected. Earnings late April. Volatile but the growth story is real. Hold but size your position for the volatility — this one swings hard."
+    }
+  ],
+  "keyEvents": [
+    "Monday Feb 24 — CIFR earnings (after close). Watch for AI data center revenue numbers.",
+    "Tuesday Feb 25 — NVDA earnings (after close). THE event of the week. Blackwell ramp and guidance are what matter.",
+    "Thursday Feb 26 — CRWV earnings. High risk with insider selling and debt concerns.",
+    "Markets closed Monday Feb 17 for Presidents Day — already passed, full trading week ahead."
+  ]
+}
