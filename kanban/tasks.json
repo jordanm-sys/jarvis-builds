@@ -130,14 +130,34 @@
     }
   },
   {
-    "id": "1771892498652",
-    "createdAt": "2026-02-24T00:21:38.652Z",
+    "id": "1771892843946",
+    "createdAt": "2026-02-24T00:27:23.946Z",
     "assignedTo": "Jarvis",
     "title": "Fun fact website",
-    "description": "✅ COMPLETED — Simple cat fun fact website. A group of cats = clowder, kittens = kindle. Gradient design, floating card, animations. Running on http://localhost:3336",
+    "description": "✅ COMPLETED — Monkey fun fact website. Capuchin monkeys use rock tools for 3,000+ years. Dark gradient, floating card, animations. Running on http://localhost:3337",
     "priority": "high",
     "column": "review",
     "schedule": "instant",
-    "projectId": "1771892658066"
+    "projectId": "1771892900361"
+  },
+  {
+    "id": "1771892875204",
+    "createdAt": "2026-02-24T00:27:55.205Z",
+    "assignedTo": "Jarvis",
+    "title": "fun fact website",
+    "description": "Build a fun fact website about a sloth",
+    "priority": "high",
+    "column": "backlog",
+    "schedule": "instant"
+  },
+  {
+    "id": "1771892904710",
+    "createdAt": "2026-02-24T00:28:24.710Z",
+    "assignedTo": "Jarvis",
+    "title": "fun fact website",
+    "description": "build a simple fun fact website about a shark",
+    "priority": "high",
+    "column": "backlog",
+    "schedule": "instant"
   }
 ]

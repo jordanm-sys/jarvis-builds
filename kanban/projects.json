@@ -113,25 +113,13 @@
     "reviewed": false
   },
   {
-    "id": "1771845188058",
-    "createdAt": "2026-02-23",
-    "name": "Animal Fun Fact Site",
-    "description": "Minimal dark-themed site displaying a fun fact about the mantis shrimp. Floating glassmorphism card with animations.",
-    "status": "active",
-    "category": "websites",
-    "localUrl": "http://localhost:3341",
-    "githubUrl": "https://github.com/jordanm-sys/jarvis-builds",
-    "reviewed": false,
-    "note": "Access via Tailscale. Localhost: http://localhost:3341"
-  },
-  {
-    "id": "1771892658066",
+    "id": "1771892900361",
     "createdAt": "2026-02-24",
-    "name": "Fun Fact Website",
-    "description": "Simple cat fun fact website — displays that a group of cats is called a clowder and kittens a kindle. Styled with gradient, floating card, animations.",
+    "name": "Fun Fact Website — Monkey",
+    "description": "Simple monkey fun fact site. Capuchin monkeys use rocks as tools and have been doing it for 3,000+ years. Dark gradient design with floating card.",
     "category": "websites",
     "status": "completed",
-    "localUrl": "http://localhost:3336",
+    "localUrl": "http://localhost:3337",
     "github": "https://github.com/jordanm-sys/jarvis-builds"
   }
 ]
