@@ -159,7 +159,7 @@
     "description": "Comprehensive safari trip plan with 3 options: Jabulani (South Africa), Abu Camp (Botswana), Reteti (Kenya). Cost comparisons, itineraries, tips. PDF available.",
     "category": "research",
     "status": "completed",
-    "localUrl": "http://localhost:3341/plan.html",
+    "localUrl": "http://localhost:3341/",
     "github": "https://github.com/jordanm-sys/jarvis-builds"
   }
 ]
