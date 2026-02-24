@@ -39,6 +39,7 @@ app.use(express.static(path.join(__dirname, 'public'), {
   }
 }));
 app.use('/files', express.static(path.join(__dirname, '..', 'research'), { maxAge: 0, etag: false, lastModified: true, setHeaders: (res, filePath) => { res.set('Cache-Control', 'no-cache, no-store, must-revalidate'); if (filePath.endsWith('.pdf')) res.set('Content-Disposition', `attachment; filename="${require('path').basename(filePath)}"`); } }));
+app.use('/files-view', express.static(path.join(__dirname, '..', 'research'), { maxAge: 0, etag: false, lastModified: true, setHeaders: (res, filePath) => { res.set('Cache-Control', 'no-cache, no-store, must-revalidate'); if (filePath.endsWith('.pdf')) res.set('Content-Disposition', `inline; filename="${require('path').basename(filePath)}"`); } }));
 
 const read = () => JSON.parse(fs.readFileSync(TASKS_FILE, 'utf8'));
 const save = (d) => fs.writeFileSync(TASKS_FILE, JSON.stringify(d, null, 2));
