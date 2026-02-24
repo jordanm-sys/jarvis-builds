@@ -145,19 +145,32 @@
     "createdAt": "2026-02-24T00:27:55.205Z",
     "assignedTo": "Jarvis",
     "title": "fun fact website",
-    "description": "Build a fun fact website about a sloth",
+    "description": "✅ COMPLETED — Sloth fun fact website. Running on http://localhost:3338",
     "priority": "high",
-    "column": "backlog",
-    "schedule": "instant"
+    "column": "review",
+    "schedule": "instant",
+    "projectId": "1771893019927"
   },
   {
     "id": "1771892904710",
     "createdAt": "2026-02-24T00:28:24.710Z",
     "assignedTo": "Jarvis",
     "title": "fun fact website",
-    "description": "build a simple fun fact website about a shark",
+    "description": "✅ COMPLETED — Shark fun fact website. Running on http://localhost:3339",
+    "priority": "medium",
+    "column": "review",
+    "schedule": "instant",
+    "projectId": "1771893019957"
+  },
+  {
+    "id": "1771892955050",
+    "createdAt": "2026-02-24T00:29:15.050Z",
+    "assignedTo": "Jarvis",
+    "title": "fun fact website ",
+    "description": "✅ COMPLETED — Gorilla fun fact website. Running on http://localhost:3340",
     "priority": "high",
-    "column": "backlog",
-    "schedule": "instant"
+    "column": "review",
+    "schedule": "instant",
+    "projectId": "1771893019982"
   }
 ]

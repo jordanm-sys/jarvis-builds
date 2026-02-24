@@ -121,5 +121,35 @@
     "status": "completed",
     "localUrl": "http://localhost:3337",
     "github": "https://github.com/jordanm-sys/jarvis-builds"
+  },
+  {
+    "id": "1771893019927",
+    "createdAt": "2026-02-24",
+    "name": "Fun Fact Website — Sloth",
+    "description": "Sloth fun fact: they poop once a week and 50% of deaths happen during that trip. Dark blue gradient, floating card.",
+    "category": "websites",
+    "status": "completed",
+    "localUrl": "http://localhost:3338",
+    "github": "https://github.com/jordanm-sys/jarvis-builds"
+  },
+  {
+    "id": "1771893019957",
+    "createdAt": "2026-02-24",
+    "name": "Fun Fact Website — Shark",
+    "description": "Shark fun fact: 450M years old, predate trees and dinosaurs. Greenland sharks live 400+ years. Deep blue gradient.",
+    "category": "websites",
+    "status": "completed",
+    "localUrl": "http://localhost:3339",
+    "github": "https://github.com/jordanm-sys/jarvis-builds"
+  },
+  {
+    "id": "1771893019982",
+    "createdAt": "2026-02-24",
+    "name": "Fun Fact Website — Gorilla",
+    "description": "Gorilla fun fact: Koko learned 1,000+ signs and adopted a kitten. Purple gradient.",
+    "category": "websites",
+    "status": "completed",
+    "localUrl": "http://localhost:3340",
+    "github": "https://github.com/jordanm-sys/jarvis-builds"
   }
 ]
