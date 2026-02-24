@@ -122,11 +122,11 @@ label:first-child{margin-top:0}
       </div>
       <div class="grid-2">
         <div class="result-card">
-          <h3>📄 Tailored Resume <button class="btn btn-ghost" style="margin-left:auto;font-size:12px;padding:4px 10px" onclick="downloadPdf('resume')">⬇️ PDF</button></h3>
+          <h3>📄 Tailored Resume <button class="btn btn-ghost" style="margin-left:auto;font-size:12px;padding:4px 10px" onclick="downloadDocx('resume')">⬇️ Word</button> <button class="btn btn-ghost" style="font-size:12px;padding:4px 10px" onclick="downloadPdf('resume')">⬇️ PDF</button></h3>
           <div class="content" id="resumeResult"></div>
         </div>
         <div class="result-card">
-          <h3>✉️ Cover Letter <button class="btn btn-ghost" style="margin-left:auto;font-size:12px;padding:4px 10px" onclick="downloadPdf('cover')">⬇️ PDF</button></h3>
+          <h3>✉️ Cover Letter <button class="btn btn-ghost" style="margin-left:auto;font-size:12px;padding:4px 10px" onclick="downloadDocx('cover')">⬇️ Word</button> <button class="btn btn-ghost" style="font-size:12px;padding:4px 10px" onclick="downloadPdf('cover')">⬇️ PDF</button></h3>
           <div class="content" id="coverResult"></div>
         </div>
       </div>
@@ -325,6 +325,20 @@ async function deleteHistory(id){
   await fetch('/api/history/'+id,{method:'DELETE'});
   history=await(await fetch('/api/history')).json();
   renderHistory();
+}
+
+async function downloadDocx(type){
+  if(!lastResult)return;
+  const content=type==='resume'?lastResult.tailoredResume:lastResult.coverLetter;
+  const company=document.getElementById('company').value||'Company';
+  const filename=type==='resume'?`Resume-${company}.docx`:`CoverLetter-${company}.docx`;
+  
+  const res=await fetch('/api/docx',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content,filename,type})});
+  if(!res.ok){alert('Word doc generation failed');return}
+  const blob=await res.blob();
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download=filename;a.click();
+  URL.revokeObjectURL(url);
 }
 
 async function uploadFile(input){

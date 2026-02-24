@@ -119,6 +119,121 @@ app.post('/api/tailor', async (req, res) => {
   }
 });
 
+// Word doc generation
+app.post('/api/docx', async (req, res) => {
+  const { content, filename, type } = req.body;
+  try {
+    const docx = require('docx');
+    const { Document, Paragraph, TextRun, HeadingLevel, AlignmentType, BorderStyle, TabStopPosition, TabStopType, SectionType } = docx;
+    
+    const lines = (content || '').split('\n');
+    const children = [];
+    
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      
+      // Heading 1: # 
+      if (line.startsWith('# ')) {
+        children.push(new Paragraph({
+          children: [new TextRun({ text: line.slice(2), bold: true, size: 32, font: 'Calibri' })],
+          alignment: AlignmentType.CENTER,
+          spacing: { after: 100 },
+        }));
+        // Add a line under the name
+        children.push(new Paragraph({
+          border: { bottom: { style: BorderStyle.SINGLE, size: 1, color: '999999' } },
+          spacing: { after: 200 },
+        }));
+      }
+      // Heading 2: ##
+      else if (line.startsWith('## ')) {
+        children.push(new Paragraph({
+          children: [new TextRun({ text: line.slice(3).toUpperCase(), bold: true, size: 22, font: 'Calibri', color: '2E4057' })],
+          spacing: { before: 240, after: 80 },
+          border: { bottom: { style: BorderStyle.SINGLE, size: 1, color: 'CCCCCC' } },
+        }));
+      }
+      // Heading 3: ###
+      else if (line.startsWith('### ')) {
+        children.push(new Paragraph({
+          children: [new TextRun({ text: line.slice(4), bold: true, size: 21, font: 'Calibri' })],
+          spacing: { before: 120, after: 40 },
+        }));
+      }
+      // Bullet: - 
+      else if (line.startsWith('- ')) {
+        const text = line.slice(2);
+        const runs = parseInlineFormatting(text);
+        children.push(new Paragraph({
+          children: runs,
+          bullet: { level: 0 },
+          spacing: { after: 40 },
+          style: 'bodyText',
+        }));
+      }
+      // Italic line: *text*
+      else if (line.startsWith('*') && line.endsWith('*') && !line.startsWith('**')) {
+        children.push(new Paragraph({
+          children: [new TextRun({ text: line.slice(1, -1), italics: true, size: 20, font: 'Calibri', color: '666666' })],
+          spacing: { after: 40 },
+        }));
+      }
+      // Empty line
+      else if (line.trim() === '') {
+        children.push(new Paragraph({ spacing: { after: 60 } }));
+      }
+      // Regular text
+      else {
+        const runs = parseInlineFormatting(line);
+        children.push(new Paragraph({
+          children: runs,
+          spacing: { after: 60 },
+        }));
+      }
+    }
+    
+    function parseInlineFormatting(text) {
+      const runs = [];
+      const regex = /\*\*(.+?)\*\*/g;
+      let lastIndex = 0;
+      let match;
+      while ((match = regex.exec(text)) !== null) {
+        if (match.index > lastIndex) {
+          runs.push(new TextRun({ text: text.slice(lastIndex, match.index), size: 20, font: 'Calibri' }));
+        }
+        runs.push(new TextRun({ text: match[1], bold: true, size: 20, font: 'Calibri' }));
+        lastIndex = regex.lastIndex;
+      }
+      if (lastIndex < text.length) {
+        runs.push(new TextRun({ text: text.slice(lastIndex), size: 20, font: 'Calibri' }));
+      }
+      if (runs.length === 0) {
+        runs.push(new TextRun({ text, size: 20, font: 'Calibri' }));
+      }
+      return runs;
+    }
+    
+    const doc = new Document({
+      sections: [{
+        properties: {
+          page: {
+            margin: { top: 720, bottom: 720, left: 900, right: 900 },
+          },
+        },
+        children,
+      }],
+    });
+    
+    const buffer = await docx.Packer.toBuffer(doc);
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+    res.setHeader('Content-Disposition', `attachment; filename="${filename || 'document.docx'}"`);
+    res.send(buffer);
+  } catch (e) {
+    console.error('DOCX error:', e);
+    res.status(500).json({ error: e.message });
+  }
+});
+
 // PDF generation
 app.post('/api/pdf', async (req, res) => {
   const { content, filename, type } = req.body;
