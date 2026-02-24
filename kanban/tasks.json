@@ -129,8 +129,8 @@
     "title": "Clothing Store",
     "description": "Make me a sample website of a clothing store. ",
     "priority": "high",
-    "column": "inprogress",
-    "schedule": "instant"
+    "column": "backlog",
+    "schedule": null
   },
   {
     "id": "1771891361219",
@@ -186,5 +186,14 @@
     "description": "Cron runs Sunday 9am PST. Reviews daily memory logs, updates MEMORY.md with distilled learnings, removes outdated info. Model: Gemini.",
     "priority": "low",
     "column": "recurring"
+  },
+  {
+    "id": "1771891734586",
+    "createdAt": "2026-02-24T00:08:54.586Z",
+    "assignedTo": "Jarvis",
+    "title": "Add recurring task schedule input to kanban board",
+    "description": "Add a schedule field to the recurring column in the board UI. When Jordan adds a recurring task with a schedule (e.g. every Monday 9am, daily at 7:30am, etc.), Jarvis detects it and sets up the cron, then confirms on Telegram.",
+    "priority": "medium",
+    "column": "inprogress"
   }
 ]
