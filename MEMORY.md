@@ -106,6 +106,8 @@
 - Always add recurring tasks here (stock briefings, insider scans, options flow, etc.)
 
 ## Decisions & Lessons
+- **ALWAYS verify project links work before sending to Jordan** — test every URL (curl the actual link). Never send a broken link.
+- **ALWAYS attach the correct project/PDF links** — double-check the URL matches the actual project, not a stale or wrong one
 - Briefing crons should NOT write to earnings data — that's the refresh script's job (avoids Perplexity overwriting good yfinance data)
 - Old briefings/market insights should be auto-cleaned (7 days / 5 days) to prevent stale accumulation
 - ETF notes should be static ("ETF — no earnings") not dynamic countdown text
