@@ -172,5 +172,16 @@
     "column": "review",
     "schedule": "instant",
     "projectId": "1771893019982"
+  },
+  {
+    "id": "1771904923357",
+    "createdAt": "2026-02-24T03:48:43.357Z",
+    "assignedTo": "Jarvis",
+    "title": "Trip",
+    "description": "✅ COMPLETED — African elephant safari trip plan. 3 options researched: Jabulani (South Africa, ~-9.5K), Abu Camp (Botswana, ~-20K), Reteti+Sarara (Kenya, ~-6K). Includes itinerary, costs, visa/vaccine info, packing tips. View: http://localhost:3341/plan.html | PDF: http://localhost:3341/pdf",
+    "priority": "high",
+    "column": "review",
+    "schedule": "instant",
+    "projectId": "1771905092514"
   }
 ]

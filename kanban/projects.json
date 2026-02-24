@@ -151,5 +151,15 @@
     "status": "completed",
     "localUrl": "http://localhost:3340",
     "github": "https://github.com/jordanm-sys/jarvis-builds"
+  },
+  {
+    "id": "1771905092514",
+    "createdAt": "2026-02-24",
+    "name": "African Safari Trip — Elephant Experience",
+    "description": "Comprehensive safari trip plan with 3 options: Jabulani (South Africa), Abu Camp (Botswana), Reteti (Kenya). Cost comparisons, itineraries, tips. PDF available.",
+    "category": "research",
+    "status": "completed",
+    "localUrl": "http://localhost:3341/plan.html",
+    "github": "https://github.com/jordanm-sys/jarvis-builds"
   }
 ]

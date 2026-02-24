@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+@page { size: A4; margin: 40px 50px; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', serif; color: #1a1a1a; line-height: 1.6; background: #fff; }
+.cover { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(135deg, #2d3436, #636e72); color: #fff; text-align: center; page-break-after: always; }
+.cover h1 { font-size: 48px; font-weight: 300; letter-spacing: 4px; margin-bottom: 12px; }
+.cover .subtitle { font-size: 18px; opacity: 0.8; letter-spacing: 2px; }
+.cover .emoji { font-size: 80px; margin-bottom: 30px; }
+.cover .date { margin-top: 40px; font-size: 14px; opacity: 0.6; }
+.section { page-break-inside: avoid; margin-bottom: 32px; }
+.section-title { font-size: 24px; color: #2d3436; border-bottom: 2px solid #dfe6e9; padding-bottom: 8px; margin-bottom: 16px; }
+.option { background: #f8f9fa; border-left: 4px solid #00b894; padding: 20px; margin-bottom: 20px; border-radius: 0 8px 8px 0; page-break-inside: avoid; }
+.option.premium { border-left-color: #e17055; }
+.option.budget { border-left-color: #0984e3; }
+.option h3 { font-size: 18px; margin-bottom: 4px; }
+.option .location { color: #636e72; font-size: 14px; margin-bottom: 10px; }
+.option .price { font-weight: bold; color: #00b894; font-size: 16px; }
+.option.premium .price { color: #e17055; }
+.option.budget .price { color: #0984e3; }
+.option p { margin-top: 8px; font-size: 14px; }
+.highlight { background: #ffeaa7; padding: 16px 20px; border-radius: 8px; margin-bottom: 20px; font-size: 14px; }
+.itinerary { margin-top: 12px; }
+.itinerary .day { display: flex; gap: 16px; margin-bottom: 12px; page-break-inside: avoid; }
+.itinerary .day-num { min-width: 60px; height: 60px; background: #2d3436; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; flex-shrink: 0; }
+.itinerary .day-content h4 { font-size: 15px; margin-bottom: 4px; }
+.itinerary .day-content p { font-size: 13px; color: #444; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #dfe6e9; }
+th { background: #2d3436; color: #fff; }
+tr:nth-child(even) { background: #f8f9fa; }
+.tip { background: #dfe6e9; padding: 12px 16px; border-radius: 6px; font-size: 13px; margin-top: 12px; }
+.footer { text-align: center; color: #b2bec3; font-size: 12px; margin-top: 40px; padding-top: 20px; border-top: 1px solid #dfe6e9; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="emoji">🐘</div>
+  <h1>AFRICAN SAFARI</h1>
+  <div class="subtitle">AN ELEPHANT EXPERIENCE</div>
+  <div class="date">Prepared by Jarvis • February 2026</div>
+</div>
+
+<div style="padding: 20px 0;">
+
+<div class="highlight">
+  🐘 <strong>Goal:</strong> An African safari where you can spend meaningful, up-close time with elephants — walking with them, learning about them, and supporting their conservation. Here are the top 3 options, from ultra-luxury to mid-range.
+</div>
+
+<div class="section">
+  <h2 class="section-title">🏆 Top Pick: Jabulani Safari — South Africa</h2>
+  <div class="option premium">
+    <h3>Jabulani Safari Lodge</h3>
+    <div class="location">📍 Greater Kruger, Hoedspruit, South Africa</div>
+    <div class="price">~$1,350–$1,550 USD / person / night (all-inclusive)</div>
+    <p><strong>Why this one:</strong> This is THE elephant safari in Africa. The lodge was literally built around a rescued elephant herd. You don't just "see" elephants — you walk alongside them in the bush, learn their individual stories, and watch them interact with their caretakers. The HERD (Hoedspruit Elephant Rehabilitation and Development) orphanage is on-site.</p>
+    <p><strong>What's included:</strong> Luxury suite with plunge pool, all meals & premium drinks, daily elephant experiences, game drives (Big 5 area), guided bush walks, airport transfers, laundry, Wi-Fi.</p>
+    <p><strong>Elephant experiences:</strong></p>
+    <ul style="margin-left: 20px; font-size: 14px; margin-top: 6px;">
+      <li>Walking with the Jabulani elephant herd in the bush</li>
+      <li>Visiting the HERD orphanage — meet baby elephants being rehabilitated</li>
+      <li>Elephant dung research walks (sounds weird, actually cool)</li>
+      <li>Learning individual elephant stories — many are rescues from Zimbabwe</li>
+    </ul>
+    <p style="margin-top: 10px;"><strong>Best time:</strong> March–May or October–November (shoulder season, lower rates, great weather)</p>
+    <p><strong>Getting there:</strong> Fly Vancouver → Johannesburg (16-18h), then 1h flight to Hoedspruit Eastgate Airport. Lodge handles transfers.</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2 class="section-title">🌿 Premium Pick: Abu Camp — Botswana</h2>
+  <div class="option premium">
+    <h3>Abu Camp, Okavango Delta</h3>
+    <div class="location">📍 Okavango Delta, Botswana (500,000-acre private concession)</div>
+    <div class="price">~$2,500–$3,500 USD / person / night (ultra-luxury)</div>
+    <p><strong>Why this one:</strong> The original elephant-interaction safari camp. Named after an elephant who starred in a Clint Eastwood film. The resident herd includes Naledi, whose rescue was featured on Netflix. You walk with elephants through the Okavango Delta and sleep on a star bed above their boma — falling asleep to elephant rumblings below.</p>
+    <p><strong>What's included:</strong> All meals, premium drinks, twice-daily safari activities, walking with elephants, mokoro (canoe) excursions, night game drives, scenic helicopter flights (some packages).</p>
+    <p><strong>Elephant experiences:</strong></p>
+    <ul style="margin-left: 20px; font-size: 14px; margin-top: 6px;">
+      <li>Walking alongside the Abu elephant herd through the Delta</li>
+      <li>Star Bed experience — sleep above the elephant boma</li>
+      <li>Observing natural herd behavior in a private concession</li>
+      <li>Supporting Wilderness Safaris' elephant conservation program</li>
+    </ul>
+    <p style="margin-top: 10px;"><strong>Best time:</strong> June–October (dry season, peak wildlife viewing)</p>
+    <p><strong>Getting there:</strong> Vancouver → Johannesburg → Maun (Botswana), then charter flight to Abu airstrip.</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2 class="section-title">💰 Value Pick: Reteti Elephant Sanctuary + Safari — Kenya</h2>
+  <div class="option budget">
+    <h3>Reteti Elephant Sanctuary + Sarara Camp</h3>
+    <div class="location">📍 Matthews Range, Northern Kenya</div>
+    <div class="price">~$600–$900 USD / person / night (mid-luxury)</div>
+    <p><strong>Why this one:</strong> Africa's first community-owned elephant orphanage. You'll see baby elephants being bottle-fed and rehabilitated for release back into the wild. Combine with Sarara Camp for a full safari experience. This is the most conservation-focused option — your money directly supports the local Samburu community and anti-poaching patrols.</p>
+    <p><strong>What's included:</strong> Accommodation, meals, game drives, guided walks, cultural visits to Samburu communities, orphanage visits.</p>
+    <p><strong>Elephant experiences:</strong></p>
+    <ul style="margin-left: 20px; font-size: 14px; margin-top: 6px;">
+      <li>Visit Reteti orphanage — bottle-feed baby elephants</li>
+      <li>Watch elephant rehabilitation and release programs</li>
+      <li>Game drives with wild elephant herds in the Matthews Range</li>
+      <li>Cultural exchange with Samburu elephant keepers</li>
+    </ul>
+    <p style="margin-top: 10px;"><strong>Best time:</strong> January–March or June–October</p>
+    <p><strong>Getting there:</strong> Vancouver → Nairobi (Kenya), then charter flight to Sarara airstrip.</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2 class="section-title">💲 Cost Comparison</h2>
+  <table>
+    <tr><th>Option</th><th>Per Night (USD)</th><th>5-Night Trip Est.</th><th>Flights (approx)</th><th>Total Est.</th></tr>
+    <tr><td>🏆 Jabulani (South Africa)</td><td>$1,350–$1,550</td><td>$6,750–$7,750</td><td>$1,200–$1,800</td><td>$8,000–$9,500</td></tr>
+    <tr><td>🌿 Abu Camp (Botswana)</td><td>$2,500–$3,500</td><td>$12,500–$17,500</td><td>$1,500–$2,200</td><td>$14,000–$20,000</td></tr>
+    <tr><td>💰 Reteti + Sarara (Kenya)</td><td>$600–$900</td><td>$3,000–$4,500</td><td>$1,000–$1,600</td><td>$4,000–$6,100</td></tr>
+  </table>
+  <p style="font-size: 13px; color: #636e72; margin-top: 8px;">*Prices are per person. Flights estimated from Vancouver. Shoulder season rates shown where possible.</p>
+</div>
+
+<div class="section">
+  <h2 class="section-title">📅 Suggested Itinerary: Jabulani (5 Nights)</h2>
+  <div class="itinerary">
+    <div class="day">
+      <div class="day-num">Day 1</div>
+      <div class="day-content">
+        <h4>Arrive in Johannesburg</h4>
+        <p>Overnight at OR Tambo airport hotel. Rest and adjust to the timezone (UTC+2, 10 hours ahead of PST).</p>
+      </div>
+    </div>
+    <div class="day">
+      <div class="day-num">Day 2</div>
+      <div class="day-content">
+        <h4>Transfer to Jabulani</h4>
+        <p>Morning flight to Hoedspruit (1h). Lodge transfer. Afternoon game drive — first chance to spot the Big 5. Welcome dinner under the stars.</p>
+      </div>
+    </div>
+    <div class="day">
+      <div class="day-num">Day 3</div>
+      <div class="day-content">
+        <h4>Elephant Day</h4>
+        <p>Morning walk with the Jabulani elephant herd through the bush. Afternoon visit to the HERD orphanage — meet the baby elephants. Evening sundowner game drive.</p>
+      </div>
+    </div>
+    <div class="day">
+      <div class="day-num">Day 4</div>
+      <div class="day-content">
+        <h4>Full Safari Day</h4>
+        <p>Dawn game drive (best time for predators). Midday spa or pool. Afternoon guided bush walk focused on tracking. Night game drive for nocturnal species.</p>
+      </div>
+    </div>
+    <div class="day">
+      <div class="day-num">Day 5</div>
+      <div class="day-content">
+        <h4>Conservation & Farewell</h4>
+        <p>Morning elephant dung research walk (seriously cool — helps track herd health). Final game drive. Farewell dinner.</p>
+      </div>
+    </div>
+    <div class="day">
+      <div class="day-num">Day 6</div>
+      <div class="day-content">
+        <h4>Departure</h4>
+        <p>Transfer to Hoedspruit. Flight to Johannesburg. Connect home to Vancouver.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2 class="section-title">🧳 Quick Tips</h2>
+  <div class="tip">🛂 <strong>Visa:</strong> Canadian passport holders get visa-free entry to South Africa (90 days), Kenya (eTA required), and Botswana (90 days).</div>
+  <div class="tip">💉 <strong>Vaccines:</strong> Yellow fever certificate may be required. Malaria prophylaxis recommended for all three destinations.</div>
+  <div class="tip">📸 <strong>Packing:</strong> Neutral colors (khaki, olive, brown), layers for morning cold/afternoon heat, good binoculars, camera with zoom lens.</div>
+  <div class="tip">💵 <strong>Tipping:</strong> Budget ~$20-30/day for guides, $10-15/day for camp staff.</div>
+  <div class="tip">🐘 <strong>Ethics:</strong> All three options are ethical — no riding, no chains, no forced interactions. These are rescue/conservation programs where elephants choose to engage.</div>
+</div>
+
+<div class="footer">
+  Prepared by Jarvis ⚡ • February 2026 • For Jordan Maragliano
+</div>
+
+</div>
+</body>
+</html>
