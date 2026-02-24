@@ -107,6 +107,7 @@
 
 ## Decisions & Lessons
 - **All research outputs must be styled PDFs** (readable, using puppeteer for HTML→PDF) unless Jordan specifies otherwise
+- **Research PDFs must be downloadable** — always use `Content-Disposition: attachment` so anyone with the link can download, not just view inline
 - **ALWAYS verify project links work before sending to Jordan** — test every URL (curl the actual link). Never send a broken link.
 - **ALWAYS attach the correct project/PDF links** — double-check the URL matches the actual project, not a stale or wrong one
 - Briefing crons should NOT write to earnings data — that's the refresh script's job (avoids Perplexity overwriting good yfinance data)
