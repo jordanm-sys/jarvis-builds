@@ -151,7 +151,12 @@ label:first-child{margin-top:0}
     </div>
     <p style="color:var(--text2);font-size:13px;margin-top:8px">Paste your full resume below. This is your base — the AI will tailor it for each job.</p>
     <label>Resume Content</label>
-    <textarea id="masterResume" rows="20" placeholder="Paste your full resume here...&#10;&#10;JORDAN MARAGLIANO&#10;Vancouver, BC | jordan@email.com | linkedin.com/in/jordan&#10;&#10;EDUCATION&#10;Simon Fraser University — Bachelor of Business Administration&#10;..."></textarea>
+    <div style="display:flex;gap:8px;margin-bottom:8px">
+      <button class="btn btn-ghost" onclick="document.getElementById('fileUpload').click()">📎 Upload .docx or .txt</button>
+      <input type="file" id="fileUpload" accept=".docx,.txt" style="display:none" onchange="uploadFile(this)">
+      <span id="uploadStatus" style="font-size:13px;color:var(--text2);align-self:center"></span>
+    </div>
+    <textarea id="masterResume" rows="20" placeholder="Paste your full resume here or upload a .docx file above...&#10;&#10;JORDAN MARAGLIANO&#10;Vancouver, BC | jordan@email.com | linkedin.com/in/jordan&#10;&#10;EDUCATION&#10;Simon Fraser University — Bachelor of Business Administration&#10;..."></textarea>
     <div class="btn-row">
       <button class="btn btn-primary" onclick="saveResume()">💾 Save Resume</button>
       <button class="btn btn-danger" onclick="if(confirm('Clear your saved resume?')){document.getElementById('masterResume').value='';saveResume()}">Clear</button>
@@ -320,6 +325,22 @@ async function deleteHistory(id){
   await fetch('/api/history/'+id,{method:'DELETE'});
   history=await(await fetch('/api/history')).json();
   renderHistory();
+}
+
+async function uploadFile(input){
+  const file=input.files[0];if(!file)return;
+  const status=document.getElementById('uploadStatus');
+  status.textContent='Uploading...';
+  const form=new FormData();
+  form.append('file',file);
+  try{
+    const res=await fetch('/api/upload',{method:'POST',body:form});
+    if(!res.ok){const e=await res.json();throw new Error(e.error)}
+    const data=await res.json();
+    document.getElementById('masterResume').value=data.text;
+    status.textContent='✅ Extracted from '+file.name;
+  }catch(e){status.textContent='❌ '+e.message}
+  input.value='';
 }
 
 function esc(s){const d=document.createElement('div');d.textContent=s||'';return d.innerHTML}

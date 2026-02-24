@@ -1,16 +1,5 @@
 [
   {
-    "id": "1",
-    "name": "Kanban Board",
-    "description": "Project management dashboard for tracking Jarvis tasks and builds",
-    "status": "active",
-    "githubUrl": "https://github.com/jordanm-sys/jarvis-builds",
-    "createdAt": "2026-02-13",
-    "category": "websites",
-    "localUrl": "/",
-    "reviewed": true
-  },
-  {
     "id": "2",
     "name": "Fitness Tracker",
     "description": "Comprehensive fitness tracking web app with calorie intake tracking, workout logging, daily refresh with historical data storage, and calendar navigation",
@@ -113,46 +102,6 @@
     "reviewed": false
   },
   {
-    "id": "1771892900361",
-    "createdAt": "2026-02-24",
-    "name": "Fun Fact Website — Monkey",
-    "description": "Simple monkey fun fact site. Capuchin monkeys use rocks as tools and have been doing it for 3,000+ years. Dark gradient design with floating card.",
-    "category": "websites",
-    "status": "completed",
-    "localUrl": "http://localhost:3337",
-    "github": "https://github.com/jordanm-sys/jarvis-builds"
-  },
-  {
-    "id": "1771893019927",
-    "createdAt": "2026-02-24",
-    "name": "Fun Fact Website — Sloth",
-    "description": "Sloth fun fact: they poop once a week and 50% of deaths happen during that trip. Dark blue gradient, floating card.",
-    "category": "websites",
-    "status": "completed",
-    "localUrl": "http://localhost:3338",
-    "github": "https://github.com/jordanm-sys/jarvis-builds"
-  },
-  {
-    "id": "1771893019957",
-    "createdAt": "2026-02-24",
-    "name": "Fun Fact Website — Shark",
-    "description": "Shark fun fact: 450M years old, predate trees and dinosaurs. Greenland sharks live 400+ years. Deep blue gradient.",
-    "category": "websites",
-    "status": "completed",
-    "localUrl": "http://localhost:3339",
-    "github": "https://github.com/jordanm-sys/jarvis-builds"
-  },
-  {
-    "id": "1771893019982",
-    "createdAt": "2026-02-24",
-    "name": "Fun Fact Website — Gorilla",
-    "description": "Gorilla fun fact: Koko learned 1,000+ signs and adopted a kitten. Purple gradient.",
-    "category": "websites",
-    "status": "completed",
-    "localUrl": "http://localhost:3340",
-    "github": "https://github.com/jordanm-sys/jarvis-builds"
-  },
-  {
     "id": "1771905092514",
     "createdAt": "2026-02-24",
     "name": "African Safari Trip — Elephant Experience",
@@ -170,6 +119,7 @@
     "category": "tools",
     "status": "active",
     "localUrl": "http://localhost:3342",
-    "github": "https://github.com/jordanm-sys/jarvis-builds"
+    "github": "https://github.com/jordanm-sys/jarvis-builds",
+    "reviewed": false
   }
 ]

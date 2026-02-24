@@ -13,6 +13,33 @@ if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR);
 const RESUME_FILE = path.join(DATA_DIR, 'master-resume.json');
 const HISTORY_FILE = path.join(DATA_DIR, 'history.json');
 
+// File upload — extract text from .docx/.doc/.pdf/.txt
+const multer = require('multer');
+const mammoth = require('mammoth');
+const upload = multer({ dest: path.join(DATA_DIR, 'uploads'), limits: { fileSize: 10 * 1024 * 1024 } });
+
+app.post('/api/upload', upload.single('file'), async (req, res) => {
+  if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
+  const ext = path.extname(req.file.originalname).toLowerCase();
+  try {
+    let text = '';
+    if (ext === '.docx') {
+      const result = await mammoth.extractRawText({ path: req.file.path });
+      text = result.value;
+    } else if (ext === '.txt') {
+      text = fs.readFileSync(req.file.path, 'utf8');
+    } else {
+      fs.unlinkSync(req.file.path);
+      return res.status(400).json({ error: 'Supported formats: .docx, .txt' });
+    }
+    fs.unlinkSync(req.file.path);
+    res.json({ text });
+  } catch (e) {
+    try { fs.unlinkSync(req.file.path); } catch (_) {}
+    res.status(500).json({ error: e.message });
+  }
+});
+
 // Master resume
 app.get('/api/resume', (_, res) => {
   if (fs.existsSync(RESUME_FILE)) return res.json(JSON.parse(fs.readFileSync(RESUME_FILE, 'utf8')));
