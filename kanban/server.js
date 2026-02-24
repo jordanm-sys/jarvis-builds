@@ -372,4 +372,22 @@ app.post('/api/stocks/summary', (req, res) => {
   res.json(summary);
 });
 
+// Proxy download — serves files from other local project servers so download attribute works cross-port
+app.get('/api/download', async (req, res) => {
+  const url = req.query.url;
+  if (!url) return res.status(400).json({ error: 'Missing url param' });
+  try {
+    // Only allow localhost URLs for security
+    const parsed = new URL(url.replace(req.hostname, 'localhost'));
+    if (!['localhost', '127.0.0.1'].includes(parsed.hostname)) return res.status(403).json({ error: 'Only local URLs allowed' });
+    const http = require('http');
+    http.get(parsed.href, (upstream) => {
+      const filename = req.query.filename || 'download.pdf';
+      res.setHeader('Content-Type', upstream.headers['content-type'] || 'application/octet-stream');
+      res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+      upstream.pipe(res);
+    }).on('error', (e) => res.status(502).json({ error: e.message }));
+  } catch (e) { res.status(400).json({ error: e.message }); }
+});
+
 app.listen(3333, '0.0.0.0', () => console.log('Kanban server running on http://localhost:3333'));
