@@ -106,9 +106,9 @@
     "createdAt": "2026-02-21T06:33:03.588Z",
     "assignedTo": "Jarvis",
     "title": "Verify Monday morning cron runs",
-    "description": "After 6:30am Hawaii time Monday Feb 23, check all 5 cron jobs ran at the correct time (6am Hawaii). Confirm: portfolio briefing, watchlist, market insights, insider scan, options flow. Report results to Jordan via Telegram.",
+    "description": "✅ VERIFIED — All 6 Monday morning crons ran on schedule (7:25-8:20 AM PST). Earnings refresh, portfolio briefing, watchlist, market insights, insider scan all completed OK. Options flow was still running at verification time. Issue found: 3 of 4 Telegram sends failed (portfolio, watchlist, market insights) — Jarvis caught and re-sent manually. Insider scan delivered fine. Reported to Jordan via Telegram.",
     "priority": "high",
-    "column": "backlog",
+    "column": "review",
     "schedule": "2026-02-23T16:30:00.000Z"
   },
   {
@@ -121,5 +121,70 @@
     "column": "review",
     "schedule": "instant",
     "projectId": "1771845188058"
+  },
+  {
+    "id": "1771872744060",
+    "createdAt": "2026-02-23T18:52:24.060Z",
+    "assignedTo": "Jarvis",
+    "title": "Clothing Store",
+    "description": "Make me a sample website of a clothing store. ",
+    "priority": "high",
+    "column": "inprogress",
+    "schedule": "instant"
+  },
+  {
+    "id": "1771891361219",
+    "createdAt": "2026-02-24T00:02:41.219Z",
+    "assignedTo": "Jarvis",
+    "title": "Fix task pickup system + populate recurring tasks",
+    "description": "✅ COMPLETED — Full task pickup system rebuilt and tested:\n\n1. **Webhook instant trigger** — When you add a backlog task, the kanban server triggers the task watcher cron within seconds. Tested: added instant task → picked up and moved to inprogress in ~10s.\n\n2. **30-min polling fallback** — Task watcher cron (Sonnet, cheap) runs every 30 min for scheduled tasks with passed deadlines.\n\n3. **Recurring column populated** — Added all 5 missing recurring tasks (earnings refresh, options flow, daily summary, task watcher, weekly memory maintenance). Total 8 recurring tasks now tracked.\n\n4. **Workflow rules updated** in MEMORY.md with full backlog/inprogress/review/done/recurring specs.\n\nCron ID: b622ecbc-82c9-4c1a-a448-1cd296cbabe5",
+    "priority": "high",
+    "column": "review",
+    "schedule": "instant"
+  },
+  {
+    "id": "1771891426700",
+    "createdAt": "2026-02-24T00:03:46.700Z",
+    "assignedTo": "Jarvis",
+    "title": "Daily earnings calendar refresh (7:25am PST)",
+    "description": "Cron runs daily at 7:25am PST weekdays. Refreshes earnings dates via yfinance, updates bull/bear cases via Perplexity for upcoming earnings (14-day window). Cleans old briefings (>7d) and market insights (>5d). Model: Sonnet.",
+    "priority": "medium",
+    "column": "recurring"
+  },
+  {
+    "id": "1771891426718",
+    "createdAt": "2026-02-24T00:03:46.718Z",
+    "assignedTo": "Jarvis",
+    "title": "Options flow scan (8:20am PST)",
+    "description": "Cron runs daily at 8:20am PST weekdays. Scans unusual options activity via fetch-options.js + yfinance across all portfolio/watchlist tickers. Alerts on Telegram for high-score signals (>=50). Model: Sonnet.",
+    "priority": "medium",
+    "column": "recurring"
+  },
+  {
+    "id": "1771891426735",
+    "createdAt": "2026-02-24T00:03:46.735Z",
+    "assignedTo": "Jarvis",
+    "title": "Jarvis daily summary (8:25am PST)",
+    "description": "Cron runs daily at 8:25am PST weekdays. Jarvis writes a personal analyst note with sentiment, picks (buy/hold/trim/sell/watch), and key events. Posts to /api/stocks/summary and delivers via Telegram. Model: Opus.",
+    "priority": "high",
+    "column": "recurring"
+  },
+  {
+    "id": "1771891426751",
+    "createdAt": "2026-02-24T00:03:46.751Z",
+    "assignedTo": "Jarvis",
+    "title": "Task watcher (every 30min)",
+    "description": "Cron runs every 30 min. Also triggered instantly by webhook when new backlog task is added. Checks for instant/scheduled/pending tasks and picks them up. Model: Sonnet.",
+    "priority": "high",
+    "column": "recurring"
+  },
+  {
+    "id": "1771891426764",
+    "createdAt": "2026-02-24T00:03:46.764Z",
+    "assignedTo": "Jarvis",
+    "title": "Weekly memory maintenance (Sun 9am PST)",
+    "description": "Cron runs Sunday 9am PST. Reviews daily memory logs, updates MEMORY.md with distilled learnings, removes outdated info. Model: Gemini.",
+    "priority": "low",
+    "column": "recurring"
   }
 ]

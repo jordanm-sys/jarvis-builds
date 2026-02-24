@@ -65,8 +65,8 @@
   ],
   "earnings": [
     {
-      "id": "1771839783159",
-      "updatedAt": "2026-02-23T09:43:03.159Z",
+      "id": "1771860304847",
+      "updatedAt": "2026-02-23T15:25:04.847Z",
       "symbol": "MSFT",
       "reportDate": "2026-04-29",
       "source": "portfolio",
@@ -75,8 +75,8 @@
       "notes": "Earnings in 65 days"
     },
     {
-      "id": "1771839783162",
-      "updatedAt": "2026-02-23T09:43:03.162Z",
+      "id": "1771860304850",
+      "updatedAt": "2026-02-23T15:25:04.850Z",
       "symbol": "MU",
       "reportDate": "2026-03-18",
       "source": "portfolio",
@@ -85,8 +85,8 @@
       "notes": "Earnings in 23 days"
     },
     {
-      "id": "1771839783164",
-      "updatedAt": "2026-02-23T09:43:03.164Z",
+      "id": "1771860304852",
+      "updatedAt": "2026-02-23T15:25:04.852Z",
       "symbol": "FCX",
       "reportDate": "2026-04-23",
       "source": "portfolio",
@@ -95,8 +95,8 @@
       "notes": "Earnings in 59 days"
     },
     {
-      "id": "1771839783176",
-      "updatedAt": "2026-02-23T09:43:03.176Z",
+      "id": "1771860304860",
+      "updatedAt": "2026-02-23T15:25:04.860Z",
       "symbol": "IREN",
       "reportDate": "2026-05-13",
       "source": "portfolio",
@@ -105,28 +105,28 @@
       "notes": "Earnings in 79 days"
     },
     {
-      "id": "1771839783174",
-      "updatedAt": "2026-02-23T09:43:03.174Z",
+      "id": "1771860365656",
+      "updatedAt": "2026-02-23T15:26:05.656Z",
       "symbol": "CIFR",
       "reportDate": "2026-02-24",
       "source": "portfolio",
-      "bullCase": "Q4 rev $77.9M (+84% YoY) beats, AI DC pivot validates → $20+",
-      "bearCase": "BTC weakness + execution risk on AI transition → $12",
+      "bullCase": "CIFR beats Q4 on 70% revenue growth to $257M for 2025 with 42% EBITDA margins, BTC recovery + AI/HPC pivot validates $9.3B data center pipeline → Morgan Stanley PT $38.",
+      "bearCase": "Persistent losses (EPS -$0.32, -49% net margins) + BTC weakness erode the 26x EV/Sales multiple and execution risk on AI transition → downside to $18.",
       "notes": "⚠️ REPORTING TOMORROW"
     },
     {
-      "id": "1771839783171",
-      "updatedAt": "2026-02-23T09:43:03.171Z",
+      "id": "1771860365692",
+      "updatedAt": "2026-02-23T15:26:05.692Z",
       "symbol": "CRWV",
       "reportDate": "2026-02-26",
       "source": "portfolio",
-      "bullCase": "Q4 rev +105% YoY beats, $55B backlog validates → $120+",
-      "bearCase": "$29B debt + Blue Owl failed placement + MS downgrade → sub-$80",
-      "notes": "⚠️ EARNINGS IN 3 DAYS"
+      "bullCase": "CRWV beats Q4 $1.56B estimate on $55B backlog + 1GW capacity, GB300 rollout + Meta/OpenAI activity sustain momentum → consensus PT $125, high end $180.",
+      "bearCase": "$29B debt + failed Blue Owl placement + Morgan Stanley downgrade to Hold + HSBC Reduce at $41 signal liquidity strains and insider selling → downside to $41-50.",
+      "notes": "⚠️ EARNINGS IN 3 DAYS — MS downgrade, Blue Owl failed debt placement. High risk/reward."
     },
     {
-      "id": "1771839783169",
-      "updatedAt": "2026-02-23T09:43:03.169Z",
+      "id": "1771860304854",
+      "updatedAt": "2026-02-23T15:25:04.854Z",
       "symbol": "NBIS",
       "reportDate": "2026-04-29",
       "source": "portfolio",
@@ -135,8 +135,8 @@
       "notes": "Earnings in 65 days"
     },
     {
-      "id": "1771839783166",
-      "updatedAt": "2026-02-23T09:43:03.166Z",
+      "id": "1771860304853",
+      "updatedAt": "2026-02-23T15:25:04.853Z",
       "symbol": "AMPX",
       "reportDate": "2026-03-05",
       "source": "portfolio",
@@ -145,8 +145,8 @@
       "notes": "Earnings in 10 days"
     },
     {
-      "id": "1771839783156",
-      "updatedAt": "2026-02-23T09:43:03.156Z",
+      "id": "1771860304845",
+      "updatedAt": "2026-02-23T15:25:04.845Z",
       "symbol": "TE",
       "reportDate": "2026-03-24",
       "source": "portfolio",
@@ -175,17 +175,97 @@
       "notes": "ETF — tracks BTC spot price. No earnings."
     },
     {
-      "id": "1771839783178",
-      "updatedAt": "2026-02-23T09:43:03.178Z",
+      "id": "1771860365676",
+      "updatedAt": "2026-02-23T15:26:05.676Z",
       "symbol": "NVDA",
       "reportDate": "2026-02-25",
       "source": "watchlist",
-      "bullCase": "Q4 FY26 beats on Blackwell ramp + surging AI data center demand. Revenue guidance above $40B. Meta/hyperscaler orders validate capex cycle → rally to $200+",
-      "bearCase": "Margins compress on Blackwell production costs, DeepSeek narrative reduces AI capex urgency, guidance disappoints → pullback to $165-170",
-      "notes": "⚠️ EARNINGS IN 2 DAYS"
+      "bullCase": "NVDA crushes Q4 $65B revenue and guides Q1 FY27 to $75B+ on Blackwell supercycle + China sales resumption, FY27 EPS $9.56 vs Street $7.76 → re-rating to $250.",
+      "bearCase": "Q1 guide disappoints at ~$70B amid China export blackout and circular AI demand concerns, margins slip below 75% on competition → pullback to $150 support.",
+      "notes": "⚠️ EARNINGS TOMORROW — Q4 FY26. Consensus $65B rev, EPS $1.53, 94.5% beat probability."
     }
   ],
   "briefings": [
+    {
+      "id": "1771861067282",
+      "date": "2026-02-23",
+      "createdAt": "2026-02-23T15:37:47.282Z",
+      "type": "watchlist",
+      "summary": "NVDA closed Friday at $189.82 (+1.02%). No market-moving news Monday pre-open. Q4 FY26 earnings due Wednesday Feb 25 AMC — the critical near-term catalyst. Morningstar rates NVDA 4-star undervalued with $240 fair value estimate. Consensus expects ~$65B revenue and EPS $1.53.",
+      "stocks": [
+        {
+          "symbol": "NVDA",
+          "change": 1.02,
+          "note": "$189.82 (Friday close). Earnings Wed Feb 25 AMC. Consensus $65B rev, EPS $1.53. Morningstar FV $240. Blackwell ramp + AI data center demand are the key narratives."
+        }
+      ],
+      "analysis": "NVDA enters earnings week in reasonable shape — recovering from the $185 lows and closing Friday at $189.82. The Feb 25 Q4 FY26 report is the biggest near-term catalyst in the entire portfolio watchlist. Morningstar sees the stock as moderately undervalued at a $240 fair value. Analyst consensus sits around $65B revenue and $1.53 EPS with a high historical beat rate (~94.5%). Bull case: Blackwell supercycle beats + strong Q1 guide to $75B+ → re-rating toward $250. Bear case: China export headwinds, circular AI demand concerns, Q1 guide disappoints at ~$70B → pullback to $150 support. Implied volatility is elevated heading into the event — expect a significant post-earnings move either direction. The result will also set the tone for SOXX and the broader AI infrastructure trade including CRWV, NBIS, and IREN in the portfolio."
+    },
+    {
+      "id": "1771860929132",
+      "date": "2026-02-23",
+      "createdAt": "2026-02-23T15:35:29.132Z",
+      "type": "portfolio",
+      "summary": "BTC crashed below $65K support today (tariff tensions + whale selling — 6th consecutive down week), hitting crypto names hard. FBTC, CIFR, and IREN all under pressure. CRWV bouncing +3% despite class action lawsuit filing. MU surging on Zacks #1 Strong Buy with 4 analyst upgrades. FCX got double upgrade (Freedom Capital Buy/$76 PT, Scotiabank raised to $72). MSFT drifting lower on AI capex concerns. NBIS slightly down but confirmed acquisition of Tavily (AI agent software). CIFR reports earnings TOMORROW (Feb 24).",
+      "stocks": [
+        {
+          "symbol": "FBTC",
+          "change": -3.1,
+          "note": "~$29.60 CAD. BTC broke below $65K support ($64,384 low) on tariff fears + whale selling. 6th consecutive down week for BTC."
+        },
+        {
+          "symbol": "SOXX",
+          "change": 0.8,
+          "note": "~$359. Semis holding ahead of NVDA earnings tomorrow. Citi added TXN and MPWR as top Buy picks today."
+        },
+        {
+          "symbol": "TE",
+          "change": 0,
+          "note": "~$6.30. Quiet session — no major news. Earnings Mar 24."
+        },
+        {
+          "symbol": "MSFT",
+          "change": -0.3,
+          "note": "~$396. Stonegate cut position today. Down ~21% over 6 months on AI capex concerns per Zacks."
+        },
+        {
+          "symbol": "MU",
+          "change": 2.4,
+          "note": "~$428. Zacks #1 Strong Buy published today. 4 analysts raised estimates in past 60 days. HBM/AI demand narrative intact. Earnings Mar 18."
+        },
+        {
+          "symbol": "FCX",
+          "change": 0.2,
+          "note": "~$64.45. Freedom Capital upgraded to Buy with $76 PT today. Scotiabank raised target to $72 (Outperform). Copper thesis intact."
+        },
+        {
+          "symbol": "AMPX",
+          "change": 0,
+          "note": "~$10.35. Quiet. Earnings in 10 days (Mar 5). Defense battery demand story unchanged."
+        },
+        {
+          "symbol": "NBIS",
+          "change": -0.9,
+          "note": "~$97. Range $95.13-$97.40. Confirmed acquisition of Tavily to expand AI agent software capabilities."
+        },
+        {
+          "symbol": "CRWV",
+          "change": 3.2,
+          "note": "~$92. Range $84.50-$98.15. BFA Law filed class action lawsuit (securities fraud re: data center delays). Recovering from lows. Earnings Thu Feb 26."
+        },
+        {
+          "symbol": "CIFR",
+          "change": -2.4,
+          "note": "~$14.30. EARNINGS TOMORROW (Feb 24). BTC crash is headwind. Bearish technicals (70% bearish signals)."
+        },
+        {
+          "symbol": "IREN",
+          "change": -3.7,
+          "note": "~$39.50. Range $39.05-$40.12. BTC selloff hitting miners hard. $9.7B Microsoft AI contract and AI cloud pivot intact but near-term pain."
+        }
+      ],
+      "analysis": "Today is dominated by the Bitcoin crash — BTC broke below $65,000 support for the first time in weeks, dropping to a $64,384 intraday low on tariff tensions, regulatory uncertainty, and heavy whale selling. This is the 6th consecutive negative week for crypto. The ripple effect hits FBTC (-3%), IREN (-4%), and CIFR (-2%) hard — and CIFR reports earnings TOMORROW, making this especially sensitive. CRWV is the surprise gainer (+3%) despite BFA Law filing a class action lawsuit alleging securities fraud. The stock is recovering from an $84.50 intraday low, suggesting buyers ahead of Thursday earnings. MU is surging on a Zacks #1 Strong Buy call + 4 upward analyst estimate revisions. FCX got a double-upgrade day (Freedom Capital Buy/$76, Scotiabank/$72) as copper fundamentals stay strong. NBIS dipped slightly but confirmed its Tavily acquisition, deepening its AI software stack. NVDA reports tomorrow — that result will set the tone for SOXX and the entire AI infrastructure trade."
+    },
     {
       "id": "1771631421457",
       "date": "2026-02-20",
@@ -543,6 +623,93 @@
     }
   ],
   "market": [
+    {
+      "id": "1771861250992",
+      "date": "2026-02-23",
+      "createdAt": "2026-02-23T15:40:50.992Z",
+      "type": "warning",
+      "title": "S&P 500 Concentration Risk: 10 Stocks = 40% of Index",
+      "description": "The S&P 500's top 10 holdings represent nearly 40% of total index weight. With these names underperforming during the current rotation, the index itself is masking significant internal weakness. The market bounced Friday to close just above its 20-day moving average — fragile technical positioning heading into Monday.",
+      "tickers": [
+        "SPY",
+        "VOO",
+        "AAPL",
+        "MSFT",
+        "NVDA",
+        "AMZN",
+        "META"
+      ],
+      "thesis": "Index investors are getting a distorted picture. The equal-weight S&P is outperforming significantly, but passive mega-cap exposure carries hidden rotation risk. If the rotation exhausts AND tech fails to recover, the headline index could see a sharp drawdown. Monitor whether SPY can hold above its 20-day MA this week — failure is a bearish signal.",
+      "conviction": "high"
+    },
+    {
+      "id": "1771861250980",
+      "date": "2026-02-23",
+      "createdAt": "2026-02-23T15:40:50.980Z",
+      "type": "trend",
+      "title": "GE Aerospace & Industrial Momentum Stocks Leading Mid-Cap Breakouts",
+      "description": "Within the industrials rotation, GE Aerospace (GE) holds a Zacks #1 Strong Buy rank and is benefiting directly from the sector tailwind. Pollution Control and Metal Fabricating sub-sectors are the strongest pockets within Industrials. Transportation index recently peaked 3 standard deviations above mean after a massive post-Liberation Day rally — entering a short-term correction phase.",
+      "tickers": [
+        "GE",
+        "IYT",
+        "XTN",
+        "XLI"
+      ],
+      "thesis": "GE Aerospace represents the highest-conviction name within the industrials rotation — strong fundamentals meeting a strong sector tailwind. However, the broader Transportation Index is showing exhaustion after its massive run. The opportunity window in industrials may be narrowing; focus on quality names like GE rather than chasing the sector ETF.",
+      "conviction": "medium"
+    },
+    {
+      "id": "1771861250966",
+      "date": "2026-02-23",
+      "createdAt": "2026-02-23T15:40:50.966Z",
+      "type": "opportunity",
+      "title": "Tech & Financials Deeply Oversold — Contrarian Accumulation Zone",
+      "description": "XLK (Technology) is oversold and trading at significant discounts to expected growth rates. XLF (Financials) is 3 standard deviations BELOW its mean — a rare extreme. With mega-cap tech comprising 29% of the S&P, any reversal of the rotation creates an outsized snapback opportunity.",
+      "tickers": [
+        "XLK",
+        "XLF",
+        "QQQ",
+        "MU",
+        "NVDA"
+      ],
+      "thesis": "The same breadth extremes that make cyclicals dangerous make oversold tech and financials interesting. Micron (MU) holds a Zacks Strong Buy rating within semiconductors. When the reflation narrative cracks under falling inflation data, capital will rush back to growth. Quality tech at depressed relative multiples is the contrarian play.",
+      "conviction": "medium"
+    },
+    {
+      "id": "1771861250950",
+      "date": "2026-02-23",
+      "createdAt": "2026-02-23T15:40:50.950Z",
+      "type": "warning",
+      "title": "Cyclical Sector Breadth at 50-Year Extremes — Exhaustion Risk",
+      "description": "Energy, Materials, Industrials, and Staples are trading 3+ standard deviations above their means on breadth measures. This level of overbought extension in slower-growth defensives and cyclical inflation hedges hasn't been seen in 50 years. Meanwhile, macro data is showing slowing growth and falling inflation — directly undermining the reflation trade thesis.",
+      "tickers": [
+        "XLE",
+        "XLB",
+        "XLI",
+        "XLP",
+        "XLY"
+      ],
+      "thesis": "When cyclicals are priced for sustained inflation but macro data shows the opposite, the disconnect tends to resolve violently. Rotation reversal could be swift. Monitor breadth indicators — this is a late-cycle signal, not a launchpad. Reduce exposure to crowded defensives.",
+      "conviction": "high"
+    },
+    {
+      "id": "1771861250932",
+      "date": "2026-02-23",
+      "createdAt": "2026-02-23T15:40:50.932Z",
+      "type": "shift",
+      "title": "Great Rotation: Value vs. Growth Bifurcation",
+      "description": "A pronounced sector split is reshaping 2026 YTD. Energy (+21%), Materials (+17%), Staples (+15%), and Industrials (+12%) are massively outperforming while Tech, Financials, and Healthcare lag. The S&P 500 is up only ~1.2% YTD as mega-cap tech weight (29% of index) drags on the headline number.",
+      "tickers": [
+        "XLE",
+        "XLB",
+        "XLI",
+        "XLP",
+        "XLK",
+        "SPY"
+      ],
+      "thesis": "Structural broadening away from a decade of mega-cap tech dominance. The Dow Transports hitting new highs confirms broad economic resilience outside large-cap growth. However, the four outperforming sectors represent only ~19% of the S&P 500 — the math limits how far this rotation can lift the index.",
+      "conviction": "high"
+    },
     {
       "id": "1771631533331",
       "date": "2026-02-20",

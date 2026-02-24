@@ -50,6 +50,7 @@
 - **8:20 AM** — Options Flow Scan (Sonnet) — unusual options activity via fetch-options.js + yfinance
 - **8:25 AM** — Jarvis Daily Summary (Opus) — my written analysis posted to /api/stocks/summary
 - **Sunday 9 AM** — Weekly Memory Maintenance (Gemini) — review daily logs, update MEMORY.md
+- **Task Watcher**: cron `b622ecbc-82c9-4c1a-a448-1cd296cbabe5` (Sonnet, every 30m + webhook instant trigger)
 - **Heartbeats**: disabled (replaced by task watcher cron)
 
 ## Key Scripts
@@ -68,12 +69,38 @@
 - **Earnings week of Feb 24:** CIFR (Mon), NVDA (Tue), CRWV (Thu) — big week
 
 ## Workflow Rules (NON-NEGOTIABLE)
-- **ALWAYS move tasks to "inprogress" before starting work** — no exceptions, even for small fixes
+
+### Backlog
+- Jordan adds tasks here
+- Check `schedule` field:
+  - `"instant"` → start IMMEDIATELY, no waiting
+  - ISO datetime → complete by that deadline
+  - No schedule → pick up when nothing else is in progress
+- **Priority tiebreaker**: If multiple tasks share the same schedule/time AND same priority, start with the one with earliest `createdAt`
+- **Polling must work** — pick up tasks right away when added
+
+### In Progress
+- Two ways a task appears here:
+  1. Jarvis picks up a backlog task → move it to inprogress
+  2. Jordan asks me to build/do ANYTHING (even small) → I create a task in inprogress myself
+- **EVERY piece of work must be visible here** — Jordan tracks what I'm doing via this column
+
+### Review
+- ALL completed inprogress tasks go to review
+- **MUST have a clickable link** if applicable (website URL, PDF, etc.) that takes Jordan to the project in the Projects section
 - **ALWAYS create a project and link it via projectId** — every task must have a projectId so Jordan can click through
 - Create the project FIRST (POST /api/projects), get the ID, THEN update the task with that projectId
-- Show ALL tasks in progress on the kanban board so Jordan can see what I'm working on
-- When done → move to "review" with detailed description of what was done + projectId
-- Never move tasks to "done" — that's Jordan's call
+- Use logic to pick the right project subsection (websites, research, etc.)
+- If no good subsection exists, create a new one with a logical heading
+
+### Done
+- **ONLY Jordan moves tasks here** — never Jarvis
+- Tasks move review → done when Jordan sets it to "reviewed" in Projects, or drags it in Tasks
+- Works vice versa too (two-way sync between task column and project reviewed status)
+
+### Recurring
+- Used to track recurring tasks (crons, scheduled checks, etc.)
+- Always add recurring tasks here (stock briefings, insider scans, options flow, etc.)
 
 ## Decisions & Lessons
 - Briefing crons should NOT write to earnings data — that's the refresh script's job (avoids Perplexity overwriting good yfinance data)

@@ -64,7 +64,7 @@ app.post('/api/tasks', (req, res) => {
   if (!req.body.column || req.body.column === 'backlog') {
     const { exec } = require('child_process');
     const env = { HOME: '/Users/jordanmaragliano', PATH: '/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin' };
-    exec('/opt/homebrew/bin/openclaw cron run c4a983dd-d9dd-4a41-9f33-44627ae8b870', { timeout: 15000, env }, (err) => {
+    exec('/opt/homebrew/bin/openclaw cron run b622ecbc-82c9-4c1a-a448-1cd296cbabe5', { timeout: 15000, env }, (err) => {
       if (err) console.log('Task watcher trigger failed:', err.message);
       else console.log('⚡ Task watcher triggered — new task:', task.title);
     });
