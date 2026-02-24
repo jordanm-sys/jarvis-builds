@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Resume Tailor</title>
+<style>
+:root{--bg:#0d1117;--surface:#161b22;--surface2:#21262d;--border:#30363d;--text:#e6edf3;--text2:#8b949e;--accent:#58a6ff;--accent2:#3fb950;--danger:#f85149;--radius:8px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh}
+.container{max-width:1200px;margin:0 auto;padding:20px}
+header{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--border);margin-bottom:24px}
+header h1{font-size:22px;display:flex;align-items:center;gap:8px}
+.tabs{display:flex;gap:4px}
+.tab{padding:8px 16px;border-radius:var(--radius);cursor:pointer;font-size:14px;color:var(--text2);background:transparent;border:1px solid transparent;transition:all .2s}
+.tab:hover{color:var(--text);background:var(--surface)}
+.tab.active{color:var(--text);background:var(--surface);border-color:var(--border)}
+.panel{display:none}
+.panel.active{display:block}
+
+/* Forms */
+textarea,input{width:100%;padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:14px;font-family:inherit;resize:vertical}
+textarea:focus,input:focus{outline:none;border-color:var(--accent)}
+label{display:block;font-size:13px;color:var(--text2);margin-bottom:6px;margin-top:16px}
+label:first-child{margin-top:0}
+.btn{padding:10px 20px;border:none;border-radius:var(--radius);cursor:pointer;font-size:14px;font-weight:600;transition:all .2s}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{opacity:.9}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed}
+.btn-success{background:var(--accent2);color:#fff}
+.btn-danger{background:var(--danger);color:#fff;font-size:12px;padding:6px 12px}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text2)}
+.btn-ghost:hover{border-color:var(--text2)}
+.btn-row{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap}
+
+/* Resume Setup */
+.status-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:20px;font-size:12px}
+.status-badge.saved{background:#1a3a2a;color:var(--accent2)}
+.status-badge.empty{background:#3a1a1a;color:var(--danger)}
+
+/* Tailor */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:768px){.grid-2{grid-template-columns:1fr}}
+.result-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-top:16px}
+.result-card h3{font-size:16px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.result-card .content{font-size:14px;line-height:1.7;white-space:pre-wrap;color:var(--text2)}
+.result-card .content h1,.result-card .content h2,.result-card .content h3{color:var(--text);margin-top:12px}
+.result-card .content strong{color:var(--text)}
+.keywords{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.keyword{background:var(--surface2);padding:4px 10px;border-radius:20px;font-size:12px;color:var(--accent)}
+.ats-score{font-size:36px;font-weight:700;text-align:center;padding:20px}
+.ats-score.high{color:var(--accent2)}
+.ats-score.mid{color:#d29922}
+.ats-score.low{color:var(--danger)}
+.tips{list-style:none;padding:0}
+.tips li{padding:6px 0;font-size:13px;color:var(--text2);border-bottom:1px solid var(--border)}
+.tips li:last-child{border:none}
+.tips li::before{content:'💡 '}
+
+/* History */
+.history-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px}
+.history-card .meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.history-card .meta h3{font-size:15px}
+.history-card .meta span{font-size:12px;color:var(--text2)}
+.history-card .meta-row{font-size:13px;color:var(--text2);margin-bottom:8px}
+
+/* Loading */
+.spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;align-items:center;justify-content:center;flex-direction:column;gap:16px;color:var(--text)}
+.loading-overlay.active{display:flex}
+.loading-overlay .spinner{width:40px;height:40px;border-width:3px}
+.empty-state{text-align:center;padding:60px 20px;color:var(--text2)}
+.empty-state .icon{font-size:48px;margin-bottom:16px}
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>📄 Resume Tailor</h1>
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('tailor')">✨ Tailor</div>
+      <div class="tab" onclick="switchTab('resume')">📋 My Resume</div>
+      <div class="tab" onclick="switchTab('history')">📂 History</div>
+    </div>
+  </header>
+
+  <!-- Tailor Panel -->
+  <div class="panel active" id="panel-tailor">
+    <div id="noResume" style="display:none">
+      <div class="empty-state">
+        <div class="icon">📋</div>
+        <h2>No resume saved yet</h2>
+        <p style="margin-top:8px">Go to "My Resume" tab and paste your master resume first.</p>
+      </div>
+    </div>
+    <div id="tailorForm">
+      <div class="grid-2">
+        <div>
+          <label>Company Name (optional)</label>
+          <input id="company" placeholder="e.g. Google, TD Bank, Shopify">
+          <label>Role / Position (optional)</label>
+          <input id="role" placeholder="e.g. Software Engineering Intern">
+        </div>
+        <div>
+          <label>Job Posting *</label>
+          <textarea id="jobPosting" rows="6" placeholder="Paste the full job description here..."></textarea>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="tailorBtn" onclick="tailorResume()">✨ Tailor My Resume</button>
+      </div>
+    </div>
+    
+    <div id="results" style="display:none">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:24px;margin-bottom:8px">
+        <h2>Results</h2>
+        <div style="display:flex;gap:8px;align-items:center">
+          <div id="atsInline" class="status-badge saved"></div>
+          <button class="btn btn-ghost" onclick="document.getElementById('results').style.display='none'">Close</button>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="result-card">
+          <h3>📄 Tailored Resume <button class="btn btn-ghost" style="margin-left:auto;font-size:12px;padding:4px 10px" onclick="downloadPdf('resume')">⬇️ PDF</button></h3>
+          <div class="content" id="resumeResult"></div>
+        </div>
+        <div class="result-card">
+          <h3>✉️ Cover Letter <button class="btn btn-ghost" style="margin-left:auto;font-size:12px;padding:4px 10px" onclick="downloadPdf('cover')">⬇️ PDF</button></h3>
+          <div class="content" id="coverResult"></div>
+        </div>
+      </div>
+      <div class="grid-2" style="margin-top:12px">
+        <div class="result-card">
+          <h3>🔑 Keywords Matched</h3>
+          <div class="keywords" id="keywordsResult"></div>
+        </div>
+        <div class="result-card">
+          <h3>💡 Tips</h3>
+          <ul class="tips" id="tipsResult"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Resume Panel -->
+  <div class="panel" id="panel-resume">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <h2>Master Resume</h2>
+      <span id="resumeStatus"></span>
+    </div>
+    <p style="color:var(--text2);font-size:13px;margin-top:8px">Paste your full resume below. This is your base — the AI will tailor it for each job.</p>
+    <label>Resume Content</label>
+    <textarea id="masterResume" rows="20" placeholder="Paste your full resume here...&#10;&#10;JORDAN MARAGLIANO&#10;Vancouver, BC | jordan@email.com | linkedin.com/in/jordan&#10;&#10;EDUCATION&#10;Simon Fraser University — Bachelor of Business Administration&#10;..."></textarea>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="saveResume()">💾 Save Resume</button>
+      <button class="btn btn-danger" onclick="if(confirm('Clear your saved resume?')){document.getElementById('masterResume').value='';saveResume()}">Clear</button>
+    </div>
+  </div>
+
+  <!-- History Panel -->
+  <div class="panel" id="panel-history">
+    <h2>Tailoring History</h2>
+    <p style="color:var(--text2);font-size:13px;margin-top:8px;margin-bottom:16px">Past resume tailoring sessions.</p>
+    <div id="historyList"></div>
+  </div>
+</div>
+
+<div class="loading-overlay" id="loading">
+  <div class="spinner"></div>
+  <div>Tailoring your resume...</div>
+  <div style="font-size:13px;color:var(--text2)">This takes ~15-30 seconds</div>
+</div>
+
+<script>
+let masterResume='', history=[], lastResult=null;
+
+async function init(){
+  const r=await(await fetch('/api/resume')).json();
+  masterResume=r.resume||'';
+  document.getElementById('masterResume').value=masterResume;
+  updateResumeStatus();
+  history=await(await fetch('/api/history')).json();
+  renderHistory();
+}
+
+function updateResumeStatus(){
+  const el=document.getElementById('resumeStatus');
+  const noResume=document.getElementById('noResume');
+  const form=document.getElementById('tailorForm');
+  if(masterResume){
+    el.innerHTML='<span class="status-badge saved">✅ Saved</span>';
+    noResume.style.display='none';
+    form.style.display='block';
+  } else {
+    el.innerHTML='<span class="status-badge empty">⚠️ Not set</span>';
+    noResume.style.display='block';
+    form.style.display='none';
+  }
+}
+
+function switchTab(tab){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelector(`.tab[onclick="switchTab('${tab}')"]`).classList.add('active');
+  document.getElementById('panel-'+tab).classList.add('active');
+}
+
+async function saveResume(){
+  masterResume=document.getElementById('masterResume').value;
+  await fetch('/api/resume',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({resume:masterResume})});
+  updateResumeStatus();
+}
+
+async function tailorResume(){
+  const jobPosting=document.getElementById('jobPosting').value;
+  if(!jobPosting){alert('Please paste a job posting');return}
+  if(!masterResume){alert('Please save your resume first');return}
+  
+  const btn=document.getElementById('tailorBtn');
+  btn.disabled=true;
+  document.getElementById('loading').classList.add('active');
+  
+  try{
+    const res=await fetch('/api/tailor',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      resume:masterResume,
+      jobPosting,
+      company:document.getElementById('company').value,
+      role:document.getElementById('role').value
+    })});
+    
+    if(!res.ok){const e=await res.json();throw new Error(e.error||'Failed')}
+    
+    lastResult=await res.json();
+    showResults(lastResult);
+    
+    // Save to history
+    await fetch('/api/history',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      company:document.getElementById('company').value||'Unknown',
+      role:document.getElementById('role').value||'Unknown Role',
+      atsScore:lastResult.atsScore,
+      tailoredResume:lastResult.tailoredResume,
+      coverLetter:lastResult.coverLetter,
+      keywordsMatched:lastResult.keywordsMatched
+    })});
+    history=await(await fetch('/api/history')).json();
+    renderHistory();
+  }catch(e){alert('Error: '+e.message)}
+  finally{btn.disabled=false;document.getElementById('loading').classList.remove('active')}
+}
+
+function showResults(r){
+  document.getElementById('results').style.display='block';
+  document.getElementById('resumeResult').innerHTML=markdownToHtml(r.tailoredResume);
+  document.getElementById('coverResult').innerHTML=markdownToHtml(r.coverLetter);
+  document.getElementById('keywordsResult').innerHTML=(r.keywordsMatched||[]).map(k=>`<span class="keyword">${esc(k)}</span>`).join('');
+  document.getElementById('tipsResult').innerHTML=(r.tips||[]).map(t=>`<li>${esc(t)}</li>`).join('');
+  const score=r.atsScore||0;
+  const cls=score>=80?'high':score>=60?'mid':'low';
+  document.getElementById('atsInline').innerHTML=`ATS: <strong>${score}/100</strong>`;
+  document.getElementById('atsInline').className=`status-badge ${score>=80?'saved':'empty'}`;
+}
+
+function markdownToHtml(md){
+  if(!md)return'';
+  return md.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/^### (.+)$/gm,'<h3>$1</h3>')
+    .replace(/^## (.+)$/gm,'<h2>$1</h2>')
+    .replace(/^# (.+)$/gm,'<h1>$1</h1>')
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g,'<em>$1</em>')
+    .replace(/^- (.+)$/gm,'<li>$1</li>')
+    .replace(/(<li>.*<\/li>)/gs,'<ul>$1</ul>')
+    .replace(/\n\n/g,'<br><br>')
+    .replace(/\n/g,'<br>');
+}
+
+async function downloadPdf(type){
+  if(!lastResult)return;
+  const content=type==='resume'?markdownToHtml(lastResult.tailoredResume):markdownToHtml(lastResult.coverLetter);
+  const company=document.getElementById('company').value||'Company';
+  const filename=type==='resume'?`Resume-${company}.pdf`:`CoverLetter-${company}.pdf`;
+  
+  const res=await fetch('/api/pdf',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content,filename,type})});
+  if(!res.ok){alert('PDF generation failed');return}
+  const blob=await res.blob();
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download=filename;a.click();
+  URL.revokeObjectURL(url);
+}
+
+function renderHistory(){
+  const el=document.getElementById('historyList');
+  if(!history.length){el.innerHTML='<div class="empty-state"><div class="icon">📂</div><h2>No history yet</h2><p style="margin-top:8px">Tailor a resume to see it here.</p></div>';return}
+  el.innerHTML=history.map(h=>{
+    const date=new Date(h.createdAt).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+    const score=h.atsScore||'—';
+    const cls=score>=80?'high':score>=60?'mid':'low';
+    return`<div class="history-card">
+      <div class="meta"><h3>${esc(h.company)} — ${esc(h.role)}</h3><span>${date}</span></div>
+      <div class="meta-row">ATS Score: <strong style="color:${score>=80?'var(--accent2)':score>=60?'#d29922':'var(--danger)'}">${score}/100</strong> · ${(h.keywordsMatched||[]).length} keywords matched</div>
+      <div class="btn-row" style="margin-top:8px">
+        <button class="btn btn-ghost" onclick='viewHistoryItem(${JSON.stringify(JSON.stringify(h))})'>View</button>
+        <button class="btn btn-danger" onclick="deleteHistory('${h.id}')">Delete</button>
+      </div>
+    </div>`}).join('');
+}
+
+function viewHistoryItem(json){
+  const h=JSON.parse(json);
+  lastResult={tailoredResume:h.tailoredResume,coverLetter:h.coverLetter,keywordsMatched:h.keywordsMatched,atsScore:h.atsScore,tips:[]};
+  document.getElementById('company').value=h.company||'';
+  document.getElementById('role').value=h.role||'';
+  switchTab('tailor');
+  showResults(lastResult);
+}
+
+async function deleteHistory(id){
+  if(!confirm('Delete this entry?'))return;
+  await fetch('/api/history/'+id,{method:'DELETE'});
+  history=await(await fetch('/api/history')).json();
+  renderHistory();
+}
+
+function esc(s){const d=document.createElement('div');d.textContent=s||'';return d.innerHTML}
+
+init();
+</script>
+</body>
+</html>

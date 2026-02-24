@@ -30,17 +30,6 @@
     }
   },
   {
-    "id": "1771579242130",
-    "createdAt": "2026-02-20T09:20:42.130Z",
-    "assignedTo": "Jarvis",
-    "title": "Research: AI smart scale for calorie tracking",
-    "description": "✅ COMPLETED — PDF report saved to research/ai-smart-scale-research-2026.pdf and pushed to jarvis-builds.\n\nKEY FINDINGS:\n• Direct competitor found: Qalzy (UK, ex-Microsoft team) launched on Kickstarter May 2025 at $169-280. Same concept — scale + camera + OpenAI.\n• Market: Smart kitchen TAM $60B+ by 2030 (16-18% CAGR). SOM for AI nutrition scales: $500M-3B.\n• AI accuracy: 94.2% for common foods (Stanford 2025). Struggles with mixed meals, sauces, liquids.\n• Pain point validated: 72% of MFP users cite database inaccuracy, ~65% dropout rate within months.\n• Business model: $179 hardware + $9.99/mo sub → LTV:CAC of 4.2:1 at target scenario.\n• Patent risk: US10502614B2 covers scale+camera+food recognition — needs FTO analysis.\n• Verdict: CONDITIONALLY GO. Differentiate via build-a-bowl workflow, superior design, US-first launch, B2B clinical channel.",
-    "priority": "high",
-    "column": "review",
-    "schedule": "instant",
-    "projectId": "1771579640209"
-  },
-  {
     "id": "1771585888501",
     "createdAt": "2026-02-20T11:11:28.501Z",
     "assignedTo": "Jarvis",
@@ -130,58 +119,14 @@
     }
   },
   {
-    "id": "1771892843946",
-    "createdAt": "2026-02-24T00:27:23.946Z",
+    "id": "1771924806191",
+    "createdAt": "2026-02-24T09:20:06.191Z",
     "assignedTo": "Jarvis",
-    "title": "Fun fact website",
-    "description": "✅ COMPLETED — Monkey fun fact website. Capuchin monkeys use rock tools for 3,000+ years. Dark gradient, floating card, animations. Running on http://localhost:3337",
+    "title": "Build AI Resume Tailor tool",
+    "description": "✅ COMPLETED — AI Resume Tailor tool on port 3342. Features: paste master resume (saved), paste job posting, AI tailors resume + generates cover letter, ATS score, keyword matching, tips. PDF downloads. History of past sessions. Accessible at http://localhost:3342",
     "priority": "high",
     "column": "review",
     "schedule": "instant",
-    "projectId": "1771892900361"
-  },
-  {
-    "id": "1771892875204",
-    "createdAt": "2026-02-24T00:27:55.205Z",
-    "assignedTo": "Jarvis",
-    "title": "fun fact website",
-    "description": "✅ COMPLETED — Sloth fun fact website. Running on http://localhost:3338",
-    "priority": "high",
-    "column": "review",
-    "schedule": "instant",
-    "projectId": "1771893019927"
-  },
-  {
-    "id": "1771892904710",
-    "createdAt": "2026-02-24T00:28:24.710Z",
-    "assignedTo": "Jarvis",
-    "title": "fun fact website",
-    "description": "✅ COMPLETED — Shark fun fact website. Running on http://localhost:3339",
-    "priority": "medium",
-    "column": "review",
-    "schedule": "instant",
-    "projectId": "1771893019957"
-  },
-  {
-    "id": "1771892955050",
-    "createdAt": "2026-02-24T00:29:15.050Z",
-    "assignedTo": "Jarvis",
-    "title": "fun fact website ",
-    "description": "✅ COMPLETED — Gorilla fun fact website. Running on http://localhost:3340",
-    "priority": "high",
-    "column": "review",
-    "schedule": "instant",
-    "projectId": "1771893019982"
-  },
-  {
-    "id": "1771904923357",
-    "createdAt": "2026-02-24T03:48:43.357Z",
-    "assignedTo": "Jarvis",
-    "title": "Trip",
-    "description": "✅ COMPLETED — African elephant safari trip plan. 3 options researched: Jabulani (South Africa, ~-9.5K), Abu Camp (Botswana, ~-20K), Reteti+Sarara (Kenya, ~-6K). Includes itinerary, costs, visa/vaccine info, packing tips. View: http://localhost:3341/plan.html | PDF: http://localhost:3341/pdf",
-    "priority": "high",
-    "column": "review",
-    "schedule": "instant",
-    "projectId": "1771905092514"
+    "projectId": "1771925006243"
   }
 ]

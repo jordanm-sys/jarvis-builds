@@ -161,5 +161,15 @@
     "status": "completed",
     "localUrl": "/files/african-safari-trip.pdf",
     "github": "https://github.com/jordanm-sys/jarvis-builds"
+  },
+  {
+    "id": "1771925006243",
+    "createdAt": "2026-02-24",
+    "name": "AI Resume Tailor",
+    "description": "Personal resume tailoring tool. Paste master resume, paste job posting, AI generates tailored resume + cover letter with ATS scoring. PDF downloads. History tracking.",
+    "category": "tools",
+    "status": "active",
+    "localUrl": "http://localhost:3342",
+    "github": "https://github.com/jordanm-sys/jarvis-builds"
   }
 ]
