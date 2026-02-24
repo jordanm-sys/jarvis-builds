@@ -1,65 +1,18 @@
 [
   {
-    "id": "2",
-    "title": "Research AI dropshipping tools",
-    "description": "Evaluate top AI-powered dropshipping platforms and automation tools",
-    "priority": "medium",
-    "column": "done",
-    "assignedTo": "Jarvis",
-    "createdAt": "2026-02-13T21:33:00Z",
-    "projectId": "3"
-  },
-  {
     "id": "3",
     "title": "Daily memory maintenance",
     "description": "Review and consolidate daily memory files, update MEMORY.md",
     "priority": "low",
     "column": "recurring",
     "assignedTo": "Jarvis",
-    "createdAt": "2026-02-13T21:33:00Z"
-  },
-  {
-    "id": "1771051554374",
-    "createdAt": "2026-02-14T06:45:54.374Z",
-    "assignedTo": "Jarvis",
-    "title": "Build comprehensive fitness tracking web app",
-    "description": "✅ COMPLETED — Full fitness tracker with: calorie intake tracking (breakfast/lunch/dinner/snacks), workout logging with weight tracking for strength exercises, exercise database (cardio/strength/bodyweight/flexibility/sports), custom food creation & saving, calendar navigation with historical data, daily notes. Running on http://localhost:3334. No persistent highlight on calendar clicks. Server: fitness-app/server.js (Express on port 3334).",
-    "priority": "high",
-    "column": "done",
-    "projectId": "2"
-  },
-  {
-    "id": "1771135157227",
-    "createdAt": "2026-02-15T05:59:17.227Z",
-    "assignedTo": "Jarvis",
-    "title": "plan me stuff to do in Oahu Hawaii ",
-    "description": "im staying at the illikai hotel",
-    "priority": "high",
-    "column": "done",
-    "schedule": "instant",
-    "projectId": "4"
-  },
-  {
-    "id": "1771138009006",
-    "createdAt": "2026-02-15T06:46:49.006Z",
-    "assignedTo": "Jarvis",
-    "title": "Deep dive product research with logical reasoning for drop shipping",
-    "description": "✅ COMPLETED — Deep dive product research with 8 winning products analyzed: Peeling Facial Serum (83% margin), Magnetic Gym Bottle Bag (80%), Facial Ice Bath Bowl (75%), Bluetooth Smart Sunglasses (75%), Rain Cloud Aroma Diffuser (75%), Hidden Love Projection Necklace (80%), Roulette Watch (72%), Red Light Therapy Belt (70%). Each includes: why it wins, target audience, profit margins, direct supplier links (AliExpress, CJ Dropshipping, Alibaba, Spocket, etc.), and marketing angles. Plus strategic recommendations for beginners. Full report: dropship-product-research-2026.md",
-    "priority": "high",
-    "column": "done",
-    "schedule": "instant",
-    "projectId": "1771138009006"
-  },
-  {
-    "id": "1771298270666",
-    "createdAt": "2026-02-17T03:17:50.666Z",
-    "assignedTo": "Jarvis",
-    "title": "plan me a trip somewhere",
-    "description": "",
-    "priority": "medium",
-    "column": "done",
-    "schedule": "instant",
-    "projectId": "1771450414784"
+    "createdAt": "2026-02-13T21:33:00Z",
+    "recurringSchedule": {
+      "type": "recurring",
+      "frequency": "weekly",
+      "time": "09:00",
+      "cron": "0 9 * * 0"
+    }
   },
   {
     "id": "1771578468521",
@@ -68,7 +21,13 @@
     "title": "Daily stock briefing (8am PST)",
     "description": "3 cron jobs run daily at 8:00/8:05/8:10 AM PST:\n1) Portfolio briefing — prices, changes, earnings alerts\n2) Watchlist briefing — same treatment\n3) Market insights — sector rotations, opportunities, trends\n\nAll post to /api/stocks endpoints and send summaries to Telegram.",
     "priority": "high",
-    "column": "recurring"
+    "column": "recurring",
+    "recurringSchedule": {
+      "type": "recurring",
+      "frequency": "weekly",
+      "time": "07:30",
+      "cron": "30 7 * * 1,2,3,4,5"
+    }
   },
   {
     "id": "1771579242130",
@@ -82,65 +41,19 @@
     "projectId": "1771579640209"
   },
   {
-    "id": "1771585391059",
-    "createdAt": "2026-02-20T11:03:11.059Z",
-    "assignedTo": "Jarvis",
-    "title": "Build insider trading tracker",
-    "description": "Built insider trading tracker: Backend API (GET/POST/DELETE /api/stocks/insiders + /summary cluster detection), fetch-insiders.js script (SEC EDGAR Form 4 XML parsing, dedup, filters P/S transactions only), Dashboard UI with Insider tab (summary cards, cluster alerts, filterable transaction table). Populated with 145 real transactions. Clusters detected: FCX 4 insiders selling $34M, CRWV 2 insiders selling $25.3M.",
-    "priority": "high",
-    "column": "review",
-    "schedule": "instant",
-    "projectId": "1771585868878"
-  },
-  {
     "id": "1771585888501",
     "createdAt": "2026-02-20T11:11:28.501Z",
     "assignedTo": "Jarvis",
     "title": "Daily insider trading scan (8:15am PST)",
     "description": "Cron job runs fetch-insiders.js daily at 8:15am PST (after stock briefing). Fetches new SEC Form 4 filings, alerts via Telegram only for notable activity (insider buys, large sells, cluster activity).",
     "priority": "medium",
-    "column": "recurring"
-  },
-  {
-    "id": "1771655583588",
-    "createdAt": "2026-02-21T06:33:03.588Z",
-    "assignedTo": "Jarvis",
-    "title": "Verify Monday morning cron runs",
-    "description": "✅ VERIFIED — All 6 Monday morning crons ran on schedule (7:25-8:20 AM PST). Earnings refresh, portfolio briefing, watchlist, market insights, insider scan all completed OK. Options flow was still running at verification time. Issue found: 3 of 4 Telegram sends failed (portfolio, watchlist, market insights) — Jarvis caught and re-sent manually. Insider scan delivered fine. Reported to Jordan via Telegram.",
-    "priority": "high",
-    "column": "review",
-    "schedule": "2026-02-23T16:30:00.000Z"
-  },
-  {
-    "id": "1771844859346",
-    "createdAt": "2026-02-23T11:07:39.346Z",
-    "assignedTo": "Jarvis",
-    "title": "TEST",
-    "description": "Built a minimal animal fun fact site — mantis shrimp fact with glassmorphism card, dark gradient, floating animation. Running at http://localhost:3341.",
-    "priority": "high",
-    "column": "review",
-    "schedule": "instant",
-    "projectId": "1771845188058"
-  },
-  {
-    "id": "1771872744060",
-    "createdAt": "2026-02-23T18:52:24.060Z",
-    "assignedTo": "Jarvis",
-    "title": "Clothing Store",
-    "description": "Make me a sample website of a clothing store. ",
-    "priority": "high",
-    "column": "backlog",
-    "schedule": null
-  },
-  {
-    "id": "1771891361219",
-    "createdAt": "2026-02-24T00:02:41.219Z",
-    "assignedTo": "Jarvis",
-    "title": "Fix task pickup system + populate recurring tasks",
-    "description": "✅ COMPLETED — Full task pickup system rebuilt and tested:\n\n1. **Webhook instant trigger** — When you add a backlog task, the kanban server triggers the task watcher cron within seconds. Tested: added instant task → picked up and moved to inprogress in ~10s.\n\n2. **30-min polling fallback** — Task watcher cron (Sonnet, cheap) runs every 30 min for scheduled tasks with passed deadlines.\n\n3. **Recurring column populated** — Added all 5 missing recurring tasks (earnings refresh, options flow, daily summary, task watcher, weekly memory maintenance). Total 8 recurring tasks now tracked.\n\n4. **Workflow rules updated** in MEMORY.md with full backlog/inprogress/review/done/recurring specs.\n\nCron ID: b622ecbc-82c9-4c1a-a448-1cd296cbabe5",
-    "priority": "high",
-    "column": "review",
-    "schedule": "instant"
+    "column": "recurring",
+    "recurringSchedule": {
+      "type": "recurring",
+      "frequency": "weekly",
+      "time": "07:45",
+      "cron": "45 7 * * 1,2,3,4,5"
+    }
   },
   {
     "id": "1771891426700",
@@ -149,7 +62,13 @@
     "title": "Daily earnings calendar refresh (7:25am PST)",
     "description": "Cron runs daily at 7:25am PST weekdays. Refreshes earnings dates via yfinance, updates bull/bear cases via Perplexity for upcoming earnings (14-day window). Cleans old briefings (>7d) and market insights (>5d). Model: Sonnet.",
     "priority": "medium",
-    "column": "recurring"
+    "column": "recurring",
+    "recurringSchedule": {
+      "type": "recurring",
+      "frequency": "weekly",
+      "time": "07:25",
+      "cron": "25 7 * * 1,2,3,4,5"
+    }
   },
   {
     "id": "1771891426718",
@@ -158,7 +77,13 @@
     "title": "Options flow scan (8:20am PST)",
     "description": "Cron runs daily at 8:20am PST weekdays. Scans unusual options activity via fetch-options.js + yfinance across all portfolio/watchlist tickers. Alerts on Telegram for high-score signals (>=50). Model: Sonnet.",
     "priority": "medium",
-    "column": "recurring"
+    "column": "recurring",
+    "recurringSchedule": {
+      "type": "recurring",
+      "frequency": "weekly",
+      "time": "08:20",
+      "cron": "20 8 * * 1,2,3,4,5"
+    }
   },
   {
     "id": "1771891426735",
@@ -167,7 +92,13 @@
     "title": "Jarvis daily summary (8:25am PST)",
     "description": "Cron runs daily at 8:25am PST weekdays. Jarvis writes a personal analyst note with sentiment, picks (buy/hold/trim/sell/watch), and key events. Posts to /api/stocks/summary and delivers via Telegram. Model: Opus.",
     "priority": "high",
-    "column": "recurring"
+    "column": "recurring",
+    "recurringSchedule": {
+      "type": "recurring",
+      "frequency": "weekly",
+      "time": "08:25",
+      "cron": "25 8 * * 1,2,3,4,5"
+    }
   },
   {
     "id": "1771891426751",
@@ -176,7 +107,12 @@
     "title": "Task watcher (every 30min)",
     "description": "Cron runs every 30 min. Also triggered instantly by webhook when new backlog task is added. Checks for instant/scheduled/pending tasks and picks them up. Model: Sonnet.",
     "priority": "high",
-    "column": "recurring"
+    "column": "recurring",
+    "recurringSchedule": {
+      "type": "recurring",
+      "frequency": "custom",
+      "cron": "*/30 * * * *"
+    }
   },
   {
     "id": "1771891426764",
@@ -185,15 +121,23 @@
     "title": "Weekly memory maintenance (Sun 9am PST)",
     "description": "Cron runs Sunday 9am PST. Reviews daily memory logs, updates MEMORY.md with distilled learnings, removes outdated info. Model: Gemini.",
     "priority": "low",
-    "column": "recurring"
+    "column": "recurring",
+    "recurringSchedule": {
+      "type": "recurring",
+      "frequency": "weekly",
+      "time": "09:00",
+      "cron": "0 9 * * 0"
+    }
   },
   {
-    "id": "1771891734586",
-    "createdAt": "2026-02-24T00:08:54.586Z",
+    "id": "1771892498652",
+    "createdAt": "2026-02-24T00:21:38.652Z",
     "assignedTo": "Jarvis",
-    "title": "Add recurring task schedule input to kanban board",
-    "description": "Add a schedule field to the recurring column in the board UI. When Jordan adds a recurring task with a schedule (e.g. every Monday 9am, daily at 7:30am, etc.), Jarvis detects it and sets up the cron, then confirms on Telegram.",
-    "priority": "medium",
-    "column": "inprogress"
+    "title": "Fun fact website",
+    "description": "✅ COMPLETED — Simple cat fun fact website. A group of cats = clowder, kittens = kindle. Gradient design, floating card, animations. Running on http://localhost:3336",
+    "priority": "high",
+    "column": "review",
+    "schedule": "instant",
+    "projectId": "1771892658066"
   }
 ]

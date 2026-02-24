@@ -51,6 +51,9 @@
 - **8:25 AM** — Jarvis Daily Summary (Opus) — my written analysis posted to /api/stocks/summary
 - **Sunday 9 AM** — Weekly Memory Maintenance (Gemini) — review daily logs, update MEMORY.md
 - **Task Watcher**: cron `b622ecbc-82c9-4c1a-a448-1cd296cbabe5` (Sonnet, every 30m + webhook instant trigger)
+  - Task watcher ONLY moves tasks from backlog → inprogress. It does NOT build/complete tasks.
+  - Main session (me) does the actual work when I see the task in inprogress.
+- **Fun fact website**: http://localhost:3336 — managed by launchd (com.jarvis.funfact)
 - **Heartbeats**: disabled (replaced by task watcher cron)
 
 ## Key Scripts

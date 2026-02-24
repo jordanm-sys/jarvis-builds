@@ -113,16 +113,6 @@
     "reviewed": false
   },
   {
-    "id": "1771585868878",
-    "createdAt": "2026-02-20",
-    "name": "Insider Trading Tracker",
-    "description": "SEC Form 4 insider trading monitor. Tracks buys/sells for all portfolio + watchlist tickers via SEC EDGAR. Dashboard tab with summary cards, cluster detection, filterable transaction table. Daily cron job fetches new filings.",
-    "status": "active",
-    "category": "websites",
-    "githubUrl": "https://github.com/jordanm-sys/jarvis-builds",
-    "localUrl": "http://localhost:3333"
-  },
-  {
     "id": "1771845188058",
     "createdAt": "2026-02-23",
     "name": "Animal Fun Fact Site",
@@ -133,5 +123,15 @@
     "githubUrl": "https://github.com/jordanm-sys/jarvis-builds",
     "reviewed": false,
     "note": "Access via Tailscale. Localhost: http://localhost:3341"
+  },
+  {
+    "id": "1771892658066",
+    "createdAt": "2026-02-24",
+    "name": "Fun Fact Website",
+    "description": "Simple cat fun fact website — displays that a group of cats is called a clowder and kittens a kindle. Styled with gradient, floating card, animations.",
+    "category": "websites",
+    "status": "completed",
+    "localUrl": "http://localhost:3336",
+    "github": "https://github.com/jordanm-sys/jarvis-builds"
   }
 ]

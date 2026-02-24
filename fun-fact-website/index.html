@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fun Cat Fact 🐱</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#fce4ec,#f3e5f5,#e8eaf6);overflow:hidden}
+.card{background:#fff;border-radius:24px;padding:48px 40px;max-width:520px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.12);position:relative;animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.cat{font-size:80px;margin-bottom:16px}
+h1{font-size:1.4rem;color:#ad1457;margin-bottom:24px;font-weight:900;letter-spacing:1px}
+.fact{font-size:1.15rem;line-height:1.7;color:#4a4a4a;font-weight:400}
+.highlight{color:#7b1fa2;font-weight:700}
+.paws{position:fixed;font-size:28px;opacity:.15}
+.paws:nth-child(1){top:10%;left:8%;transform:rotate(-20deg)}
+.paws:nth-child(2){top:25%;right:12%;transform:rotate(15deg)}
+.paws:nth-child(3){bottom:15%;left:15%;transform:rotate(-35deg)}
+.paws:nth-child(4){bottom:30%;right:8%;transform:rotate(25deg)}
+.paws:nth-child(5){top:50%;left:3%;transform:rotate(10deg)}
+footer{margin-top:28px;font-size:.8rem;color:#bbb}
+</style>
+</head>
+<body>
+<div class="paws">🐾</div><div class="paws">🐾</div><div class="paws">🐾</div><div class="paws">🐾</div><div class="paws">🐾</div>
+<div class="card">
+<div class="cat">😸</div>
+<h1>DID YOU KNOW?</h1>
+<p class="fact">A group of cats is called a <span class="highlight">"clowder"</span> — and a group of kittens is called a <span class="highlight">"kindle"</span>. Yes, like the e-reader… but way cuter. 📚🐱</p>
+<footer>purrr… 🐾</footer>
+</div>
+</body>
+</html>
