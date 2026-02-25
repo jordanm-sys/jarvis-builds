@@ -1,2 +1,6 @@
 node_modules/
 .DS_Store
+
+# Resume Tailor secrets
+resume-tailor/.env
+

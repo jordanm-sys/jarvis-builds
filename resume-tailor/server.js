@@ -1,6 +1,14 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const dotenv = require('dotenv');
+dotenv.config({ path: path.join(__dirname, '.env') });
+const OpenAI = require('openai');
+const pdfParse = require('pdf-parse');
+let openai = null;
+if (process.env.OPENAI_API_KEY) {
+  openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+}
 const app = express();
 const PORT = 3342;
 
@@ -28,9 +36,12 @@ app.post('/api/upload', upload.single('file'), async (req, res) => {
       text = result.value;
     } else if (ext === '.txt') {
       text = fs.readFileSync(req.file.path, 'utf8');
+    } else if (ext === '.pdf') {
+      const data = await pdfParse(fs.readFileSync(req.file.path));
+      text = data.text;
     } else {
       fs.unlinkSync(req.file.path);
-      return res.status(400).json({ error: 'Supported formats: .docx, .txt' });
+      return res.status(400).json({ error: 'Supported formats: .docx, .txt, .pdf' });
     }
     fs.unlinkSync(req.file.path);
     res.json({ text });
@@ -72,19 +83,36 @@ app.delete('/api/history/:id', (req, res) => {
   res.json({ ok: true });
 });
 
-// AI Tailor endpoint — triggers OpenClaw to process, polls for result
+// AI Tailor endpoint
 app.post('/api/tailor', async (req, res) => {
   const { resume, jobPosting, company, role } = req.body;
   if (!resume || !jobPosting) return res.status(400).json({ error: 'Resume and job posting required' });
   
   try {
-    // Save the request
+    if (openai) {
+      const systemPrompt = `You are an expert resume writer and career coach. Respond ONLY with valid JSON in this shape:\n{\n  "tailoredResume": "...",\n  "coverLetter": "...",\n  "keywordsMatched": [],\n  "atsScore": 0,\n  "tips": []\n}\nThe tailored resume must be 1 page of polished bullet points, formatted in markdown style (headings, bullets). The cover letter should be 3-4 paragraphs, professional tone. Include at least 10 keywords matched from the job posting. ATS score must be 0-100 integer. Tips should be a helpful list.`;
+      const userPrompt = `MASTER RESUME:\n${resume}\n\nJOB POSTING:\n${jobPosting}\n\nCOMPANY: ${company || 'Unknown'}\nROLE: ${role || 'Unknown'}\n\nTailor the resume and cover letter for this specific opportunity. Emphasize accounting/audit skills, CPA aspirations, teamwork, learning mindset, and bilingual requirement if present.`;
+      const completion = await openai.chat.completions.create({
+        model: 'gpt-4o',
+        temperature: 0.35,
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userPrompt }
+        ]
+      });
+      const text = completion.choices[0].message.content;
+      const jsonMatch = text.match(/\{[\s\S]*\}/);
+      if (!jsonMatch) return res.status(500).json({ error: 'Failed to parse AI response' });
+      const result = JSON.parse(jsonMatch[0]);
+      return res.json(result);
+    }
+    
+    // Fallback: trigger OpenClaw manual workflow
     const requestId = Date.now().toString();
     const requestFile = path.join(DATA_DIR, `request-${requestId}.json`);
     const resultFile = path.join(DATA_DIR, `result-${requestId}.json`);
     fs.writeFileSync(requestFile, JSON.stringify({ resume, jobPosting, company, role, requestId }));
     
-    // Trigger OpenClaw system event to wake Jarvis
     const { exec: execCmd } = require('child_process');
     const env = { HOME: '/Users/jordanmaragliano', PATH: '/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin' };
     execCmd(`/opt/homebrew/bin/openclaw system event --text "RESUME_TAILOR_REQUEST:${requestId}" --mode now`, { timeout: 15000, env }, (err) => {
@@ -92,7 +120,6 @@ app.post('/api/tailor', async (req, res) => {
       else console.log('⚡ Resume tailor request sent to Jarvis:', requestId);
     });
     
-    // Poll for result (max 120 seconds)
     let attempts = 0;
     const maxAttempts = 60;
     const poll = () => new Promise((resolve) => {
@@ -101,7 +128,6 @@ app.post('/api/tailor', async (req, res) => {
         if (fs.existsSync(resultFile)) {
           clearInterval(interval);
           const result = JSON.parse(fs.readFileSync(resultFile, 'utf8'));
-          // Cleanup
           try { fs.unlinkSync(requestFile); fs.unlinkSync(resultFile); } catch(e) {}
           resolve(result);
         } else if (attempts >= maxAttempts) {
@@ -111,10 +137,36 @@ app.post('/api/tailor', async (req, res) => {
       }, 2000);
     });
     
-    const result = await poll();
-    if (!result) return res.status(504).json({ error: 'Timed out waiting for AI response. Try again.' });
-    res.json(result);
+    const fallbackResult = await poll();
+    if (!fallbackResult) return res.status(504).json({ error: 'Timed out waiting for AI response. Try again.' });
+    res.json(fallbackResult);
   } catch (e) {
+    console.error('Tailor error', e);
+    res.status(500).json({ error: e.message });
+  }
+});
+
+app.post('/api/upload-job', upload.single('file'), async (req, res) => {
+  if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
+  const ext = path.extname(req.file.originalname).toLowerCase();
+  try {
+    let text = '';
+    if (ext === '.pdf') {
+      const data = await pdfParse(fs.readFileSync(req.file.path));
+      text = data.text;
+    } else if (ext === '.docx') {
+      const result = await mammoth.extractRawText({ path: req.file.path });
+      text = result.value;
+    } else if (ext === '.txt') {
+      text = fs.readFileSync(req.file.path, 'utf8');
+    } else {
+      fs.unlinkSync(req.file.path);
+      return res.status(400).json({ error: 'Supported formats: .pdf, .docx, .txt' });
+    }
+    fs.unlinkSync(req.file.path);
+    res.json({ text });
+  } catch (e) {
+    try { fs.unlinkSync(req.file.path); } catch (_) {}
     res.status(500).json({ error: e.message });
   }
 });

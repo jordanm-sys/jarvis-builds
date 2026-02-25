@@ -1,77 +1,79 @@
 {
-  "updatedAt": "2026-02-23T16:26:24.033Z",
+  "updatedAt": "2026-02-24T16:26:05.949Z",
   "sentiment": "mixed",
-  "overall": "This is the biggest week of the year for the portfolio. CIFR reports tomorrow, NVDA Wednesday, CRWV Thursday. BTC crashing below $65K is hammering your crypto exposure, and CRWV insiders have dumped $48M in shares while a class action lawsuit was just filed. The good news: MU is on fire with analyst upgrades, FCX got a double upgrade, and the broader tech oversold bounce is setting up. Buckle up.",
+  "overall": "It's a split market right now — your high-beta AI/crypto names are ripping today while MSFT drags and BTC keeps sliding. The big story this week is a wall of earnings: NVDA tonight, CIFR just reported (missed badly but stock loves the HPC deal), and CRWV Thursday. The macro rotation out of tech into cyclicals continues, but your portfolio is positioned more in AI infrastructure than mega-cap tech, so you're actually catching the right side of this move.",
   "picks": [
-    {
-      "symbol": "CIFR",
-      "action": "hold",
-      "reasoning": "Earnings TOMORROW. BTC crashing below $65K is terrible timing at $14.30 with bearish technicals. COO Patrick Kelly sold $552K last week. The AI data center pivot ($9.3B pipeline) is the real story. Hold through earnings but set a mental stop around $12. If BTC keeps bleeding and they miss, this gets ugly fast."
-    },
     {
       "symbol": "NVDA",
       "action": "watch",
-      "reasoning": "Earnings Wednesday AMC, the single most important event this week. Consensus $65B rev, $1.53 EPS, 94.5% beat rate. CFO Colette Kress sold ~$8.5M at $172-179 (routine 10b5-1). Morningstar fair value $240 vs current $190. If they guide Q1 to $75B+, it drags SOXX, CRWV, NBIS, and IREN higher. Do NOT buy ahead of the print."
+      "reasoning": "Reporting TONIGHT after close — this is the single biggest catalyst for your entire portfolio this week. Consensus is ~$65B rev, $1.53 EPS, and options are pricing a massive move. CFO Colette Kress sold ~$8.4M in shares in early Feb, which is routine for her. If Blackwell guidance beats $75B for Q1, this thing re-rates toward $220+. Wait for the print before doing anything."
     },
     {
       "symbol": "CRWV",
       "action": "trim",
-      "reasoning": "Earnings Thursday but the red flags are screaming. CEO Intrator, CSO Venturo, and CDO McBee collectively dumped $48.3M in shares over two weeks. Morgan Stanley downgraded. Blue Owl failed a $4B debt placement. Class action lawsuit filed. The $55B backlog is real but $29B in debt with insiders running for the exits is a clear trim signal."
+      "reasoning": "Earnings Thursday with options pricing a 17% move — that's enormous. But here's what really concerns me: $48.3M in insider selling from THREE C-suite execs (CEO Intrator, CSO Venturo, CDO McBee) across 70 transactions in the last two weeks. The CEO dumped shares at $89-$97. A class action lawsuit was also filed. The $55B backlog is real, but $29B in net debt and this level of insider selling ahead of earnings is a red flag. Take some off the table before Thursday."
     },
     {
-      "symbol": "MU",
-      "action": "buy",
-      "reasoning": "Zacks #1 Strong Buy with 4 analyst upgrades in 60 days. Morgan Stanley PT $450 vs current $428. HBM demand for AI is the real deal. EVP Sadana sold $10.7M and CLO Ray sold $3.2M but thats routine at these levels. Earnings March 18, time to accumulate. Highest-conviction semi name right now."
-    },
-    {
-      "symbol": "FCX",
+      "symbol": "CIFR",
       "action": "hold",
-      "reasoning": "Double upgrade day with Freedom Capital Buy/$76 and Scotiabank $72. Copper above $14K/ton, Grasberg extension confirmed. BUT Chairman Adkerson sold $25.5M and three other insiders sold $8.5M combined. Thesis intact and upgrades validate it, but that insider selling keeps this a hold not a buy. Earnings April 23."
+      "reasoning": "Just reported today — missed badly ($59.7M rev vs $88.6M est, EPS -$1.92 vs -$0.12 est) but the stock is UP 15% because of the $3.7B HPC financing deal. The market is pricing the AI data center pivot, not the crypto mining business. Options flow is heavily bullish with calls stacking at $15-$18 strikes. COO Kelly sold $552K in shares pre-earnings. The pivot story is intact but execution risk is real with $2.71B in debt — hold but keep a tight leash."
     },
     {
       "symbol": "AMPX",
       "action": "hold",
-      "reasoning": "Earnings in 10 days (March 5). Defense battery demand is strong, stock rallied 4.4% twice last week. CTO Stefan sold $7.3M in January which is notable for a $10 stock. Fair value estimate $17.57 gives significant upside. Hold into earnings but keep position small, this is speculative."
+      "reasoning": "Up 13% today and earnings are in 9 days (Mar 5). CTO Stefan sold ~$7.3M in shares across January — that's a LOT for a $10 stock. Needham has a $20 PT but DCF fair value is only $2.08, which is a massive disconnect. The defense/aerospace battery story is exciting but the valuation is stretched. Hold into earnings but don't add here."
     },
     {
-      "symbol": "NBIS",
+      "symbol": "FCX",
       "action": "hold",
-      "reasoning": "Nvidia maintaining its stake is the bull case in one sentence. Tavily acquisition deepens AI software stack. 508% expected revenue growth in 2026. But the -9% single-day drop shows volatility risk. At $97 with PT $142-152, hold your position but do NOT add on green days. Wait for pullbacks to $90."
+      "reasoning": "Quietly compounding — up 5% today, 4th consecutive green day, copper flirting with $14K/ton records. Double upgrade last week (Freedom Capital $76 PT, Scotiabank $72). BUT Chairman Adkerson sold $25.5M in shares and CFO Robertson sold $3M — that's $18.4M total insider selling from top brass. Copper thesis is strong, Grasberg extension is huge, but insiders are clearly taking profits. Hold for now, earnings Apr 23."
+    },
+    {
+      "symbol": "MU",
+      "action": "buy",
+      "reasoning": "This is your cleanest setup right now. Zacks #1 Strong Buy, Morgan Stanley PT $450 (stock at $424), 4 analyst upgrades in 60 days, and earnings Mar 18. HBM demand for AI is the real deal. Yes, EVP Sadana sold $10.7M and CLO Ray sold $3.2M, but that's modest relative to the stock price. If NVDA beats tonight, MU rips on sympathy. Best risk/reward in the portfolio heading into earnings."
     },
     {
       "symbol": "IREN",
       "action": "hold",
-      "reasoning": "BTC crashing to $64K is brutal for miners, down 3.7% today. But the $9.7B Microsoft AI contract and 140K GPU target make this more AI than miner. Unusual bullish options flow on March $41.50-$50 calls. Earnings May 13. Hold but watch BTC closely. If it breaks $60K, reconsider."
+      "reasoning": "Up 13% today riding the CIFR sympathy wave. Options flow is mixed — bullish calls at $47-$49 strikes but also bearish puts at $39-$75 with insanely high IV (300%+). The AI cloud pivot is the story ($9.7B MSFT contract, 140K GPU target) but BTC weakness below $64K is a constant headwind. Earnings not until May 13 so no rush — hold and let the AI pivot thesis play out."
     },
     {
-      "symbol": "FBTC",
+      "symbol": "NBIS",
       "action": "hold",
-      "reasoning": "BTC broke below $65K support, 6th consecutive down week on tariff tensions and whale selling. At ~$29.60 CAD, well off the $110 high. Pure BTC proxy. I think BTC recovers medium-term but near-term pain is not over. Hold but do not add until BTC reclaims $68K."
-    },
-    {
-      "symbol": "SOXX",
-      "action": "hold",
-      "reasoning": "Semis holding at $359 ahead of NVDA earnings. High put volume signals hedging. Citi added TXN and MPWR as top picks. This ETF lives and dies by the NVDA print Wednesday. Hold and let earnings dictate the next move."
+      "reasoning": "Recovering from last week's brutal -9% selloff, up 5% today at $102. Nvidia backing is confirmed, Tavily acquisition deepens the AI software stack, and Zacks named it Bull of the Day with 508% expected revenue growth in 2026. Earnings not until Apr 29. Volatile but the thesis is intact — hold."
     },
     {
       "symbol": "MSFT",
       "action": "hold",
-      "reasoning": "Drifting at $396, down 21% over 6 months on AI capex concerns. Director Stanton bought $2M in shares, a bullish insider signal. Heavy bullish 0DTE call flow today at $387-395 strikes (scores 85-90). Analysts still see $592 PT. Earnings April 29. Boring but undervalued. Patient hold."
+      "reasoning": "The portfolio's anchor and today's biggest laggard at -2.3%. Down 21% over 6 months on AI capex concerns — the market wants to see ROI on those Azure/AI investments. Bright spot: Director Stanton bought $2M in shares on Feb 18, which is a bullish signal from an insider. Analysts still have a $592 PT. Earnings Apr 29. Boring but solid — hold. One unusual options alert: $1.2M in deep ITM $345 calls expiring Friday, which reads as bullish positioning."
     },
     {
       "symbol": "TE",
       "action": "hold",
-      "reasoning": "Quietest name in the portfolio at $6.30. CAO termination raises governance questions. Treasury 45X tax credit supports the solar thesis. Earnings March 24. No insider activity, no unusual options. This is a show-me story. Hold small position but no reason to add until they prove execution."
+      "reasoning": "Up 7.6% today on no clear catalyst — could be solar/clean energy momentum. Tax credit confirmation supports the thesis but governance concerns linger after the CAO termination. Earnings Mar 24. Small position, limited data — just hold and see what earnings bring."
+    },
+    {
+      "symbol": "SOXX",
+      "action": "hold",
+      "reasoning": "Semis holding steady at $364, up 1.3%. This is basically an NVDA earnings proxy tonight — if Blackwell beats, SOXX breaks out. If it misses, expect a pullback. High put volume signals hedging. No action needed, just let NVDA do the talking."
+    },
+    {
+      "symbol": "FBTC",
+      "action": "hold",
+      "reasoning": "BTC is in trouble — broke below $65K, now at $63.7K, 6th consecutive down week. FBTC down 5.7% today to $28.81 CAD. There's no bullish catalyst on the horizon and macro headwinds (tariffs, hawkish Fed) keep piling up. Not saying sell because BTC can snap back violently, but this is the weakest position in the portfolio right now. Hold with low conviction."
     }
   ],
   "keyEvents": [
-    "CIFR Q4 earnings TOMORROW (Feb 24) - BTC crash makes this high-risk. Watch for AI data center pipeline updates.",
-    "NVDA Q4 FY26 earnings Wednesday Feb 25 AMC - consensus $65B rev, $1.53 EPS. THE event of the week for all AI names.",
-    "CRWV Q4 earnings Thursday Feb 26 - $48M insider selling + class action + failed debt placement. Extreme caution.",
-    "BTC crashed below $65K support - 6th straight down week. Tariff tensions and whale selling. Impacts FBTC, CIFR, IREN.",
-    "AMPX earnings March 5 (10 days) - defense battery contracts are the catalyst.",
-    "MU earnings March 18 (23 days) - Zacks Strong Buy, MS PT $450. Highest-conviction semi.",
-    "Great Rotation continues: Energy +21% YTD, Tech lagging. Cyclicals at 50-year overbought extremes - reversal risk building.",
-    "Tech and Financials deeply oversold - contrarian bounce setup if NVDA delivers Wednesday."
+    "NVDA Q4 FY26 earnings TONIGHT (Feb 25 AMC) — consensus $65B rev, $1.53 EPS. Sets tone for entire AI trade.",
+    "CRWV Q4 earnings Thursday Feb 26 — options pricing 17% post-earnings move. Heavy insider selling ahead of report.",
+    "CIFR Q4 reported TODAY — missed estimates but $3.7B HPC deal has stock up 15%.",
+    "AMPX earnings Mar 5 (9 days) — watch for defense battery commercialization updates.",
+    "MU earnings Mar 18 (22 days) — Zacks Strong Buy, Morgan Stanley PT $450.",
+    "TE earnings Mar 24 (28 days) — tax credit and governance updates.",
+    "BTC broke below $65K support — 6th consecutive down week, pressuring FBTC/CIFR/IREN.",
+    "Tech-to-cyclical rotation accelerating — Energy +21% YTD, Tech worst sector in 2026.",
+    "Capital Economics flagging 2027 bubble burst risk — market breadth at 50-year extremes.",
+    "Copper near $14K/ton all-time highs — supports FCX thesis."
   ]
 }

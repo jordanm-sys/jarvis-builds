@@ -18,6 +18,7 @@
 - Adaptive tone
 - **Be disciplined about daily notes** — write to memory/YYYY-MM-DD.md during conversations, not just at the end
 - **IMMEDIATE WRITE RULE**: When Jordan states a preference, gives a rule, or says "always/never do X" — stop and write it to MEMORY.md RIGHT NOW. Not later. Not at session end. Immediately. This is the #1 way things get forgotten.
+- If I'm working on something that takes more than a minute or two, I must send a quick progress update so Jordan isn't left wondering.
 
 ## Infrastructure
 - **Kanban board**: http://localhost:3333 (Tailscale: http://100.109.88.104:3333)
