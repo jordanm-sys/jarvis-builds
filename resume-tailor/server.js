@@ -31,20 +31,27 @@ app.post('/api/upload', upload.single('file'), async (req, res) => {
   const ext = path.extname(req.file.originalname).toLowerCase();
   try {
     let text = '';
+    let html = '';
     if (ext === '.docx') {
-      const result = await mammoth.extractRawText({ path: req.file.path });
-      text = result.value;
+      const [textResult, htmlResult] = await Promise.all([
+        mammoth.extractRawText({ path: req.file.path }),
+        mammoth.convertToHtml({ path: req.file.path })
+      ]);
+      text = textResult.value;
+      html = htmlResult.value;
     } else if (ext === '.txt') {
       text = fs.readFileSync(req.file.path, 'utf8');
+      html = '<pre>' + text.replace(/&/g,'&amp;').replace(/</g,'&lt;') + '</pre>';
     } else if (ext === '.pdf') {
       const data = await pdfParse(fs.readFileSync(req.file.path));
       text = data.text;
+      html = '<pre>' + text.replace(/&/g,'&amp;').replace(/</g,'&lt;') + '</pre>';
     } else {
       fs.unlinkSync(req.file.path);
       return res.status(400).json({ error: 'Supported formats: .docx, .txt, .pdf' });
     }
     fs.unlinkSync(req.file.path);
-    res.json({ text });
+    res.json({ text, html });
   } catch (e) {
     try { fs.unlinkSync(req.file.path); } catch (_) {}
     res.status(500).json({ error: e.message });
@@ -58,7 +65,7 @@ app.get('/api/resume', (_, res) => {
 });
 
 app.post('/api/resume', (req, res) => {
-  fs.writeFileSync(RESUME_FILE, JSON.stringify({ resume: req.body.resume, updatedAt: new Date().toISOString() }));
+  fs.writeFileSync(RESUME_FILE, JSON.stringify({ resume: req.body.resume, resumeHtml: req.body.resumeHtml || '', updatedAt: new Date().toISOString() }));
   res.json({ ok: true });
 });
 
